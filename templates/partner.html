@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Partner With Us — What's New In Town</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#BFA181;
+  --light:#E5E5E5;
+  --dark:#000;
+  --card:#1A1A1A;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#000,#111);
+  color:var(--light);padding:25px;
+}
+.container{
+  max-width:920px;margin:20px auto;padding:32px;border-radius:24px;
+  background:rgba(20,20,20,0.55);
+  border:1px solid rgba(191,161,129,0.35);
+  box-shadow:0 8px 40px rgba(0,0,0,0.55),0 0 45px rgba(191,161,129,0.15);
+  backdrop-filter:blur(14px);
+}
+header{display:flex;align-items:center;gap:16px;margin-bottom:25px;}
+.logo{
+  width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,var(--gold),#d9c2a4);
+  display:flex;align-items:center;justify-content:center;font-weight:700;color:#000;
+  box-shadow:0 0 18px rgba(191,161,129,0.7);
+}
+h1{margin:0;font-size:24px;color:var(--gold)}
+p.lead{margin:0;color:var(--light);opacity:0.75;font-size:14px}
+
+/* STEP TABS */
+.tabs{display:flex;justify-content:space-between;margin:25px 0 20px;gap:12px}
+.tab{
+  flex:1;text-align:center;padding:12px 0;font-size:17px;color:var(--light);
+  cursor:pointer;border-bottom:2px solid transparent;transition:0.35s;
+  backdrop-filter:blur(4px);
+  border-radius:10px;padding-left:12px;padding-right:12px;
+}
+.tab.active{
+  color:var(--gold);
+  border-color:var(--gold);
+  background:rgba(191,161,129,0.06);
+  box-shadow:0 0 12px rgba(191,161,129,0.12);
+}
+
+.step{display:none;animation:fade 0.35s ease}
+.step.active{display:block}
+
+@keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+
+label{font-size:15px;margin-bottom:8px;color:var(--gold);display:block}
+input,select,textarea{
+  width:100%;padding:14px;border-radius:10px;
+  background:rgba(15,15,15,0.55);
+  backdrop-filter:blur(6px);
+  border:1px solid rgba(191,161,129,0.4);
+  color:var(--light);font-size:15px;
+  transition:0.3s;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 12px rgba(191,161,129,0.35);
+}
+textarea{min-height:110px;resize:vertical}
+.full{grid-column:1/3}
+
+/* CATEGORY BUTTONS */
+.category-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
+.cat{
+  padding:10px 18px;border-radius:24px;border:1px solid rgba(191,161,129,0.3);
+  color:var(--gold);background:#0e0e0e;cursor:pointer;font-size:14px;
+  transition:0.35s;box-shadow:0 0 10px rgba(191,161,129,0.12);
+}
+.cat.selected{
+  background:linear-gradient(135deg,var(--gold),#e7d7b9);
+  color:#000;font-weight:600;
+  transform:translateY(-3px);
+  box-shadow:0 0 15px rgba(191,161,129,0.45),
+              0 0 30px rgba(191,161,129,0.25);
+}
+.cat:hover{
+  background:linear-gradient(135deg,var(--gold),#e7d7b9);
+  color:#000;
+  transform:translateY(-3px);
+  box-shadow:0 0 12px rgba(191,161,129,0.35);
+}
+.cat input{display:none}
+
+/* FILE DROP */
+.file-drop{
+  border:2px dashed rgba(191,161,129,0.45);
+  padding:16px;border-radius:16px;
+  background:rgba(10,10,10,0.45);
+  backdrop-filter:blur(6px);
+  text-align:center;
+  transition:0.3s;
+}
+.file-drop:hover{
+  border-color:var(--gold);
+  box-shadow:0 0 15px rgba(191,161,129,0.45);
+}
+.hint{font-size:12px;color:var(--light);opacity:0.7;margin-top:6px}
+.preview-grid{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.preview-grid img{width:84px;height:64px;object-fit:cover;border-radius:6px;border:1px solid rgba(191,161,129,0.35)}
+
+/* BUTTONS */
+.actions{display:flex;justify-content:space-between;margin-top:25px}
+button::after{
+  content:"";
+  position:absolute;
+  width:0;height:0;
+  background:rgba(191,161,129,0.18);
+  border-radius:50%;
+  opacity:0;
+  transform:translate(-50%, -50%);
+  pointer-events:none;
+  transition:width .5s ease,height .5s ease,opacity .4s ease;
+}
+button:active::after{
+  width:200px;height:200px;opacity:1;
+}
+button{
+  padding:10px 22px;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+  border:2px solid var(--gold);
+  background:#000;
+  color:var(--gold);
+  font-size:16px;
+  position:relative;
+  overflow:hidden;
+  transition:0.35s;
+  box-shadow:0 0 10px rgba(191,161,129,0.18);
+}
+button:hover{
+  background:linear-gradient(135deg,#cbb796,#e5d9c4);
+  color:#000;
+  transform:translateY(-3px);
+  box-shadow:0 0 18px rgba(191,161,129,0.35),0 0 35px rgba(191,161,129,0.25);
+}
+.secondary{
+  background:#000;color:var(--gold);border:2px solid var(--gold);
+}
+.secondary:hover{
+  background:linear-gradient(135deg,var(--gold),#e7d7b9);color:#000;
+  box-shadow:0 0 35px rgba(191,161,129,0.7);
+}
+
+/* FINISH PAGE */
+.success-box{
+  text-align:center;padding:40px;display:none;
+}
+.success-box.show{display:block;animation:fade 0.4s ease}
+.success-tick{
+  font-size:60px;color:var(--gold);text-shadow:0 0 25px rgba(191,161,129,0.9);
+}
+
+/* SHAKE ANIMATION */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+.error-shake {
+  animation: shake 0.35s ease;
+  border-color: red !important;
+  box-shadow:0 0 12px red !important;
+}
+</style>
+</head>
+<body>
+<!-- MAIN BRAND HEADING AT TOP -->
+<a href="/" style="text-decoration:none;">
+<div style="text-align:center;margin-top:10px;margin-bottom:18px; cursor:pointer;">
+  <h1 
+    style="
+      font-size:48px;
+      font-weight:800;
+      background:linear-gradient(135deg,var(--gold),#e8d9c4);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 25px rgba(191,161,129,0.35);
+      margin:0;
+      transition:0.35s ease;
+      cursor:pointer;
+    "
+    onmouseover="this.style.textShadow='0 0 18px rgba(191,161,129,0.65), 0 0 35px rgba(191,161,129,0.45), 0 0 60px rgba(191,161,129,0.35)'"
+    onmouseout="this.style.textShadow='0 0 25px rgba(191,161,129,0.35)'"
+  >
+    What's New in Town
+  </h1>
+
+  <p 
+    style="
+      font-size:18px;
+      color:var(--light);
+      opacity:0.85;
+      margin-top:8px;
+      transition:0.35s;
+    "
+    onmouseover="this.style.textShadow='0 0 12px rgba(191,161,129,0.65)'"
+    onmouseout="this.style.textShadow='none'"
+  >
+    Discover the New Places
+  </p>
+
+</div>
+</a>
+
+<div class="container">
+
+<header style="display:flex;align-items:center;gap:16px;margin-bottom:18px;">
+  <div class="logo">WNT</div>
+  <div>
+    <h1 style="margin:0;font-size:28px;font-weight:700;color:var(--gold);text-shadow:0 0 12px rgba(191,161,129,0.2);">Partner With Us</h1>
+    <p class="lead">Join the most premium partner network in your city.</p>
+  </div>
+</header>
+
+<!-- STEP TABS -->
+<div class="tabs">
+  <div class="tab active" data-step="1">Business</div>
+  <div class="tab" data-step="2">Contact</div>
+  <div class="tab" data-step="3">Uploads</div>
+  <div class="tab" data-step="4">Finish</div>
+</div>
+
+<!-- FIXED FORM TAG -->
+<form id="partnerForm" action="{{ url_for('partner') }}" method="POST" enctype="multipart/form-data">
+
+<!-- STEP 1 BUSINESS -->
+<div class="step active" id="step1">
+  <label>Full Name / Business Name</label>
+  <input required id="name" name="full_name"/>
+
+  <label style="margin-top:18px">State</label>
+  <select id="state" name="state" required>
+    <option value="">Select state</option>
+    <option>Madhya Pradesh</option>
+    <option>Maharashtra</option>
+    <option>Delhi</option>
+    <option>Karnataka</option>
+  </select>
+
+  <label style="margin-top:12px">City</label>
+  <select id="city" name="city" required><option value="">Select city</option></select>
+
+  <label style="margin-top:18px">Category</label>
+  <div class="category-row">
+    <label class="cat"><input type="radio" name="category" value="Fine Dine" required> Fine Dine</label>
+    <label class="cat"><input type="radio" name="category" value="Restrobar"> Restrobar</label>
+    <label class="cat"><input type="radio" name="category" value="Arcade"> Arcade</label>
+    <label class="cat"><input type="radio" name="category" value="Bowling"> Bowling</label>
+  </div>
+
+  <label style="margin-top:18px">Cost for Two</label>
+  <input id="costForTwo" name="cost_for_two" type="number" placeholder="Enter average cost for two" required />
+
+  <label style="margin-top:18px">Location / Full Address</label>
+  <textarea required id="location" name="location"></textarea>
+
+  <div class="actions"><button class="secondary" type="button" disabled>← Back</button><button id="btnNext1" type="button">Next →</button></div>
+</div>
+
+<!-- STEP 2 CONTACT -->
+<div class="step" id="step2">
+  <label>Contact Number</label>
+  <input id="phone" name="contact_number" required />
+
+  <label style="margin-top:15px">Email</label>
+  <input id="email" name="email" type="email" required />
+
+  <label style="margin-top:15px">Password</label>
+  <div style="position:relative;width:100%">
+    <input id="password" name="password" type="password" placeholder="Enter your password" required style="padding-right:40px;" />
+    <span id="togglePwd" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--gold);font-size:16px;user-select:none;">👁️</span>
+  </div>
+
+  <div class="actions"><button class="secondary" id="btnBack2" type="button">← Back</button><button id="btnNext2" type="button">Next →</button></div>
+</div>
+
+<!-- STEP 3 UPLOADS -->
+<div class="step" id="step3">
+<div style="display:flex;gap:20px;align-items:flex-start"> 
+  <div style="flex:1">
+    <label>Restaurant Photos (interior/exterior) — upload up to 5 photos</label>
+    <div class="file-drop">
+      <input type="file" name="photo1" accept="image/*" required />
+      <input type="file" name="photo2" accept="image/*" required />
+      <input type="file" name="photo3" accept="image/*" required />
+      <input type="file" name="photo4" accept="image/*" required />
+      <input type="file" name="photo5" accept="image/*" required />
+      <div class="hint">You can upload a maximum of 5 photos.</div>
+      <div class="preview-grid" id="previewPhotos"></div>
+    </div>
+  </div>
+
+  <div style="flex:1">
+    <label>Electricity Bill</label>
+    <div class="file-drop">
+      <input id="bill" name="electricity_bill" type="file" accept="image/*,application/pdf" required />
+      <div class="hint">Upload latest bill (under 5MB)</div>
+    </div>
+  </div>
+</div>
+
+<div class="actions"><button class="secondary" id="btnBack3" type="button">← Back</button><button id="btnNext3" type="button">Next →</button></div>
+</div>
+
+<!-- STEP 4 FINISH -->
+<div class="step" id="step4">
+
+  <label>Additional Notes (optional)</label>
+  <textarea id="notes" name="additional_notes"></textarea>
+
+  <div class="actions"><button class="secondary" id="btnBack4" type="button">← Back</button><button id="btnFinish" type="submit">Finish →</button>
+</form>
+
+<div class="success-box" id="successBox">
+  <div class="success-tick">✔</div>
+  <h2 style="color:var(--gold)">Application Submitted!</h2>
+  <p>Your partner form has been successfully submitted.</p>
+</div>
+
+</div>
+<script>
+// Helper to show step and active tab
+function goStep(n){
+  const steps = document.querySelectorAll('.step');
+  steps.forEach(s=>s.classList.remove('active'));
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(t=>t.classList.remove('active'));
+  const step = document.getElementById('step'+n);
+  if(step) step.classList.add('active');
+  const tab = Array.from(tabs).find(x=>x.dataset.step==n);
+  if(tab) tab.classList.add('active');
+  step && step.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function validateStep(n){
+  const step = document.getElementById('step'+n);
+  if(!step) return true;
+  const inputs = step.querySelectorAll('input,select,textarea');
+  let valid = true;
+  inputs.forEach(i=>{
+    if(i.hasAttribute('required') && !i.checkValidity()){
+      i.classList.add('error-shake');
+      setTimeout(()=>i.classList.remove('error-shake'),450);
+      valid = false;
+    }
+  });
+  if(n===1){
+    const anyCat = document.querySelector('.category-row input[type=radio]:checked');
+    if(!anyCat){
+      document.querySelectorAll('.cat').forEach(c=>{
+        c.classList.add('error-shake');
+        setTimeout(()=>c.classList.remove('error-shake'),450);
+      });
+      valid = false;
+    }
+  }
+  return valid;
+}
+
+function nextStep(n){ if(validateStep(n)) goStep(n+1); }
+function prevStep(n){ goStep(n-1); }
+
+document.getElementById('btnNext1').addEventListener('click',()=>nextStep(1));
+document.getElementById('btnNext2').addEventListener('click',()=>nextStep(2));
+document.getElementById('btnNext3').addEventListener('click',()=>nextStep(3));
+document.getElementById('btnBack2').addEventListener('click',()=>prevStep(2));
+document.getElementById('btnBack3').addEventListener('click',()=>prevStep(3));
+document.getElementById('btnBack4').addEventListener('click',()=>prevStep(4));
+
+// SUBMIT FORM FIX
+document.getElementById('btnFinish').addEventListener('click',()=>{
+  for(let s=1;s<=4;s++){
+    if(!validateStep(s)){ goStep(s); return; }
+  }
+    document.getElementById('partnerForm').submit();
+});
+
+// Category visuals
+document.querySelectorAll('.cat').forEach(lbl=>{
+  lbl.addEventListener('click',()=>{
+    document.querySelectorAll('.cat').forEach(x=>x.classList.remove('selected'));
+    lbl.classList.add('selected');
+    lbl.querySelector('input').checked = true;
+  });
+});
+
+// State → City
+const stateEl = document.getElementById('state');
+const cityEl = document.getElementById('city');
+const cityMap={"Madhya Pradesh":["Indore"],"Maharashtra":["Mumbai"],"Delhi":["Delhi"],"Karnataka":["Bengaluru"]};
+
+stateEl.addEventListener('change',()=>{
+  cityEl.innerHTML = '<option value="">Select city</option>';
+  (cityMap[stateEl.value]||[]).forEach(c=>{
+    const o=document.createElement('option');o.value=c;o.textContent=c;cityEl.appendChild(o);
+  });
+});
+
+// Photo preview
+const photosEl = document.getElementById('photos');
+const previewPhotos = document.getElementById('previewPhotos');
+photosEl.addEventListener('change',()=>{
+  const files = Array.from(photosEl.files);
+  if(files.length>5){ alert('Max 5 photos allowed'); photosEl.value=''; previewPhotos.innerHTML=''; return; }
+  previewPhotos.innerHTML='';
+  files.forEach(f=>{
+    if(!f.type.startsWith('image/')) return;
+    const img=document.createElement('img');img.src=URL.createObjectURL(f);previewPhotos.appendChild(img);
+  });
+});
+
+// Password toggle
+const pwd=document.getElementById('password');
+const toggle=document.getElementById('togglePwd');
+toggle.addEventListener('click',()=>{
+  pwd.type = pwd.type === 'password' ? 'text' : 'password';
+  toggle.textContent = pwd.type === 'password' ? '👁️' : '🙈';
+});
+</script>
+</body>
+</html>

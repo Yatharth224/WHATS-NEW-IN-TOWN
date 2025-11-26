@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – What's New in Town</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1C1C1C 100%);
+            color: #E5E5E5;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .background-orbs {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+        .orb1 { width: 380px; height: 380px; top: 10%; left: 5%; background: radial-gradient(circle, rgba(191,161,129,0.35), transparent 70%); }
+        .orb2 { width: 320px; height: 320px; bottom: 5%; right: 10%; background: radial-gradient(circle, rgba(229,229,229,0.25), transparent 70%); }
+
+        @keyframes float {0%,100%{transform:translate(0,0);}50%{transform:translate(30px,-40px);}}
+
+        .login-card {
+            width: 380px;
+            padding: 40px 35px;
+            background: rgba(28, 28, 28, 0.85);
+            border: 1px solid rgba(191,161,129,0.3);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .logo-title {
+            font-size: 34px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #BFA181, #E5E5E5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 10px rgba(191,161,129,0.25);
+        }
+
+        .input-group { text-align: left; margin-bottom: 18px; }
+        .input-group label { font-size: 14px; font-weight: 500; color: #BFA181; }
+        .input-group input {
+            width: 100%;
+            margin-top: 6px;
+            padding: 14px;
+            font-size: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(191,161,129,0.4);
+            background: rgba(0,0,0,0.4);
+            color: #E5E5E5;
+            outline: none;
+        }
+        .input-group input:focus {
+            border-color: #BFA181;
+            box-shadow: 0 0 12px rgba(191,161,129,0.4);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            border-radius: 30px;
+            border: 2px solid #BFA181;
+            background: #000;
+            color: #BFA181;
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #BFA181, #E5E5E5);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(191,161,129,0.45);
+        }
+
+        .signup-link {
+            margin-top: 18px;
+            font-size: 15px;
+        }
+        .signup-link a {
+            color: #BFA181;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .signup-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+
+<body>
+
+    <div class="background-orbs">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+    </div>
+
+    <div class="login-card">
+
+        <!-- 🔥 ADDED LOGO HERE -->
+        <h1 class="logo-title">What's New in Town</h1>
+
+        <h2 style="margin-top: 10px;">Login</h2>
+
+        <form method="POST">
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+
+        </form>
+
+        <p class="signup-link">
+            Don't have an account?
+            <a href="{{ url_for('signup') }}">Sign Up</a>
+        </p>
+
+    </div>
+
+</body>
+</html>

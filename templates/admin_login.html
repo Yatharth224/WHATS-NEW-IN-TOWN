@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WNT Admin Login</title>
+
+<style>
+:root {
+    --gold-light: #F3D9B1;
+    --gold: #D1AF7A;
+    --gold-dark: #A58A63;
+    --light: #E5E5E5;
+    --dark: #000;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #000, #111);
+    font-family: Poppins, sans-serif;
+    color: var(--light);
+    height: 100vh;
+}
+
+/* HEADER */
+.top-header {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.top-header h1 {
+    font-size: 50px;
+    font-weight: 700;
+    background: linear-gradient(180deg, var(--gold-light), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 4px 20px rgba(191,161,129,0.25);
+    margin-bottom: 5px;
+    transition: 0.35s ease; /* smooth */
+}
+
+/* HOVER GLOW ADDED */
+.top-header h1:hover {
+    text-shadow: 
+        0 0 20px rgba(191,161,129,0.65), 
+        0 0 40px rgba(191,161,129,0.45), 
+        0 0 60px rgba(191,161,129,0.35);
+    transform: translateY(-3px);
+}
+
+.top-header p {
+    margin: 0;
+    font-size: 18px;
+    color: var(--gold);
+    opacity: 0.9;
+    transition: 0.35s ease;
+}
+
+.top-header p:hover {
+    text-shadow: 0 0 14px rgba(191,161,129,0.65);
+    transform: translateY(-2px);
+}
+
+/* LOGIN BOX */
+.container {
+    width: 380px;
+    padding: 35px;
+    background: rgba(20,20,20,0.6);
+    border: 1px solid rgba(191,161,129,0.35);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    margin: 220px auto 0 auto;
+}
+
+.container h2 {
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(180deg, var(--gold-light), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 4px 18px rgba(191,161,129,0.25);
+}
+
+.container p {
+    font-size: 15px;
+    color: var(--gold-light);
+    opacity: 0.85;
+    margin-bottom: 16px;
+}
+
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(191,161,129,0.4);
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--light);
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px rgba(191,161,129,0.6);
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--gold);
+    color: #000;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    box-shadow: 0 0 15px var(--gold);
+    transform: translateY(-2px);
+}
+
+.error {
+    margin-top: 10px;
+    color: #ff4d4d;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- CLICKABLE HEADER -->
+<a href="/" style="text-decoration:none;">
+    <div class="top-header">
+        <h1>What's New in Town</h1>
+        <p>Discover the New Places</p>
+    </div>
+</a>
+
+<!-- LOGIN BOX -->
+<div class="container">
+
+    <h2>WNT Admin Panel Login</h2>
+    <p>Access Admin Controls</p>
+
+    {% if errors %}
+    <div class="error">{{ errors }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="email" name="email" placeholder="Email ID" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+</body>
+</html>

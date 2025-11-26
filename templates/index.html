@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's New in Town</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', 'Inter', sans-serif;
+      background: linear-gradient(135deg, #000000 0%, #1C1C1C 100%);
+      color: #E5E5E5;
+      min-height: 100%;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    html { height: 100%; }
+    * { box-sizing: border-box; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(191,161,129,0.05) 0%, transparent 70%),
+                  radial-gradient(circle at 80% 80%, rgba(191,161,129,0.05) 0%, transparent 70%),
+                  radial-gradient(circle at 50% 10%, rgba(255,255,255,0.03) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(191,161,129,0.12), transparent);
+      filter: blur(80px);
+      animation: floatOrb 25s infinite ease-in-out;
+      opacity: 0.3;
+    }
+
+    .orb:nth-child(1) { width: 400px; height: 400px; top: -100px; left: -100px; animation-delay: 0s; }
+    .orb:nth-child(2) { width: 450px; height: 450px; top: 40%; right: -150px; animation-delay: 8s; }
+    .orb:nth-child(3) { width: 400px; height: 400px; bottom: -100px; left: 25%; animation-delay: 16s; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 50px 30px; position: relative; z-index: 1; }
+
+    .header { text-align: center; margin-bottom: 60px; animation: fadeInDown 1s ease-out; }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-40px);}to{opacity:1;transform:translateY(0);} }
+
+    .logo {
+      font-size: 56px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #BFA181 0%, #E5E5E5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 12px rgba(191,161,129,0.4));
+    }
+
+    .breadcrumb {
+      text-align: center;
+      margin-bottom: 35px;
+      padding: 14px 24px;
+      background: rgba(28, 28, 28, 0.85);
+      border-radius: 16px;
+      border: 1px solid rgba(191,161,129,0.3);
+      box-shadow: 0 4px 12px rgba(191,161,129,0.15);
+    }
+
+    .breadcrumb-item { color: #E5E5E5; font-size: 14px; opacity: 0.8; }
+    .breadcrumb-item.active { color: #BFA181; font-weight: 600; }
+    .breadcrumb-separator { color: #BFA181; margin: 0 10px; }
+
+    .section-title { font-size: 32px; font-weight: 700; color: #BFA181; text-align: center; margin-bottom: 35px; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(28, 28, 28, 0.95);
+      border: 1px solid rgba(191,161,129,0.3);
+      border-radius: 20px;
+      padding: 35px 25px;
+      text-align: center;
+      color: #E5E5E5;
+      transition: .3s;
+    }
+
+    .card:hover { transform: translateY(-12px); border-color:#BFA181; }
+
+    .card.selected { box-shadow: 0 0 25px rgba(191,161,129,0.35); border-color:#BFA181; }
+
+    .reset-btn {
+      display: block;
+      margin: 40px auto;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, #BFA181 0%, #E5E5E5 100%);
+      border-radius: 30px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      color: black;
+      font-weight: 700;
+    }
+
+    .hidden { display: none; }
+  </style>
+ </head>
+
+<body>
+<div class="orb"></div><div class="orb"></div><div class="orb"></div>
+
+<div class="container">
+<header class="header">
+<h1 class="logo">What's New in Town</h1>
+<p style="color:#BFA181">Discover new places</p>
+</header>
+
+<div id="breadcrumb" class="breadcrumb hidden">
+ <span class="breadcrumb-item" id="breadcrumb-category"></span>
+ <span class="breadcrumb-separator">›</span>
+ <span class="breadcrumb-item" id="breadcrumb-state"></span>
+ <span class="breadcrumb-separator hidden" id="separator2">›</span>
+ <span class="breadcrumb-item hidden" id="breadcrumb-city"></span>
+</div>
+
+<section id="categories-section">
+ <h2 class="section-title">Choose Your Experience</h2>
+ <div class="cards-grid">
+   <div class="card" data-category="Fine Dine" onclick="selectCategory(this)">🍽️<h3>Fine Dine</h3></div>
+   <div class="card" data-category="Restro Bar" onclick="selectCategory(this)">🍸<h3>Restro Bar</h3></div>
+   <div class="card" data-category="Arcade" onclick="selectCategory(this)">🎮<h3>Arcade</h3></div>
+   <div class="card" data-category="Bowling" onclick="selectCategory(this)">🎳<h3>Bowling</h3></div>
+ </div>
+</section>
+
+<section id="states-section" class="hidden">
+ <h2 class="section-title">Select Your State</h2>
+ <div class="cards-grid">
+   <div class="card" data-state="Madhya Pradesh" data-city="Indore" onclick="selectState(this)">🏛️<h3>Madhya Pradesh</h3></div>
+   <div class="card" data-state="Maharashtra" data-city="Mumbai" onclick="selectState(this)">🌊<h3>Maharashtra</h3></div>
+   <div class="card" data-state="Karnataka" data-city="Bengaluru" onclick="selectState(this)">🌴<h3>Karnataka</h3></div>
+   <div class="card" data-state="Delhi" data-city="Delhi" onclick="selectState(this)">🏙️<h3>Delhi</h3></div>
+ </div>
+</section>
+
+<section id="cities-section" class="hidden">
+ <h2 class="section-title">Your City</h2>
+ <div class="cards-grid">
+   <div class="card selected">
+     <div id="city-icon">🌆</div>
+     <h3 id="city-name">City</h3>
+   </div>
+ </div>
+</section>
+
+<!-- Backend submit -->
+<form id="filterForm" action="/filter" method="POST">
+ <input type="hidden" name="category" id="input-category">
+ <input type="hidden" name="state" id="input-state">
+ <input type="hidden" name="city" id="input-city">
+</form>
+
+<button class="reset-btn hidden" id="startBtn" onclick="start()">Let's Get Started</button>
+
+</div>
+
+<script>
+let selectedCategory="", selectedState="", selectedCity="";
+
+function selectCategory(el){
+ document.querySelectorAll("#categories-section .card").forEach(c=>c.classList.remove("selected"));
+ el.classList.add("selected");
+ selectedCategory=el.dataset.category;
+ document.getElementById("input-category").value=selectedCategory;
+ document.getElementById("breadcrumb").classList.remove("hidden");
+ document.getElementById("breadcrumb-category").innerText=selectedCategory;
+ document.getElementById("states-section").classList.remove("hidden");
+}
+
+function selectState(el){
+ document.querySelectorAll("#states-section .card").forEach(c=>c.classList.remove("selected"));
+ el.classList.add("selected");
+ selectedState=el.dataset.state;
+ selectedCity=el.dataset.city;
+
+ document.getElementById("input-state").value=selectedState;
+ document.getElementById("input-city").value=selectedCity;
+
+ document.getElementById("breadcrumb-state").innerText=selectedState;
+ document.getElementById("breadcrumb-city").innerText=selectedCity;
+ document.getElementById("breadcrumb-city").classList.remove("hidden");
+ document.getElementById("separator2").classList.remove("hidden");
+
+ document.getElementById("city-name").innerText=selectedCity;
+ document.getElementById("cities-section").classList.remove("hidden");
+ document.getElementById("startBtn").classList.remove("hidden");
+}
+
+function start(){
+ if(!selectedCategory || !selectedState || !selectedCity){
+   alert("Please complete all selections");
+   return;
+ }
+ document.getElementById("filterForm").submit();
+}
+</script>
+
+</body>
+</html>

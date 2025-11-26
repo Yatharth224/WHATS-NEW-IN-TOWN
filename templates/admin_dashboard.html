@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Poppins, sans-serif;
+      background: #000;
+      color: #F3D9B1;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background: #111;
+      color: #D1AF7A;
+      padding: 20px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 700;
+      border-bottom: 2px solid #D1AF7A;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      background: #111;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(209, 175, 122, 0.3);
+      border: 1px solid #D1AF7A;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #A58A63;
+    }
+
+    th {
+      background: #222;
+      color: #F3D9B1;
+      font-weight: 600;
+      border-bottom: 2px solid #D1AF7A;
+    }
+
+    td {
+      color: #F3D9B1;
+    }
+
+    .btn-accept {
+      padding:10px 26px;
+      border-radius:50px;
+      font-weight:600;
+      background:#000; /* pure black */
+      color:#F3D9B1;
+      border:2px solid rgba(255,215,140,0.35);
+      cursor:pointer;
+      transition:0.3s ease-in-out;
+      box-shadow:0 0 10px rgba(255,215,140,0.15);
+    }
+
+    .btn-reject {
+      padding:10px 26px;
+      border-radius:50px;
+      font-weight:600;
+      background:#000; /* pure black */
+      color:#ffb3b3;
+      border:2px solid rgba(255,120,120,0.35);
+      cursor:pointer;
+      transition:0.3s ease-in-out;
+      box-shadow:0 0 10px rgba(255,120,120,0.20);
+    }
+
+    .btn-accept:hover, .btn-accept:active {
+      background:linear-gradient(135deg,#f5deb4,#e6c98f,#c8a96a);
+      color:#000;
+      border-color:rgba(255,215,140,0.75);
+      box-shadow:0 0 25px rgba(255,215,140,0.75);
+      transform:scale(1.07);
+    }
+    .btn-reject:hover, .btn-reject:active {
+      background:linear-gradient(135deg,#ffb3b3,#ff8a8a,#d66565);
+      color:#000;
+      border-color:rgba(255,120,120,0.75);
+      box-shadow:0 0 25px rgba(255,120,120,0.75);
+      transform:scale(1.07);
+    }
+
+  .table-wrapper {
+      overflow-x: auto;
+      width: 100%;
+    }
+
+  .logout-btn {
+      padding:10px 26px;
+      border-radius:50px;
+      font-weight:600;
+      text-decoration:none;
+      background:#000; /* pure premium black */
+      color:#F3D9B1;
+      border:2px solid rgba(255,215,140,0.35);
+      cursor:pointer;
+      transition:0.3s ease-in-out;
+      box-shadow:0 0 10px rgba(255,215,140,0.15);
+    }
+    .logout-btn:hover, .logout-btn:active {
+      background:linear-gradient(135deg,#f5deb4,#e6c98f,#c8a96a);
+      color:#000;
+      border-color:rgba(255,215,140,0.75);
+      box-shadow:0 0 25px rgba(255,215,140,0.75);
+      transform:scale(1.07);
+    }
+
+    h2 {
+      margin-top:-10px;
+    }
+
+  .header span a {
+      color:#D1AF7A;
+      text-decoration:none;
+      transition:0.3s ease-in-out;
+    }
+
+    .header span a:hover {
+      color:#F3D9B1;
+      text-shadow:0 0 12px rgba(255,215,140,0.85);
+      filter: drop-shadow(0 0 6px rgba(255,215,140,0.6));
+      transform:scale(1.03);
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="header" style="display:flex;justify-content:center;align-items:center;position:relative;"> 
+  
+  <span style="font-size:26px;font-weight:700;"><a href="/" style="color:#D1AF7A;text-decoration:none;">What's New In Town</a> - Admin Panel</span>
+  <a href="/admin/logout" class="logout-btn" style="position:absolute;right:20px;">Logout</a>
+</div>
+
+<div class="container">
+
+  <h2>Pending Applications</h2>
+
+  <div class="table-wrapper">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>State</th>
+        <th>City</th>
+        <th>Category</th>
+        <th>Cost for Two</th>
+        <th>Location</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Photos</th>
+        <th>Electricity Bill</th>
+        <th>Additional Info</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    {% for row in data %}
+      <tr>
+    <td>{{ row.full_name_or_business_name }}</td>
+    <td>{{ row.state }}</td>
+    <td>{{ row.city }}</td>
+    <td>{{ row.category }}</td>
+    <td>{{ row.cost_for_two }}</td>
+    <td>{{ row.location }}</td>
+    <td>{{ row.contact_number }}</td>
+    <td>{{ row.email }}</td>
+
+    <!-- 📌 PHOTOS WITH THUMBNAIL & ENLARGE -->
+    <td>
+        {% for img in [row.photo1, row.photo2, row.photo3, row.photo4, row.photo5] %}
+            {% if img %}
+                <a href="{{ url_for('uploaded_file', filename=img) }}" target="_blank">
+                    <img src="{{ url_for('uploaded_file', filename=img) }}" 
+                         style="width:60px;height:60px;object-fit:cover;border-radius:6px;margin:3px;cursor:pointer;border:1px solid #D1AF7A;">
+                </a>
+            {% endif %}
+        {% endfor %}
+    </td>
+
+    <!-- ⚡ ELECTRICITY BILL THUMBNAIL -->
+    <td>
+        {% if row.electricity_bill %}
+            <a href="{{ url_for('uploaded_file', filename=row.electricity_bill) }}" target="_blank">
+                <img src="{{ url_for('uploaded_file', filename=row.electricity_bill) }}"
+                     style="width:60px;height:60px;object-fit:cover;border-radius:6px;border:1px solid #D1AF7A;">
+            </a>
+        {% else %}
+            No File
+        {% endif %}
+    </td>
+
+    <!-- 📝 ADDITIONAL NOTES -->
+    <td>{{ row.additional_notes if row.additional_notes else "—" }}</td>
+
+    <td style="white-space:nowrap;">
+        <form action="/accept/{{ row.id }}" method="POST" style="display:inline-block;margin-right:6px;">
+            <button class="btn-accept" type="submit">Accept</button>
+        </form>
+        <form action="/reject/{{ row.id }}" method="POST" style="display:inline-block;">
+            <button class="btn-reject" type="submit">Delete</button>
+        </form>
+    </td>
+</tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  </div> <!-- end table-wrapper -->
+
+</div>
+
+</body>
+</html>

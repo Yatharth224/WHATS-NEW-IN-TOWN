@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What's New - Results</title>
+
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ================= ROOT COLORS ================= */
+      :root {
+        --gold1: #c8a76c;
+        --gold2: #e8d3a1;
+        --gold3: #f5e7c8;
+        --gold4: #e6c985;
+        --gold-soft: #d4af3740;
+        --bg1: #0d0d0d;
+        --bg2: #1a1a1a;
+        --bg3: #2b2a27;
+        --text-light: #ffffff;
+        --text-muted: #c4c4c4;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, var(--bg1), var(--bg2), var(--bg3));
+        color: var(--text-light);
+        font-family: "Poppins", sans-serif;
+      }
+
+      /* ================= HEADER ================= */
+      header {
+        text-align: center;
+        padding: 30px 0;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+        box-shadow: 0 0 25px var(--gold-soft);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 32px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--gold1),
+          var(--gold2),
+          var(--gold3),
+          var(--gold4)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-shadow: 0px 0px 10px rgba(255, 245, 200, 0.25);
+      }
+      header p {
+        margin-top: 10px;
+        font-size: 15px;
+        color: var(--text-muted);
+      }
+
+      /* ================= CONTAINER ================= */
+      .container {
+        width: 90%;
+        margin: auto;
+        padding: 30px 0;
+      }
+
+      .result-text {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: var(--text-muted);
+      }
+
+      /* ================= GRID ================= */
+      .cards {
+        display: grid;
+        gap: 35px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        margin-top: 25px;
+      }
+
+      /* ================= CARD ================= */
+      .card {
+        background: #0f0f0f;
+        border-radius: 22px;
+        padding: 18px;
+        border: 1px solid rgba(200, 162, 90, 0.4);
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        transition: 0.35s ease;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .card.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0px 0px 30px rgba(226, 191, 122, 0.4);
+        border-color: var(--gold1);
+      }
+
+      /* ================= SWIPER ================= */
+      .card-swiper {
+        width: 100%;
+        height: 180px;
+        border-radius: 18px;
+        overflow: hidden;
+        margin-bottom: 12px;
+      }
+
+      .card-swiper img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      /* ================= TEXT ================= */
+      .card .title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 5px;
+        background: linear-gradient(
+          90deg,
+          var(--gold1),
+          var(--gold2),
+          var(--gold3),
+          var(--gold4)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .cost {
+        margin-top: 10px;
+        font-size: 16px;
+        background: linear-gradient(
+          90deg,
+          var(--gold1),
+          var(--gold2),
+          var(--gold3),
+          var(--gold4)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .location {
+        margin-top: 6px;
+        /* border-left:0 solid var(--gold1); */
+        /* padding-left:v;  */
+        font-size: 15px;
+        background: linear-gradient(
+          90deg,
+          var(--gold1),
+          var(--gold2),
+          var(--gold3),
+          var(--gold4)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 500;
+      }
+      .glow-link {
+        text-decoration: none;
+      }
+
+      .glow-title {
+        font-size: 48px;
+        font-weight: 800;
+        color: #d8b98a;
+        transition: all 0.4s ease;
+        text-shadow: 0 0 6px rgba(216, 185, 138, 0.4),
+          0 0 12px rgba(216, 185, 138, 0.35), 0 0 25px rgba(216, 185, 138, 0.25);
+      }
+
+      .glow-title:hover {
+        color: #f3e1b0;
+        text-shadow: 0 0 10px rgba(243, 225, 176, 0.8),
+          0 0 25px rgba(243, 225, 176, 0.6), 0 0 50px rgba(243, 225, 176, 0.45),
+          0 0 80px rgba(243, 225, 176, 0.3);
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="glow-link">
+        <h1 class="glow-title">What's New in Town</h1>
+      </a>
+      <p>Discover Best Dining Spots Near You</p>
+    </header>
+
+    <div class="container">
+      <p class="result-text">
+        Showing: <strong>{{ category }}</strong> |
+        <strong>{{ state }}</strong> | <strong>{{ city }}</strong>
+      </p>
+
+      {% if data %}
+      <div class="cards">
+        {% for r in data %}
+        <div class="card">
+          <!-- IMAGE SLIDER -->
+          <div class="swiper card-swiper">
+            <div class="swiper-wrapper">
+              {% if r.photo1 %}
+              <div class="swiper-slide"><img src="{{ r.photo1 }}" /></div>
+              {% endif %} {% if r.photo2 %}
+              <div class="swiper-slide"><img src="{{ r.photo2 }}" /></div>
+              {% endif %} {% if r.photo3 %}
+              <div class="swiper-slide"><img src="{{ r.photo3 }}" /></div>
+              {% endif %} {% if r.photo4 %}
+              <div class="swiper-slide"><img src="{{ r.photo4 }}" /></div>
+              {% endif %} {% if r.photo5 %}
+              <div class="swiper-slide"><img src="{{ r.photo5 }}" /></div>
+              {% endif %}
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+
+          <div class="title">{{ r.name }}</div>
+          <p class="cost">₹{{ r.cost_for_two }} for two</p>
+          <p class="location"><i class="ri-map-pin-line"></i> {{ r.location }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p
+        style="
+          color: #ff7777;
+          margin-top: 30px;
+          font-size: 20px;
+          text-align: center;
+        "
+      >
+        🚫 No results found for this selection.
+      </p>
+      {% endif %}
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+      // Hover based auto-scroll slider
+
+      document.querySelectorAll(".card-swiper").forEach((swiperContainer) => {
+        const swiper = new Swiper(swiperContainer, {
+          loop: true,
+          autoplay: false, // ✅ default OFF
+          speed: 650, // ✅ thodi fast animation
+          pagination: {
+            el: swiperContainer.querySelector(".swiper-pagination"),
+            clickable: true,
+          },
+        });
+
+        // ✅ HOVER PE AUTO SCROLL START
+        swiperContainer.addEventListener("mouseenter", () => {
+          swiper.params.autoplay = {
+            delay: 1100, // ✅ fast slide change
+            disableOnInteraction: false,
+          };
+          swiper.autoplay.start();
+        });
+
+        // ✅ CURSOR HATE TO STOP
+        swiperContainer.addEventListener("mouseleave", () => {
+          swiper.autoplay.stop();
+        });
+      });
+
+      // Scroll reveal animation
+      const cards = document.querySelectorAll(".card");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("show");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      cards.forEach((card) => observer.observe(card));
+    </script>
+  </body>
+</html>
