@@ -154,10 +154,9 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+
       .location {
         margin-top: 6px;
-        /* border-left:0 solid var(--gold1); */
-        /* padding-left:v;  */
         font-size: 15px;
         background: linear-gradient(
           90deg,
@@ -170,6 +169,7 @@
         -webkit-text-fill-color: transparent;
         font-weight: 500;
       }
+
       .glow-link {
         text-decoration: none;
       }
@@ -215,13 +215,17 @@
             <div class="swiper-wrapper">
               {% if r.photo1 %}
               <div class="swiper-slide"><img src="{{ r.photo1 }}" /></div>
-              {% endif %} {% if r.photo2 %}
+              {% endif %}
+              {% if r.photo2 %}
               <div class="swiper-slide"><img src="{{ r.photo2 }}" /></div>
-              {% endif %} {% if r.photo3 %}
+              {% endif %}
+              {% if r.photo3 %}
               <div class="swiper-slide"><img src="{{ r.photo3 }}" /></div>
-              {% endif %} {% if r.photo4 %}
+              {% endif %}
+              {% if r.photo4 %}
               <div class="swiper-slide"><img src="{{ r.photo4 }}" /></div>
-              {% endif %} {% if r.photo5 %}
+              {% endif %}
+              {% if r.photo5 %}
               <div class="swiper-slide"><img src="{{ r.photo5 }}" /></div>
               {% endif %}
             </div>
@@ -229,8 +233,19 @@
           </div>
 
           <div class="title">{{ r.name }}</div>
-          <p class="cost">₹{{ r.cost_for_two }} for two</p>
-          <p class="location"><i class="ri-map-pin-line"></i> {{ r.location }}</p>
+
+          <p class="cost">
+            ₹
+            {% if category|lower == "arcade" or category|lower == "bowling" %}
+              {{ r.cost_for_two }} price
+            {% else %}
+              {{ r.cost_for_two }} for two
+            {% endif %}
+          </p>
+
+          <p class="location">
+            <i class="ri-map-pin-line"></i> {{ r.location }}
+          </p>
         </div>
         {% endfor %}
       </div>
@@ -253,28 +268,27 @@
 
     <script>
       // Hover based auto-scroll slider
-
       document.querySelectorAll(".card-swiper").forEach((swiperContainer) => {
         const swiper = new Swiper(swiperContainer, {
           loop: true,
-          autoplay: false, // ✅ default OFF
-          speed: 650, // ✅ thodi fast animation
+          autoplay: false, // default OFF
+          speed: 650,
           pagination: {
             el: swiperContainer.querySelector(".swiper-pagination"),
             clickable: true,
           },
         });
 
-        // ✅ HOVER PE AUTO SCROLL START
+        // Hover pe auto scroll start
         swiperContainer.addEventListener("mouseenter", () => {
           swiper.params.autoplay = {
-            delay: 1100, // ✅ fast slide change
+            delay: 1100,
             disableOnInteraction: false,
           };
           swiper.autoplay.start();
         });
 
-        // ✅ CURSOR HATE TO STOP
+        // Cursor hatne pe stop
         swiperContainer.addEventListener("mouseleave", () => {
           swiper.autoplay.stop();
         });
