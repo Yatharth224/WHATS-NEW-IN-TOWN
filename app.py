@@ -335,7 +335,9 @@ def login():
 
 
 
-
+@app.route('/what_we_offer ')
+def what_we_offer():
+    return render_template('what_we_offer.html')
 
 
 
