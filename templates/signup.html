@@ -111,6 +111,28 @@
         .login-link a:hover {
             text-decoration: underline;
         }
+
+        /* 🔥 FLASH MESSAGE STYLES */
+        .flash-container {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .error {
+            background: rgba(255, 0, 0, 0.15);
+            border: 1px solid rgba(255, 80, 80, 0.8);
+            color: #ff8080;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+        .success {
+            background: rgba(0, 255, 100, 0.12);
+            border: 1px solid rgba(0, 255, 150, 0.7);
+            color: #b5ffcf;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
     </style>
 </head>
 
@@ -123,10 +145,21 @@
 
     <div class="signup-card">
 
-        <!-- 🔥 ADDED LOGO HERE -->
         <h1 class="logo-title">What's New in Town</h1>
-
         <h2>Create Account</h2>
+
+        <!-- 🔥 FLASH MESSAGES YAHAN DIKHEGI -->
+        <div class="flash-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="{{ category }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+        </div>
 
         <form method="POST">
 
