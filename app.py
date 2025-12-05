@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for,flash
 import mysql.connector
 from flask_bcrypt import Bcrypt
 import os
+import re
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
@@ -274,8 +275,9 @@ def admin_pending():
 
 
 
-
-
+USERNAME_PATTERN = r'^[A-Za-z0-9_]{3,20}$'
+EMAIL_PATTERN = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$'
+PASSWORD_PATTERN = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
 
 
 
@@ -283,10 +285,35 @@ def admin_pending():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        
         username = request.form['username']
         email = request.form['email']
-        password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
+        raw_password = request.form['password']
 
+        
+        if not re.fullmatch(USERNAME_PATTERN, username):
+            flash("Invalid username! Use 3-20 characters (letters, numbers, underscore).", "error")
+            return redirect(url_for('signup'))
+
+        
+        if not re.fullmatch(EMAIL_PATTERN, email):
+            flash("Invalid email format!", "error")
+            return redirect(url_for('signup'))
+
+        
+        if not re.fullmatch(PASSWORD_PATTERN, raw_password):
+            flash("Weak password! Must contain:\n"
+                  "- Minimum 8 characters\n"
+                  "- At least 1 uppercase letter\n"
+                  "- At least 1 lowercase letter\n"
+                  "- At least 1 digit\n"
+                  "- At least 1 special character (@$!%*?&)", "error")
+            return redirect(url_for('signup'))
+
+        
+        password = bcrypt.generate_password_hash(raw_password).decode('utf-8')
+
+        
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute("INSERT INTO users(name, email, password, role) VALUES (%s, %s, %s, %s)",
@@ -295,12 +322,10 @@ def signup():
         cur.close()
         conn.close()
 
+        flash("Signup successful! Please login now.", "success")
         return redirect(url_for('home'))
 
     return render_template('signup.html')
-
-
-
 
 
 
@@ -326,7 +351,7 @@ def login():
 
         if user and bcrypt.check_password_hash(user['password'], password_input):
             session['user_id'] = user['id']
-            session['role'] = user['role']
+            # session['role'] = user['role']
             return redirect(url_for('home'))
         else:
             return "Invalid email or password"
