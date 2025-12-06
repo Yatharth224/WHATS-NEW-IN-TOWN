@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
  <head>
@@ -5,211 +6,694 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What's New in Town</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', 'Inter', sans-serif;
-      background: linear-gradient(135deg, #000000 0%, #1C1C1C 100%);
-      color: #E5E5E5;
-      min-height: 100%;
-      position: relative;
-      overflow-x: hidden;
+    :root {
+      --accent: #BFA181;
+      --accent-soft: rgba(191,161,129,0.25);
+      --bg-dark: #000000;
+      --bg-surface: rgba(28, 28, 28, 0.95);
+      --text-main: #E5E5E5;
     }
 
-    html { height: 100%; }
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
 
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #111 0%, #000 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      cursor: none; /* custom cursor on desktop */
+    }
+
+    /* background glow */
     body::before {
       content: '';
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: radial-gradient(circle at 20% 50%, rgba(191,161,129,0.05) 0%, transparent 70%),
-                  radial-gradient(circle at 80% 80%, rgba(191,161,129,0.05) 0%, transparent 70%),
-                  radial-gradient(circle at 50% 10%, rgba(255,255,255,0.03) 0%, transparent 70%);
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(191,161,129,0.06) 0%, transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(191,161,129,0.06) 0%, transparent 70%),
+        radial-gradient(circle at 50% 10%, rgba(255,255,255,0.03) 0%, transparent 70%);
       z-index: 0;
       pointer-events: none;
     }
 
     .orb {
-      position: absolute;
+      position: fixed;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(191,161,129,0.12), transparent);
+      background: radial-gradient(circle, rgba(191,161,129,0.16), transparent);
       filter: blur(80px);
-      animation: floatOrb 25s infinite ease-in-out;
-      opacity: 0.3;
+      animation: floatOrb 25s infinite ease-in-out alternate;
+      opacity: 0.35;
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .orb:nth-child(1) { width: 400px; height: 400px; top: -100px; left: -100px; animation-delay: 0s; }
-    .orb:nth-child(2) { width: 450px; height: 450px; top: 40%; right: -150px; animation-delay: 8s; }
-    .orb:nth-child(3) { width: 400px; height: 400px; bottom: -100px; left: 25%; animation-delay: 16s; }
+    .orb:nth-child(1) { width: 420px; height: 420px; top: -120px; left: -100px; animation-delay: 0s; }
+    .orb:nth-child(2) { width: 460px; height: 460px; top: 40%; right: -130px; animation-delay: 8s; }
+    .orb:nth-child(3) { width: 420px; height: 420px; bottom: -140px; left: 25%; animation-delay: 16s; }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 50px 30px; position: relative; z-index: 1; }
+    @keyframes floatOrb {
+      0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.3; }
+      50% { transform: translate3d(40px, -20px, 0) scale(1.1); opacity: 0.45; }
+      100% { transform: translate3d(-20px, 30px, 0) scale(1.05); opacity: 0.3; }
+    }
 
-    .header { text-align: center; margin-bottom: 60px; animation: fadeInDown 1s ease-out; }
-    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-40px);}to{opacity:1;transform:translateY(0);} }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 20px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      text-align: center;
+      margin: 20px auto 60px;
+      animation: fadeInDown 0.9s ease-out;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px) scale(0.97); filter: blur(4px); }
+      to   { opacity: 1; transform: translateY(0) scale(1);   filter: blur(0); }
+    }
+
+    .logo-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, rgba(191,161,129,0.2), transparent 60%);
+      border: 1px solid rgba(191,161,129,0.35);
+      box-shadow: 0 0 30px rgba(0,0,0,0.6), 0 0 35px rgba(191,161,129,0.45);
+      backdrop-filter: blur(18px);
+      transform-origin: center;
+      animation: logoFloat 3.5s ease-in-out infinite;
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-6px) scale(1.02); }
+    }
+
+    @keyframes glowLine {
+      0%   { opacity: 0.3; transform: scaleX(0.7); }
+      50%  { opacity: 1;   transform: scaleX(1); }
+      100% { opacity: 0.5; transform: scaleX(0.85); }
+    }
 
     .logo {
-      font-size: 56px;
+      font-size: 52px;
       font-weight: 800;
-      background: linear-gradient(135deg, #BFA181 0%, #E5E5E5 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, #ffffff 45%, var(--accent) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 4px 12px rgba(191,161,129,0.4));
+      letter-spacing: 1px;
+      text-shadow: 0 0 24px rgba(191,161,129,0.3);
+      white-space: nowrap;
+    }
+
+    .logo::after {
+      content: '';
+      display: block;
+      width: 160px;
+      height: 2px;
+      border-radius: 999px;
+      margin: 10px auto 0;
+      background: linear-gradient(90deg, transparent, rgba(191,161,129,0.9), #ffffff, rgba(191,161,129,0.9), transparent);
+      box-shadow: 0 0 18px rgba(191,161,129,0.8);
+      animation: glowLine 2.4s ease-in-out infinite alternate;
+      transform-origin: center;
+    }
+
+    .subheading {
+      margin-top: 14px;
+      color: var(--accent);
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .subheading-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(191,161,129,0.7);
+      animation: pulseDot 1.6s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%      { transform: scale(1.6); opacity: 0.4; }
     }
 
     .breadcrumb {
-      text-align: center;
-      margin-bottom: 35px;
+      margin: 0 auto 35px;
       padding: 14px 24px;
-      background: rgba(28, 28, 28, 0.85);
+      background: linear-gradient(135deg, rgba(28, 28, 28, 0.88), rgba(10, 10, 10, 0.9));
       border-radius: 16px;
       border: 1px solid rgba(191,161,129,0.3);
-      box-shadow: 0 4px 12px rgba(191,161,129,0.15);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.65);
+      max-width: 460px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      backdrop-filter: blur(18px);
+      transform-origin: center;
+      animation: slideInUp 0.7s ease-out;
     }
 
-    .breadcrumb-item { color: #E5E5E5; font-size: 14px; opacity: 0.8; }
-    .breadcrumb-item.active { color: #BFA181; font-weight: 600; }
-    .breadcrumb-separator { color: #BFA181; margin: 0 10px; }
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-    .section-title { font-size: 32px; font-weight: 700; color: #BFA181; text-align: center; margin-bottom: 35px; }
+    .breadcrumb-item { color: var(--text-main); font-size: 13px; opacity: 0.8; }
+    .breadcrumb-item.active { color: var(--accent); font-weight: 600; opacity: 1; }
+    .breadcrumb-separator { color: var(--accent); margin: 0 4px; }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 28px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 25px;
-      max-width: 1000px;
-      margin: 0 auto;
+      max-width: 950px;
+      margin: 0 auto 10px;
     }
 
     .card {
-      background: rgba(28, 28, 28, 0.95);
-      border: 1px solid rgba(191,161,129,0.3);
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at top left, rgba(191,161,129,0.13), transparent 55%),
+                  radial-gradient(circle at bottom right, rgba(0,0,0,0.85), rgba(8,8,8,0.95));
+      border: 1px solid rgba(191,161,129,0.22);
       border-radius: 20px;
-      padding: 35px 25px;
+      padding: 28px 22px;
       text-align: center;
-      color: #E5E5E5;
-      transition: .3s;
+      color: var(--text-main);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.8);
+      backdrop-filter: blur(16px);
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transform-origin: center;
+      will-change: transform, box-shadow;
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
     }
 
-    .card:hover { transform: translateY(-12px); border-color:#BFA181; }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% 0%, rgba(255,255,255,0.08), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
 
-    .card.selected { box-shadow: 0 0 25px rgba(191,161,129,0.35); border-color:#BFA181; }
+    .card:hover {
+      transform: translateY(-12px) scale(1.02) rotateX(6deg);
+      border-color: var(--accent);
+      box-shadow: 0 26px 60px rgba(0,0,0,0.9), 0 0 40px rgba(191,161,129,0.35);
+      background: radial-gradient(circle at top left, rgba(191,161,129,0.25), transparent 60%),
+                  radial-gradient(circle at bottom right, rgba(0,0,0,0.98), rgba(10,10,10,1));
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card.selected {
+      box-shadow: 0 0 25px rgba(191,161,129,0.6), 0 26px 70px rgba(0,0,0,0.95);
+      border-color: var(--accent);
+      background: radial-gradient(circle at top left, rgba(191,161,129,0.32), transparent 65%),
+                  radial-gradient(circle at bottom right, rgba(0,0,0,1), rgba(10,10,10,1));
+    }
+
+    .card-emoji {
+      font-size: 32px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.9));
+      transition: transform 0.35s ease;
+    }
+
+    .card:hover .card-emoji {
+      transform: translateY(-4px) scale(1.12) rotate(-4deg);
+    }
+
+    .card h3 {
+      margin-top: 4px;
+      font-size: 18px;
+      letter-spacing: 0.03em;
+    }
 
     .reset-btn {
       display: block;
-      margin: 40px auto;
+      margin: 45px auto 0;
       padding: 14px 36px;
-      background: linear-gradient(135deg, #BFA181 0%, #E5E5E5 100%);
+      background: radial-gradient(circle at top left, var(--accent) 0%, #ffffff 60%);
       border-radius: 30px;
       border: none;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
-      color: black;
+      color: #000;
       font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.9), 0 0 35px rgba(191,161,129,0.6);
+      transform: translateY(8px);
+      opacity: 0;
+      animation: buttonIn 0.65s ease forwards;
+      animation-delay: 0.45s;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hidden { display: none; }
+    @keyframes buttonIn {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .reset-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.9), transparent);
+      transform: skewX(-15deg);
+      opacity: 0;
+    }
+
+    .reset-btn:hover::before {
+      animation: shimmer 0.9s ease;
+      opacity: 1;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(0) skewX(-15deg); }
+      100% { transform: translateX(250%) skewX(-15deg); }
+    }
+
+    .reset-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 22px 55px rgba(0,0,0,1), 0 0 45px rgba(191,161,129,0.8);
+    }
+
+    .hidden { display: none !important; }
+
+    /* stagger reveal animation for cards */
+    .card.revealed {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* custom cursor – DOT + RING */
+    .cursor-dot,
+    .cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: screen;
+      transition: transform 0.12s ease-out, opacity 0.2s ease-out;
+    }
+
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 0 12px rgba(255,255,255,0.9);
+      transform: translate3d(-100px, -100px, 0);
+    }
+
+    .cursor-ring {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(191,161,129,0.7);
+      box-shadow: 0 0 20px rgba(191,161,129,0.6);
+      transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+      transition: transform 0.18s ease-out, border-color 0.18s ease-out, box-shadow 0.18s ease-out, opacity 0.2s ease-out;
+    }
+
+    .cursor-ring.cursor-hover {
+      transform: translate3d(var(--cursor-x, -100px), var(--cursor-y, -100px), 0)
+                 translate(-50%, -50%) scale(1.6);
+      border-color: #ffffff;
+      box-shadow: 0 0 26px rgba(255,255,255,0.9);
+    }
+
+    .cursor-dot.cursor-hidden,
+    .cursor-ring.cursor-hidden {
+      opacity: 0;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+
+    @media (max-width: 1024px) {
+      .container {
+        padding: 40px 18px 60px;
+      }
+      .logo {
+        font-size: 44px;
+      }
+      .section-title {
+        font-size: 24px;
+      }
+      .cards-grid {
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      body { cursor: auto; }                  /* normal cursor / touch */
+      .cursor-dot, .cursor-ring { display: none; } /* hide custom cursor */
+
+      .container {
+        padding: 32px 16px 50px;
+      }
+
+      .logo {
+        font-size: 32px;
+      }
+
+      .logo::after {
+        width: 130px;
+      }
+
+      .section-title {
+        font-size: 20px;
+        margin-bottom: 22px;
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        padding: 22px 18px;
+        transform: translateY(20px) scale(0.97);
+      }
+
+      .card:hover {
+        transform: translateY(-6px) scale(1.01);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 26px;
+      }
+
+      .subheading {
+        font-size: 13px;
+        letter-spacing: 0.06em;
+      }
+
+      .breadcrumb {
+        padding: 10px 16px;
+        font-size: 12px;
+        max-width: 100%;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card h3 {
+        font-size: 16px;
+      }
+    }
   </style>
  </head>
 
 <body>
 <div class="orb"></div><div class="orb"></div><div class="orb"></div>
 
+<!-- custom cursor elements -->
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
 <div class="container">
-<header class="header">
-<h1 class="logo">What's New in Town</h1>
-<p style="color:#BFA181">Discover new places</p>
-</header>
+  <header class="header">
+    <div class="logo-wrapper">
+      <h1 class="logo">What's New in Town</h1>
+    </div>
+    <p class="subheading">
+      <span class="subheading-dot"></span>
+      Discover new places
+    </p>
+  </header>
 
-<div id="breadcrumb" class="breadcrumb hidden">
- <span class="breadcrumb-item" id="breadcrumb-category"></span>
- <span class="breadcrumb-separator">›</span>
- <span class="breadcrumb-item" id="breadcrumb-state"></span>
- <span class="breadcrumb-separator hidden" id="separator2">›</span>
- <span class="breadcrumb-item hidden" id="breadcrumb-city"></span>
-</div>
+  <div id="breadcrumb" class="breadcrumb hidden">
+    <span class="breadcrumb-item active" id="breadcrumb-category"></span>
+    <span class="breadcrumb-separator">›</span>
+    <span class="breadcrumb-item" id="breadcrumb-state"></span>
+    <span class="breadcrumb-separator hidden" id="separator2">›</span>
+    <span class="breadcrumb-item hidden" id="breadcrumb-city"></span>
+  </div>
 
-<section id="categories-section">
- <h2 class="section-title">Choose Your Experience</h2>
- <div class="cards-grid">
-   <div class="card" data-category="Fine Dine" onclick="selectCategory(this)">🍽️<h3>Fine Dine</h3></div>
-   <div class="card" data-category="Restro Bar" onclick="selectCategory(this)">🍸<h3>Restro Bar</h3></div>
-   <div class="card" data-category="Arcade" onclick="selectCategory(this)">🎮<h3>Arcade</h3></div>
-   <div class="card" data-category="Bowling" onclick="selectCategory(this)">🎳<h3>Bowling</h3></div>
- </div>
-</section>
+  <section id="categories-section">
+    <h2 class="section-title">Choose Your Experience</h2>
+    <div class="cards-grid">
+      <div class="card hoverable" data-category="Fine Dine" onclick="selectCategory(this)">
+        <div class="card-emoji">🍽️</div>
+        <h3>Fine Dine</h3>
+      </div>
+      <div class="card hoverable" data-category="Restro Bar" onclick="selectCategory(this)">
+        <div class="card-emoji">🍸</div>
+        <h3>Restro Bar</h3>
+      </div>
+      <div class="card hoverable" data-category="Arcade" onclick="selectCategory(this)">
+        <div class="card-emoji">🎮</div>
+        <h3>Arcade</h3>
+      </div>
+      <div class="card hoverable" data-category="Bowling" onclick="selectCategory(this)">
+        <div class="card-emoji">🎳</div>
+        <h3>Bowling</h3>
+      </div>
+    </div>
+  </section>
 
-<section id="states-section" class="hidden">
- <h2 class="section-title">Select Your State</h2>
- <div class="cards-grid">
-   <div class="card" data-state="Madhya Pradesh" data-city="Indore" onclick="selectState(this)">🏛️<h3>Madhya Pradesh</h3></div>
-   <div class="card" data-state="Maharashtra" data-city="Mumbai" onclick="selectState(this)">🌊<h3>Maharashtra</h3></div>
-   <div class="card" data-state="Karnataka" data-city="Bengaluru" onclick="selectState(this)">🌴<h3>Karnataka</h3></div>
-   <div class="card" data-state="Delhi" data-city="Delhi" onclick="selectState(this)">🏙️<h3>Delhi</h3></div>
- </div>
-</section>
+  <section id="states-section" class="hidden">
+    <h2 class="section-title">Select Your State</h2>
+    <div class="cards-grid">
+      <div class="card hoverable" data-state="Madhya Pradesh" data-city="Indore" onclick="selectState(this)">
+        <div class="card-emoji">🏛️</div>
+        <h3>Madhya Pradesh</h3>
+      </div>
+      <div class="card hoverable" data-state="Maharashtra" data-city="Mumbai" onclick="selectState(this)">
+        <div class="card-emoji">🌊</div>
+        <h3>Maharashtra</h3>
+      </div>
+      <div class="card hoverable" data-state="Karnataka" data-city="Bengaluru" onclick="selectState(this)">
+        <div class="card-emoji">🌴</div>
+        <h3>Karnataka</h3>
+      </div>
+      <div class="card hoverable" data-state="Delhi" data-city="Delhi" onclick="selectState(this)">
+        <div class="card-emoji">🏙️</div>
+        <h3>Delhi</h3>
+      </div>
+    </div>
+  </section>
 
-<section id="cities-section" class="hidden">
- <h2 class="section-title">Your City</h2>
- <div class="cards-grid">
-   <div class="card selected">
-     <div id="city-icon">🌆</div>
-     <h3 id="city-name">City</h3>
-   </div>
- </div>
-</section>
+  <section id="cities-section" class="hidden">
+    <h2 class="section-title">Your City</h2>
+    <div class="cards-grid">
+      <div class="card selected">
+        <div id="city-icon" class="card-emoji">🌆</div>
+        <h3 id="city-name">City</h3>
+      </div>
+    </div>
+  </section>
 
-<!-- Backend submit -->
-<form id="filterForm" action="/filter" method="POST">
- <input type="hidden" name="category" id="input-category">
- <input type="hidden" name="state" id="input-state">
- <input type="hidden" name="city" id="input-city">
-</form>
+  <!-- Backend submit -->
+  <form id="filterForm" action="/filter" method="POST">
+    <input type="hidden" name="category" id="input-category">
+    <input type="hidden" name="state" id="input-state">
+    <input type="hidden" name="city" id="input-city">
+  </form>
 
-<button class="reset-btn hidden" id="startBtn" onclick="start()">Let's Get Started</button>
+  <button class="reset-btn hidden" id="startBtn" onclick="start()">Let's Get Started</button>
 
 </div>
 
 <script>
 let selectedCategory="", selectedState="", selectedCity="";
 
+function revealCardsInSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+  const cards = section.querySelectorAll('.card');
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.classList.add('revealed');
+    }, 110 * index);
+  });
+}
+
 function selectCategory(el){
- document.querySelectorAll("#categories-section .card").forEach(c=>c.classList.remove("selected"));
- el.classList.add("selected");
- selectedCategory=el.dataset.category;
- document.getElementById("input-category").value=selectedCategory;
- document.getElementById("breadcrumb").classList.remove("hidden");
- document.getElementById("breadcrumb-category").innerText=selectedCategory;
- document.getElementById("states-section").classList.remove("hidden");
+  document.querySelectorAll("#categories-section .card").forEach(c=>c.classList.remove("selected"));
+  el.classList.add("selected");
+  selectedCategory=el.dataset.category;
+  document.getElementById("input-category").value=selectedCategory;
+
+  const breadcrumb = document.getElementById("breadcrumb");
+  breadcrumb.classList.remove("hidden");
+  document.getElementById("breadcrumb-category").innerText=selectedCategory;
+
+  const statesSection = document.getElementById("states-section");
+  statesSection.classList.remove("hidden");
+  revealCardsInSection('states-section');
 }
 
 function selectState(el){
- document.querySelectorAll("#states-section .card").forEach(c=>c.classList.remove("selected"));
- el.classList.add("selected");
- selectedState=el.dataset.state;
- selectedCity=el.dataset.city;
+  document.querySelectorAll("#states-section .card").forEach(c=>c.classList.remove("selected"));
+  el.classList.add("selected");
+  selectedState=el.dataset.state;
+  selectedCity=el.dataset.city;
 
- document.getElementById("input-state").value=selectedState;
- document.getElementById("input-city").value=selectedCity;
+  document.getElementById("input-state").value=selectedState;
+  document.getElementById("input-city").value=selectedCity;
 
- document.getElementById("breadcrumb-state").innerText=selectedState;
- document.getElementById("breadcrumb-city").innerText=selectedCity;
- document.getElementById("breadcrumb-city").classList.remove("hidden");
- document.getElementById("separator2").classList.remove("hidden");
+  document.getElementById("breadcrumb-state").innerText=selectedState;
+  document.getElementById("breadcrumb-city").innerText=selectedCity;
+  document.getElementById("breadcrumb-city").classList.remove("hidden");
+  document.getElementById("separator2").classList.remove("hidden");
 
- document.getElementById("city-name").innerText=selectedCity;
- document.getElementById("cities-section").classList.remove("hidden");
- document.getElementById("startBtn").classList.remove("hidden");
+  document.getElementById("city-name").innerText=selectedCity;
+  const citySection = document.getElementById("cities-section");
+  citySection.classList.remove("hidden");
+
+  const startBtn = document.getElementById("startBtn");
+  startBtn.classList.remove("hidden");
+
+  // reveal city card with a small delay
+  revealCardsInSection('cities-section');
 }
 
 function start(){
- if(!selectedCategory || !selectedState || !selectedCity){
-   alert("Please complete all selections");
-   return;
- }
- document.getElementById("filterForm").submit();
+  if(!selectedCategory || !selectedState || !selectedCity){
+    alert("Please complete all selections");
+    return;
+  }
+  document.getElementById("filterForm").submit();
 }
+
+// initial reveal for category cards
+window.addEventListener('load', () => {
+  revealCardsInSection('categories-section');
+});
+
+// parallax effect for orbs
+const orbs = document.querySelectorAll('.orb');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  orbs.forEach((orb, index) => {
+    const speed = (index + 1) * 0.08;
+    orb.style.transform = `translate3d(0, ${scrollY * speed}px, 0)`;
+  });
+});
+
+// interactive tilt on hover for cards (desktop)
+const cards = document.querySelectorAll('.card.hoverable');
+cards.forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -6;
+    const rotateY = ((x - centerX) / centerX) * 6;
+    card.style.transform = `translateY(-8px) scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+// custom cursor logic – dot + ring
+const cursorDot  = document.getElementById('cursor-dot');
+const cursorRing = document.getElementById('cursor-ring');
+
+function updateCursor(e) {
+  const x = e.clientX;
+  const y = e.clientY;
+
+  cursorDot.style.transform  = `translate3d(${x - 3}px, ${y - 3}px, 0)`;
+  cursorRing.style.setProperty('--cursor-x', `${y}px`);
+  cursorRing.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+}
+
+window.addEventListener('mousemove', (e) => {
+  cursorDot.classList.remove('cursor-hidden');
+  cursorRing.classList.remove('cursor-hidden');
+  updateCursor(e);
+});
+
+window.addEventListener('mouseleave', () => {
+  cursorDot.classList.add('cursor-hidden');
+  cursorRing.classList.add('cursor-hidden');
+});
+
+window.addEventListener('mouseenter', (e) => {
+  cursorDot.classList.remove('cursor-hidden');
+  cursorRing.classList.remove('cursor-hidden');
+  updateCursor(e);
+});
+
+function attachCursorHover() {
+  const hoverTargets = document.querySelectorAll('.hoverable, .reset-btn');
+  hoverTargets.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursorRing.classList.add('cursor-hover');
+    });
+    el.addEventListener('mouseleave', () => {
+      cursorRing.classList.remove('cursor-hover');
+    });
+  });
+}
+
+attachCursorHover();
 </script>
 
 </body>
