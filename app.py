@@ -129,6 +129,9 @@ def filter_data():
         query += " AND LOWER(city) LIKE %s"
         params.append(f"%{city.lower()}%")
 
+    
+    query += " ORDER BY created_at DESC"
+
     cursor.execute(query, tuple(params))
     data = cursor.fetchall()
 
@@ -142,18 +145,6 @@ def filter_data():
         city=city,
         data=data
     )
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -430,35 +421,73 @@ def accept(id):
     row = cursor.fetchone()
 
     if not row:
+        cursor.close()
+        conn.close()
         return "Application not found", 404
 
-    # insert into approved table (must match approved_businesses schema)
-    cursor.execute("""
-        INSERT INTO approved_businesses
-        (full_name_or_business_name, state, city, category, cost_for_two,
-        location, contact_number, email, password_hash,
-        photo1, photo2, photo3, photo4, photo5, electricity_bill, additional_notes)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """, (
-        row['full_name_or_business_name'], row['state'], row['city'], row['category'], row['cost_for_two'],
-        row['location'], row['contact_number'], row['email'], row['password_hash'],
-        row['photo1'], row['photo2'], row['photo3'], row['photo4'], row['photo5'],
-        row['electricity_bill'], row['additional_notes']
-    ))
+    try:
+        
+        cursor.execute("""
+            INSERT INTO approved_businesses
+            (full_name_or_business_name, state, city, category, cost_for_two,
+             location, contact_number, email, password_hash,
+             photo1, photo2, photo3, photo4, photo5,
+             electricity_bill, additional_notes)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            row['full_name_or_business_name'],
+            row['state'],
+            row['city'],
+            row['category'],
+            row['cost_for_two'],
+            row['location'],
+            row['contact_number'],
+            row['email'],
+            row['password_hash'],
+            row['photo1'],
+            row['photo2'],
+            row['photo3'],
+            row['photo4'],
+            row['photo5'],
+            row['electricity_bill'],
+            row.get('additional_notes')
+        ))
 
-    cursor.execute("DELETE FROM pending_applications WHERE id=%s", (id,))
-    conn.commit()
+        
+        cursor.execute("""
+            INSERT INTO business_listings
+            (name, location, city, state, category, cost_for_two,
+             photo1, photo2, photo3, photo4, photo5)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            row['full_name_or_business_name'], 
+            row['location'],
+            row['city'],
+            row['state'],
+            row['category'],
+            row['cost_for_two'],              
+            row['photo1'],
+            row['photo2'],
+            row['photo3'],
+            row['photo4'],
+            row['photo5']
+        ))
+
+      
+        cursor.execute("DELETE FROM pending_applications WHERE id=%s", (id,))
+
+        conn.commit()
+
+    except Exception as e:
+        conn.rollback()
+        cursor.close()
+        conn.close()
+        return f"Error while accepting application: {e}", 500
 
     cursor.close()
     conn.close()
 
     return redirect(url_for('admin_dashboard'))
-
-
-
-
-
-
 
 
 
