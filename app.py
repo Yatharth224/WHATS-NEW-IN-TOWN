@@ -281,17 +281,26 @@ def signup():
         email = request.form['email']
         raw_password = request.form['password']
 
+        # Check if the email is already registered
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+        existing_user = cur.fetchone()
+
+        if existing_user:
+            flash("Email is already registered. Please log in or use a different email.", "error")
+            cur.close()
+            conn.close()
+            return redirect(url_for('signup'))
         
         if not re.fullmatch(USERNAME_PATTERN, username):
             flash("Invalid username! Use 3-20 characters (letters, numbers, underscore).", "error")
             return redirect(url_for('signup'))
 
-        
         if not re.fullmatch(EMAIL_PATTERN, email):
             flash("Invalid email format!", "error")
             return redirect(url_for('signup'))
 
-        
         if not re.fullmatch(PASSWORD_PATTERN, raw_password):
             flash("Weak password! Must contain:\n"
                   "- Minimum 8 characters\n"
@@ -301,15 +310,13 @@ def signup():
                   "- At least 1 special character (@$!%*?&)", "error")
             return redirect(url_for('signup'))
 
-        
         password = bcrypt.generate_password_hash(raw_password).decode('utf-8')
 
-        
-        conn = get_db_connection()
-        cur = conn.cursor()
+        # Insert the new user
         cur.execute("INSERT INTO users(name, email, password, role) VALUES (%s, %s, %s, %s)",
                     (username, email, password, "user"))
         conn.commit()
+
         cur.close()
         conn.close()
 
@@ -317,8 +324,6 @@ def signup():
         return redirect(url_for('home'))
 
     return render_template('signup.html')
-
-
 
 
 
@@ -345,10 +350,9 @@ def login():
             # session['role'] = user['role']
             return redirect(url_for('home'))
         else:
-            return "Invalid email or password"
-
+            flash("Invalid email or password", 'danger')  
+            return redirect(url_for('login'))  
     return render_template('login.html')
-
 
 
 @app.route('/what_we_offer ')

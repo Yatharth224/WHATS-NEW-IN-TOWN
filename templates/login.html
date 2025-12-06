@@ -111,6 +111,39 @@
             font-weight: 600;
         }
         .signup-link a:hover { text-decoration: underline; }
+
+        /* Flash Message Styling */
+        .alert {
+            margin-bottom: 20px;
+            padding: 18px;
+            background-color: rgba(255, 0, 0, 0.2);  /* Slight red background */
+            border: 1px solid rgba(255, 0, 0, 0.4); /* Light red border */
+            border-radius: 12px;
+            color: #D9534F;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* For error messages specifically */
+        .alert-danger {
+            background-color: rgba(255, 0, 0, 0.1); /* Slightly softer red background */
+            color: #D9534F; /* Dark red text */
+        }
+
+        /* Animation to make the flash message fade in */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -127,6 +160,17 @@
         <h1 class="logo-title">What's New in Town</h1>
 
         <h2 style="margin-top: 10px;">Login</h2>
+
+        <!-- Flash Message Section (added) -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert">
+                    {% for category, message in messages %}
+                        <p class="alert-{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
 
         <form method="POST">
 
