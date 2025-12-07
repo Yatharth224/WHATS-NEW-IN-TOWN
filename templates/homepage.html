@@ -24,7 +24,7 @@
         min-height: 100vh;
       }
 
-     
+      /* Background Orbs */
       .background-orbs {
         position: fixed;
         inset: 0;
@@ -99,7 +99,7 @@
         min-height: 100vh;
       }
 
-      
+      /* Menu Button */
       .menu-button {
         background: #1c1c1c;
         border: 1px solid #bfa181;
@@ -117,7 +117,7 @@
         position: fixed;
         top: 20px;
         left: 20px;
-        z-index: 999;
+        z-index: 9999;
       }
 
       .menu-button:hover {
@@ -125,7 +125,7 @@
         box-shadow: 0 0 25px rgba(191, 161, 129, 0.6);
       }
 
-      
+      /* Dropdown */
       .dropdown-menu {
         position: fixed;
         top: 80px;
@@ -170,18 +170,18 @@
         transform: translateX(5px);
       }
 
-      /
+      /* Auth Buttons - ALWAYS top-right */
       .auth-buttons {
         position: fixed;
         top: 20px;
-        right: 70px;
+        right: 25px;
         display: flex;
         gap: 18px;
-        z-index: 999;
+        z-index: 9999;
         align-items: center;
       }
 
-      
+      /* Common Button Style */
       .button,
       .nav-button,
       .cta-button {
@@ -237,7 +237,7 @@
         transform: translateY(-2px);
       }
 
-     
+      /* Header */
       .header {
         text-align: center;
         margin-top: 90px;
@@ -263,6 +263,7 @@
         margin: 0 0 30px;
       }
 
+      /* Description */
       .description {
         max-width: 820px;
         margin: 0 auto 60px;
@@ -294,7 +295,7 @@
         border-radius: 6px;
       }
 
-      
+      /* CTA Buttons Container */
       .cta-container {
         text-align: center;
         margin: 20px 0 50px;
@@ -304,7 +305,7 @@
         flex-wrap: wrap;
       }
 
-      
+      /* Footer */
       .footer {
         margin-top: auto;
         padding: 25px;
@@ -350,8 +351,9 @@
         box-shadow: 0 6px 25px rgba(191, 161, 129, 0.45);
       }
 
-    
+      /* ------------ RESPONSIVE ------------ */
 
+      /* Tablets / small laptops */
       @media (max-width: 1024px) {
         .logo-title {
           font-size: 52px;
@@ -364,8 +366,9 @@
           padding: 30px;
         }
         .auth-buttons {
+          top: 18px;
           right: 20px;
-          gap: 10px;
+          gap: 12px;
         }
         .nav-button {
           padding: 10px 22px;
@@ -373,7 +376,7 @@
         }
       }
 
-     
+      /* Large phones / small tablets */
       @media (max-width: 768px) {
         .container {
           padding: 20px 15px 30px;
@@ -387,12 +390,10 @@
           font-size: 24px;
         }
 
-       
         .auth-buttons {
-          position: static;
-          margin-top: 70px;
-          justify-content: flex-end;
-          width: 100%;
+          top: 15px;
+          right: 15px;
+          gap: 10px;
         }
 
         .nav-button {
@@ -401,8 +402,8 @@
         }
 
         .header {
-          margin-top: 30px;
-          padding-top: 20px;
+          margin-top: 80px;
+          padding-top: 10px;
         }
 
         .logo-title {
@@ -443,7 +444,6 @@
           font-size: 15px;
         }
 
-        
         .dropdown-menu {
           left: 15px;
           right: 15px;
@@ -451,7 +451,7 @@
         }
       }
 
-      
+      /* Small phones */
       @media (max-width: 480px) {
         .logo-title {
           font-size: 32px;
@@ -466,19 +466,19 @@
         }
 
         .auth-buttons {
-          margin-top: 55px;
-          justify-content: center;
-          gap: 8px;
+          top: 12px;
+          right: 10px;
+          gap: 6px;
         }
 
         .nav-button {
-          padding: 8px 16px;
+          padding: 6px 14px;
           font-size: 13px;
         }
 
         .header {
-          margin-top: 10px;
-          padding-top: 10px;
+          margin-top: 70px;
+          padding-top: 0;
         }
 
         .description {
@@ -584,7 +584,7 @@
         dropdownMenu.classList.toggle("active");
       });
 
-     
+      // Close dropdown when clicking outside
       document.addEventListener("click", (e) => {
         if (
           !dropdownMenu.contains(e.target) &&
