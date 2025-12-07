@@ -67,7 +67,6 @@ input:focus,select:focus,textarea:focus{
   box-shadow:0 0 12px rgba(191,161,129,0.35);
 }
 textarea{min-height:110px;resize:vertical}
-.full{grid-column:1/3}
 
 /* CATEGORY BUTTONS */
 .category-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
@@ -192,8 +191,6 @@ button:hover{
       transition:0.35s ease;
       cursor:pointer;
     "
-    onmouseover="this.style.textShadow='0 0 18px rgba(191,161,129,0.65), 0 0 35px rgba(191,161,129,0.45), 0 0 60px rgba(191,161,129,0.35)'"
-    onmouseout="this.style.textShadow='0 0 25px rgba(191,161,129,0.35)'"
   >
     What's New in Town
   </h1>
@@ -206,8 +203,6 @@ button:hover{
       margin-top:8px;
       transition:0.35s;
     "
-    onmouseover="this.style.textShadow='0 0 12px rgba(191,161,129,0.65)'"
-    onmouseout="this.style.textShadow='none'"
   >
     Discover the New Places
   </p>
@@ -233,7 +228,6 @@ button:hover{
   <div class="tab" data-step="4">Finish</div>
 </div>
 
-<!-- FIXED FORM TAG -->
 <form id="partnerForm" action="{{ url_for('partner') }}" method="POST" enctype="multipart/form-data">
 
 <!-- STEP 1 BUSINESS -->
@@ -253,6 +247,7 @@ button:hover{
   <label style="margin-top:12px">City</label>
   <select id="city" name="city" required><option value="">Select city</option></select>
 
+  <!-- CATEGORY FIRST -->
   <label style="margin-top:18px">Category</label>
   <div class="category-row">
     <label class="cat"><input type="radio" name="category" value="Fine Dine" required> Fine Dine</label>
@@ -261,13 +256,17 @@ button:hover{
     <label class="cat"><input type="radio" name="category" value="Bowling"> Bowling</label>
   </div>
 
-  <label style="margin-top:18px">Cost for Two</label>
+  <!-- COST / PRICE FIELD BELOW CATEGORY -->
+  <label id="costLabel" style="margin-top:18px">Cost for Two</label>
   <input id="costForTwo" name="cost_for_two" type="number" placeholder="Enter average cost for two" required />
 
   <label style="margin-top:18px">Location / Full Address</label>
   <textarea required id="location" name="location"></textarea>
 
-  <div class="actions"><button class="secondary" type="button" disabled>← Back</button><button id="btnNext1" type="button">Next →</button></div>
+  <div class="actions">
+    <button class="secondary" type="button" disabled>← Back</button>
+    <button id="btnNext1" type="button">Next →</button>
+  </div>
 </div>
 
 <!-- STEP 2 CONTACT -->
@@ -284,7 +283,10 @@ button:hover{
     <span id="togglePwd" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--gold);font-size:16px;user-select:none;">👁️</span>
   </div>
 
-  <div class="actions"><button class="secondary" id="btnBack2" type="button">← Back</button><button id="btnNext2" type="button">Next →</button></div>
+  <div class="actions">
+    <button class="secondary" id="btnBack2" type="button">← Back</button>
+    <button id="btnNext2" type="button">Next →</button>
+  </div>
 </div>
 
 <!-- STEP 3 UPLOADS -->
@@ -312,16 +314,21 @@ button:hover{
   </div>
 </div>
 
-<div class="actions"><button class="secondary" id="btnBack3" type="button">← Back</button><button id="btnNext3" type="button">Next →</button></div>
+<div class="actions">
+  <button class="secondary" id="btnBack3" type="button">← Back</button>
+  <button id="btnNext3" type="button">Next →</button>
+</div>
 </div>
 
 <!-- STEP 4 FINISH -->
 <div class="step" id="step4">
-
   <label>Additional Notes (optional)</label>
   <textarea id="notes" name="additional_notes"></textarea>
 
-  <div class="actions"><button class="secondary" id="btnBack4" type="button">← Back</button><button id="btnFinish" type="submit">Finish →</button>
+  <div class="actions">
+    <button class="secondary" id="btnBack4" type="button">← Back</button>
+    <button id="btnFinish" type="submit">Finish →</button>
+  </div>
 </form>
 
 <div class="success-box" id="successBox">
@@ -385,15 +392,28 @@ document.getElementById('btnFinish').addEventListener('click',()=>{
   for(let s=1;s<=4;s++){
     if(!validateStep(s)){ goStep(s); return; }
   }
-    document.getElementById('partnerForm').submit();
+  document.getElementById('partnerForm').submit();
 });
 
-// Category visuals
+// Category visuals + COST LABEL LOGIC
+const costLabel = document.getElementById('costLabel');
+const costInput = document.getElementById('costForTwo');
+
 document.querySelectorAll('.cat').forEach(lbl=>{
   lbl.addEventListener('click',()=>{
     document.querySelectorAll('.cat').forEach(x=>x.classList.remove('selected'));
     lbl.classList.add('selected');
-    lbl.querySelector('input').checked = true;
+    const radio = lbl.querySelector('input');
+    radio.checked = true;
+
+    const val = radio.value;
+    if(val === 'Bowling' || val === 'Arcade'){
+      costLabel.textContent = 'Price';
+      costInput.placeholder = 'Enter price';
+    } else {
+      costLabel.textContent = 'Cost for Two';
+      costInput.placeholder = 'Enter average cost for two';
+    }
   });
 });
 
@@ -406,19 +426,6 @@ stateEl.addEventListener('change',()=>{
   cityEl.innerHTML = '<option value="">Select city</option>';
   (cityMap[stateEl.value]||[]).forEach(c=>{
     const o=document.createElement('option');o.value=c;o.textContent=c;cityEl.appendChild(o);
-  });
-});
-
-// Photo preview
-const photosEl = document.getElementById('photos');
-const previewPhotos = document.getElementById('previewPhotos');
-photosEl.addEventListener('change',()=>{
-  const files = Array.from(photosEl.files);
-  if(files.length>5){ alert('Max 5 photos allowed'); photosEl.value=''; previewPhotos.innerHTML=''; return; }
-  previewPhotos.innerHTML='';
-  files.forEach(f=>{
-    if(!f.type.startsWith('image/')) return;
-    const img=document.createElement('img');img.src=URL.createObjectURL(f);previewPhotos.appendChild(img);
   });
 });
 
