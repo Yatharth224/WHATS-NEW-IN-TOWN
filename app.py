@@ -99,6 +99,7 @@ STATE_MAP = {
 
 
 
+PER_PAGE = 15  
 
 @app.route("/filter", methods=["POST"])
 def filter_data():
@@ -106,50 +107,83 @@ def filter_data():
     state = request.form.get("state")
     city = request.form.get("city")
 
+    
+    page_raw = request.form.get("page", 1)
+    try:
+        page = int(page_raw)
+    except:
+        page = 1
+    if page < 1:
+        page = 1
+
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
-    query = "SELECT * FROM business_listings WHERE 1=1"
+    
+    base_query = " FROM business_listings WHERE 1=1"
     params = []
 
     # CATEGORY FILTER USING MAPPING
     if category:
         mapped_values = CATEGORY_MAP.get(category, [category])
-        query += f" AND LOWER(category) IN ({','.join(['%s'] * len(mapped_values))})"
+        placeholders = ",".join(["%s"] * len(mapped_values))
+        base_query += f" AND LOWER(category) IN ({placeholders})"
         params.extend([v.lower() for v in mapped_values])
 
     # STATE FILTER USING MAPPING
     if state:
         mapped_states = STATE_MAP.get(state, [state])
-        query += f" AND LOWER(state) IN ({','.join(['%s'] * len(mapped_states))})"
+        placeholders = ",".join(["%s"] * len(mapped_states))
+        base_query += f" AND LOWER(state) IN ({placeholders})"
         params.extend([s.lower() for s in mapped_states])
 
     # CITY FILTER (Case insensitive)
     if city:
-        query += " AND LOWER(city) LIKE %s"
+        base_query += " AND LOWER(city) LIKE %s"
         params.append(f"%{city.lower()}%")
 
-    
-    query += " ORDER BY created_at DESC"
+    count_sql = "SELECT COUNT(*) AS total" + base_query
+    cursor.execute(count_sql, tuple(params))
+    total_records = cursor.fetchone()["total"]
 
-    cursor.execute(query, tuple(params))
+    if total_records == 0:
+        total_pages = 1
+        page = 1
+    else:
+        total_pages = (total_records + PER_PAGE - 1) // PER_PAGE  
+        if page > total_pages:
+            page = total_pages
+
+    
+    offset = (page - 1) * PER_PAGE
+
+    
+    data_sql = (
+        "SELECT *" + base_query +
+        " ORDER BY created_at DESC LIMIT %s OFFSET %s"
+    )
+    data_params = params + [PER_PAGE, offset]
+
+    cursor.execute(data_sql, tuple(data_params))
     data = cursor.fetchall()
 
     cursor.close()
     conn.close()
+
+    has_prev = page > 1
+    has_next = page < total_pages
 
     return render_template(
         "whatsnew.html",
         category=category,
         state=state,
         city=city,
-        data=data
+        data=data,
+        page=page,
+        total_pages=total_pages,
+        has_prev=has_prev,
+        has_next=has_next,
     )
-
-
-
-
-
 
 
 

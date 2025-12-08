@@ -190,11 +190,51 @@
           0 0 80px rgba(243, 225, 176, 0.3);
         transform: scale(1.05);
       }
+
+      /* ================= PAGINATION ================= */
+      .pagination-wrapper {
+        margin-top: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+      }
+
+      .pagination-btn {
+        padding: 8px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(200, 162, 90, 0.7);
+        background: linear-gradient(120deg, #1b1b1b, #25211b);
+        color: var(--text-light);
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.25s ease;
+      }
+
+      .pagination-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 0 14px rgba(212, 175, 55, 0.45);
+        background: linear-gradient(120deg, #25211b, #2f271c);
+      }
+
+      .pagination-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        box-shadow: none;
+        border-color: rgba(150, 150, 150, 0.6);
+      }
+
+      .pagination-info {
+        font-size: 14px;
+        color: var(--text-muted);
+      }
     </style>
   </head>
   <body>
     <header>
-      <a href="/" class="glow-link">
+      <a href="{{ url_for('home') }}" class="glow-link">
         <h1 class="glow-title">What's New in Town</h1>
       </a>
       <p>Discover Best Dining Spots Near You</p>
@@ -249,6 +289,44 @@
         </div>
         {% endfor %}
       </div>
+
+      <!-- PAGINATION CONTROLS -->
+      <div class="pagination-wrapper">
+        <!-- Previous -->
+        <form method="post" action="{{ url_for('filter_data') }}">
+          <input type="hidden" name="category" value="{{ category }}">
+          <input type="hidden" name="state" value="{{ state }}">
+          <input type="hidden" name="city" value="{{ city }}">
+          <input type="hidden" name="page" value="{{ page - 1 }}">
+          <button
+            type="submit"
+            class="pagination-btn"
+            {% if not has_prev %}disabled{% endif %}
+          >
+            ‹ Previous
+          </button>
+        </form>
+
+        <span class="pagination-info">
+          Page {{ page }} of {{ total_pages }}
+        </span>
+
+        <!-- Next -->
+        <form method="post" action="{{ url_for('filter_data') }}">
+          <input type="hidden" name="category" value="{{ category }}">
+          <input type="hidden" name="state" value="{{ state }}">
+          <input type="hidden" name="city" value="{{ city }}">
+          <input type="hidden" name="page" value="{{ page + 1 }}">
+          <button
+            type="submit"
+            class="pagination-btn"
+            {% if not has_next %}disabled{% endif %}
+          >
+            Next ›
+          </button>
+        </form>
+      </div>
+
       {% else %}
       <p
         style="
