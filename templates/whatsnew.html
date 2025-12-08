@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>What's New - Results</title>
 
-    <!-- Swiper CSS -->
+   
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -16,7 +16,7 @@
     />
 
     <style>
-      /* ================= ROOT COLORS ================= */
+     
       :root {
         --gold1: #c8a76c;
         --gold2: #e8d3a1;
@@ -37,7 +37,7 @@
         font-family: "Poppins", sans-serif;
       }
 
-      /* ================= HEADER ================= */
+      
       header {
         text-align: center;
         padding: 30px 0;
@@ -66,7 +66,7 @@
         color: var(--text-muted);
       }
 
-      /* ================= CONTAINER ================= */
+      
       .container {
         width: 90%;
         margin: auto;
@@ -79,7 +79,7 @@
         color: var(--text-muted);
       }
 
-      /* ================= GRID ================= */
+      
       .cards {
         display: grid;
         gap: 35px;
@@ -87,7 +87,7 @@
         margin-top: 25px;
       }
 
-      /* ================= CARD ================= */
+      
       .card {
         background: #0f0f0f;
         border-radius: 22px;
@@ -110,7 +110,7 @@
         border-color: var(--gold1);
       }
 
-      /* ================= SWIPER ================= */
+      
       .card-swiper {
         width: 100%;
         height: 180px;
@@ -125,7 +125,7 @@
         object-fit: cover;
       }
 
-      /* ================= TEXT ================= */
+      
       .card .title {
         font-size: 20px;
         font-weight: 600;
@@ -191,7 +191,7 @@
         transform: scale(1.05);
       }
 
-      /* ================= PAGINATION ================= */
+      
       .pagination-wrapper {
         margin-top: 35px;
         display: flex;
@@ -250,7 +250,7 @@
       <div class="cards">
         {% for r in data %}
         <div class="card">
-          <!-- IMAGE SLIDER -->
+          
           <div class="swiper card-swiper">
             <div class="swiper-wrapper">
               {% if r.photo1 %}
@@ -290,9 +290,9 @@
         {% endfor %}
       </div>
 
-      <!-- PAGINATION CONTROLS -->
+      
       <div class="pagination-wrapper">
-        <!-- Previous -->
+        
         <form method="post" action="{{ url_for('filter_data') }}">
           <input type="hidden" name="category" value="{{ category }}">
           <input type="hidden" name="state" value="{{ state }}">
@@ -311,7 +311,7 @@
           Page {{ page }} of {{ total_pages }}
         </span>
 
-        <!-- Next -->
+        
         <form method="post" action="{{ url_for('filter_data') }}">
           <input type="hidden" name="category" value="{{ category }}">
           <input type="hidden" name="state" value="{{ state }}">
@@ -341,15 +341,15 @@
       {% endif %}
     </div>
 
-    <!-- Swiper JS -->
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-      // Hover based auto-scroll slider
+     
       document.querySelectorAll(".card-swiper").forEach((swiperContainer) => {
         const swiper = new Swiper(swiperContainer, {
           loop: true,
-          autoplay: false, // default OFF
+          autoplay: false, 
           speed: 650,
           pagination: {
             el: swiperContainer.querySelector(".swiper-pagination"),
@@ -357,7 +357,7 @@
           },
         });
 
-        // Hover pe auto scroll start
+        
         swiperContainer.addEventListener("mouseenter", () => {
           swiper.params.autoplay = {
             delay: 1100,
@@ -366,13 +366,13 @@
           swiper.autoplay.start();
         });
 
-        // Cursor hatne pe stop
+        
         swiperContainer.addEventListener("mouseleave", () => {
           swiper.autoplay.stop();
         });
       });
 
-      // Scroll reveal animation
+      
       const cards = document.querySelectorAll(".card");
       const observer = new IntersectionObserver(
         (entries) => {
