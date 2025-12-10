@@ -3,9 +3,8 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import pytest
 from unittest.mock import MagicMock, patch
-from app import app  # because your route is inside app.py
+from app import app
 
-# For session and flash to work correctly
 app.secret_key = "test-secret-key"
 
 
