@@ -20,3 +20,8 @@ def test_homepage_best_case(client):
 def test_homepage_average_case(client):
     response = client.get("/?ref=test")
     assert response.status_code == 200
+
+
+def test_homepage_worst_case(client):
+    response = client.post("/")
+    assert response.status_code == 405
