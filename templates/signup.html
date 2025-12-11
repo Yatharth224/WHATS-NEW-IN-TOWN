@@ -62,22 +62,58 @@
             text-shadow: 0 4px 10px rgba(191,161,129,0.25);
         }
 
-        .input-group { text-align: left; margin-bottom: 18px; }
-        .input-group label { font-size: 14px; font-weight: 500; color: #BFA181; }
+        .input-group {
+            text-align: left;
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #BFA181;
+        }
 
         .input-group input {
             width: 100%;
             margin-top: 6px;
-            padding: 14px;
+            padding: 14px 45px 14px 14px;
             border: 1px solid rgba(191,161,129,0.4);
             background: rgba(0,0,0,0.4);
             color: #E5E5E5;
             border-radius: 12px;
             outline: none;
+            box-sizing: border-box;
         }
+
         .input-group input:focus {
             border-color: #BFA181;
             box-shadow: 0 0 12px rgba(191,161,129,0.4);
+        }
+
+        
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #E5E5E5 !important;
+            -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0.4) inset !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+
+        input:-moz-autofill {
+            -moz-text-fill-color: #E5E5E5 !important;
+            box-shadow: 0 0 0px 1000px rgba(0,0,0,0.4) inset !important;
+        }
+
+        
+        .eye-btn {
+            position: absolute;
+            right: 14px;
+            top: 43px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #BFA181;
+            user-select: none;
         }
 
         .signup-btn {
@@ -92,6 +128,7 @@
             cursor: pointer;
             transition: 0.4s;
         }
+
         .signup-btn:hover {
             background: linear-gradient(135deg, #BFA181, #E5E5E5);
             color: #000;
@@ -103,20 +140,15 @@
             margin-top: 18px;
             font-size: 15px;
         }
+
         .login-link a {
             color: #BFA181;
             text-decoration: none;
             font-weight: 600;
         }
-        .login-link a:hover {
-            text-decoration: underline;
-        }
 
-        /* 🔥 FLASH MESSAGE STYLES */
-        .flash-container {
-            margin-bottom: 15px;
-            text-align: left;
-        }
+        
+        .flash-container { margin-bottom: 15px; text-align: left; }
         .error {
             background: rgba(255, 0, 0, 0.15);
             border: 1px solid rgba(255, 80, 80, 0.8);
@@ -133,6 +165,14 @@
             border-radius: 10px;
             font-size: 13px;
         }
+
+        #password-error {
+            color: #ff7a7a;
+            font-size: 13px;
+            display: none;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
@@ -148,7 +188,7 @@
         <h1 class="logo-title">What's New in Town</h1>
         <h2>Create Account</h2>
 
-        <!-- 🔥 FLASH MESSAGES YAHAN DIKHEGI -->
+       
         <div class="flash-container">
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
@@ -161,7 +201,7 @@
             {% endwith %}
         </div>
 
-        <form method="POST">
+        <form method="POST" onsubmit="return validatePasswords()">
 
             <div class="input-group">
                 <label>Full Name</label>
@@ -173,10 +213,21 @@
                 <input type="email" name="email" required>
             </div>
 
+          
             <div class="input-group">
                 <label>Password</label>
-                <input type="password" name="password" required>
+                <input type="password" id="password" name="password" autocomplete="new-password" required>
+                <span class="eye-btn" onclick="togglePassword('password', this)">👁</span>
             </div>
+
+            
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <input type="password" id="confirm_password" autocomplete="new-password" required>
+                <span class="eye-btn" onclick="togglePassword('confirm_password', this)">👁</span>
+            </div>
+
+            <p id="password-error">Passwords do not match!</p>
 
             <button type="submit" class="signup-btn">Sign Up</button>
 
@@ -188,6 +239,33 @@
         </p>
 
     </div>
+
+    <script>
+        function togglePassword(id, icon) {
+            const field = document.getElementById(id);
+            if (field.type === "password") {
+                field.type = "text";
+                icon.textContent = "🙈";
+            } else {
+                field.type = "password";
+                icon.textContent = "👁";
+            }
+        }
+
+        function validatePasswords() {
+            let pwd = document.getElementById("password").value;
+            let cpwd = document.getElementById("confirm_password").value;
+            let error = document.getElementById("password-error");
+
+            if (pwd !== cpwd) {
+                error.style.display = "block";
+                return false;
+            } else {
+                error.style.display = "none";
+                return true;
+            }
+        }
+    </script>
 
 </body>
 </html>
