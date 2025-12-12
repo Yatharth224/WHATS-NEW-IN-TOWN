@@ -461,11 +461,49 @@
         font-size: 16px;
       }
     }
+
+    .logout-btn {
+  position: fixed;
+  top: 22px;
+  right: 28px;
+  padding: 10px 22px;
+  background: rgba(28, 28, 28, 0.65);
+  border: 1px solid var(--accent-soft);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 14px;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 18px rgba(0,0,0,0.6);
+  transition: all 0.25s ease;
+  z-index: 999;
+}
+
+.logout-btn:hover {
+  background: rgba(191,161,129,0.25);
+  color: #fff;
+  box-shadow: 0 0 25px rgba(191,161,129,0.55);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .logout-btn {
+    top: 16px;
+    right: 16px;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
   </style>
  </head>
 
 <body>
 <div class="orb"></div><div class="orb"></div><div class="orb"></div>
+<a href="/logout" class="logout-btn">Logout</a>
+
 
 <!-- custom cursor elements -->
 <div class="cursor-dot" id="cursor-dot"></div>

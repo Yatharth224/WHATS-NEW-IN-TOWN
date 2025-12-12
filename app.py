@@ -1,22 +1,21 @@
-from flask import Flask, render_template, request, redirect, session, url_for,flash
+from flask import Flask, render_template, request, redirect, session, url_for, flash
 import mysql.connector
+from werkzeug.utils import secure_filename
+
 from flask_bcrypt import Bcrypt
 import os
 import re
+
+
+
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
 bcrypt = Bcrypt(app)
 
-
-
-UPLOAD_FOLDER = "uploads"
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-
-
-
-
 
 
 def get_db_connection():
@@ -28,16 +27,9 @@ def get_db_connection():
     )
 
 
-
-
-
 @app.route("/")
 def homepage():
     return render_template('homepage.html')
-
-
-
-
 
 
 @app.route('/index')
@@ -50,6 +42,7 @@ def home():
 
     cursor.execute("SELECT name FROM states")
     states = [row["name"] for row in cursor.fetchall()]
+    print("debug :", cursor.statement)
 
     cursor.execute("""
         SELECT cities.name AS city, states.name AS state
@@ -62,9 +55,6 @@ def home():
     conn.close()
 
     return render_template('index.html', categories=categories, states=states, cities=cities)
-
-
-
 
 
 CATEGORY_MAP = {
@@ -80,22 +70,6 @@ STATE_MAP = {
     "Karnataka": ["Karnataka", "KA"],
     "Delhi": ["Delhi", "New Delhi", "DL"]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -185,14 +159,7 @@ def filter_data():
         has_next=has_next,
     )
 
-
-
-
-
-
-
-
-@app.route("/")
+@app.route("/whatsnew")
 def whatsnew():
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
@@ -205,19 +172,9 @@ def whatsnew():
     return render_template("whatsnew.html", restaurants=restaurants)
 
 
-
-
-
-
-
-
-
-
-
 @app.route('/partner', methods=['GET', 'POST'])
 def partner():
     if request.method == 'POST':
-
         full_name = request.form['full_name']
         state = request.form['state']
         city = request.form['city']
@@ -228,26 +185,24 @@ def partner():
         email = request.form['email']
         password_hash = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
 
-        # ---- FILE SAVE ----
         photos = []
-
-# Ensure exactly 5 photo fields
         for field in ['photo1', 'photo2', 'photo3', 'photo4', 'photo5']:
             file = request.files.get(field)
-
             if file and file.filename.strip() != "":
-                filename = file.filename
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                filename = secure_filename(file.filename)
+                save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                file.save(save_path)
             else:
-                filename = None 
-
+                filename = None
             photos.append(filename)
 
-        electricity_bill = request.files.get('electricity_bill')
+        # electricity bill (safely handle missing file)
         electricity_filename = None
+        electricity_bill = request.files.get('electricity_bill')
         if electricity_bill and electricity_bill.filename.strip() != "":
-            electricity_filename = electricity_bill.filename
-            electricity_bill.save(os.path.join(app.config['UPLOAD_FOLDER'], electricity_filename))
+            electricity_filename = secure_filename(electricity_bill.filename)
+            bill_path = os.path.join(app.config['UPLOAD_FOLDER'], electricity_filename)
+            electricity_bill.save(bill_path)
 
         additional_notes = request.form.get('additional_notes')
 
@@ -275,15 +230,6 @@ def partner():
     return render_template('partner.html')
 
 
-
-
-
-
-
-
-
-
-
 @app.route('/admin/pending')
 def admin_pending():
     conn = get_db_connection()
@@ -295,27 +241,18 @@ def admin_pending():
     return render_template("pending.html", data=data)
 
 
-
-
-
-
-
 USERNAME_PATTERN = r'^[A-Za-z0-9_]{3,20}$'
 EMAIL_PATTERN = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$'
 PASSWORD_PATTERN = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
 
 
-
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        
         username = request.form['username']
         email = request.form['email']
         raw_password = request.form['password']
 
-        # Check if the email is already registered
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute("SELECT * FROM users WHERE email = %s", (email,))
@@ -326,7 +263,7 @@ def signup():
             cur.close()
             conn.close()
             return redirect(url_for('signup'))
-        
+
         if not re.fullmatch(USERNAME_PATTERN, username):
             flash("Invalid username! Use 3-20 characters (letters, numbers, underscore).", "error")
             return redirect(url_for('signup'))
@@ -346,7 +283,6 @@ def signup():
 
         password = bcrypt.generate_password_hash(raw_password).decode('utf-8')
 
-        # Insert the new user
         cur.execute("INSERT INTO users(name, email, password, role) VALUES (%s, %s, %s, %s)",
                     (username, email, password, "user"))
         conn.commit()
@@ -358,12 +294,6 @@ def signup():
         return redirect(url_for('home'))
 
     return render_template('signup.html')
-
-
-
-
-
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -381,26 +311,23 @@ def login():
 
         if user and bcrypt.check_password_hash(user['password'], password_input):
             session['user_id'] = user['id']
-            # session['role'] = user['role']
+            flash("Logged in successfully.", "success")
             return redirect(url_for('home'))
         else:
-            flash("Invalid email or password", 'danger')  
-            return redirect(url_for('login'))  
+            flash("Invalid email or password", 'danger')
+            return redirect(url_for('login'))
     return render_template('login.html')
 
 
-@app.route('/what_we_offer ')
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('homepage'))
+
+
+@app.route('/what_we_offer')
 def what_we_offer():
     return render_template('what_we_offer.html')
-
-
-
-
-
-
-
-
-
 
 
 @app.route('/admin')
@@ -417,26 +344,17 @@ def admin_login():
         if email == "admin@gmail.com" and password == "admin1234":
             session['admin_logged_in'] = True
             return redirect(url_for('admin_dashboard'))
+
         return render_template('admin_login.html', error="Invalid Credentials")
-    
+
     return render_template('admin_login.html')
-
-
-
-
-
-
-
-
-
-
 
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
     if 'admin_logged_in' not in session:
         return redirect(url_for('admin_login'))
-    
+
     conn = get_db_connection()
     cur = conn.cursor(dictionary=True)
     cur.execute("SELECT * FROM pending_applications")
@@ -445,9 +363,6 @@ def admin_dashboard():
     conn.close()
 
     return render_template('admin_dashboard.html', data=data)
-
-
-
 
 
 @app.route('/accept/<int:id>', methods=['POST'])
@@ -464,13 +379,12 @@ def accept(id):
         return "Application not found", 404
 
     try:
-        
         cursor.execute("""
             INSERT INTO approved_businesses
             (full_name_or_business_name, state, city, category, cost_for_two,
-             location, contact_number, email, password_hash,
-             photo1, photo2, photo3, photo4, photo5,
-             electricity_bill, additional_notes)
+            location, contact_number, email, password_hash,
+            photo1, photo2, photo3, photo4, photo5,
+            electricity_bill, additional_notes)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, (
             row['full_name_or_business_name'],
@@ -491,19 +405,18 @@ def accept(id):
             row.get('additional_notes')
         ))
 
-        
         cursor.execute("""
             INSERT INTO business_listings
             (name, location, city, state, category, cost_for_two,
-             photo1, photo2, photo3, photo4, photo5)
+            photo1, photo2, photo3, photo4, photo5)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """, (
-            row['full_name_or_business_name'], 
+            row['full_name_or_business_name'],
             row['location'],
             row['city'],
             row['state'],
             row['category'],
-            row['cost_for_two'],              
+            row['cost_for_two'],
             row['photo1'],
             row['photo2'],
             row['photo3'],
@@ -511,9 +424,7 @@ def accept(id):
             row['photo5']
         ))
 
-      
         cursor.execute("DELETE FROM pending_applications WHERE id=%s", (id,))
-
         conn.commit()
 
     except Exception as e:
@@ -528,9 +439,6 @@ def accept(id):
     return redirect(url_for('admin_dashboard'))
 
 
-
-
-
 @app.route('/reject/<int:id>', methods=['POST'])
 def reject(id):
     conn = get_db_connection()
@@ -538,53 +446,17 @@ def reject(id):
 
     cursor.execute("DELETE FROM pending_applications WHERE id=%s", (id,))
     conn.commit()
+
     cursor.close()
     conn.close()
 
     return redirect(url_for('admin_dashboard'))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @app.route('/admin/logout')
 def admin_logout():
     session.clear()
     return redirect(url_for('admin_login'))
-
-
-
-
-
 
 
 from flask import send_from_directory
@@ -594,11 +466,5 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
-
-
-
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-
