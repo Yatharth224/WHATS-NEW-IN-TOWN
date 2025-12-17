@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, session, url_for, flash
 import mysql.connector
 from werkzeug.utils import secure_filename
+import smtplib
+from email.message import EmailMessage
+
 
 from flask_bcrypt import Bcrypt
 import os
@@ -325,9 +328,19 @@ def logout():
     return redirect(url_for('homepage'))
 
 
+
+
+
+
+
 @app.route('/what_we_offer')
 def what_we_offer():
     return render_template('what_we_offer.html')
+
+
+
+
+
 
 
 @app.route('/contact')
@@ -335,9 +348,14 @@ def contact_us():
     return render_template('contact_us.html')
 
 
+
+
+
+
 @app.route('/admin')
 def admin_page():
     return redirect(url_for('admin_login'))
+
 
 
 @app.route('/admin/login', methods=['GET', 'POST'])
