@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | What's New in Town</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #1a1a1a, #000000);
+      color: #e6d3b1; /* gold text */
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 40px 20px 10px;
+    }
+
+    .home-btn {
+      position: absolute;
+      left: 20px;
+      text-decoration: none;
+      color: #e6d3b1;
+      border: 1px solid #e6d3b1;
+      padding: 8px 20px;
+      border-radius: 25px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .home-btn:hover {
+      background: #e6d3b1;
+      color: #000;
+    }
+
+    .top-banner {
+      font-size: 48px;
+      font-weight: 700;
+      color: #e6d3b1;
+      text-decoration: none;
+    }
+
+    /* Top Heading */
+    .top-banner {
+      text-align: center;
+      padding: 60px 20px 10px;
+      font-size: 48px;
+      font-weight: 700;
+      color: #e6d3b1;
+    }
+
+    .top-sub {
+      text-align: center;
+      color: #c9b18c;
+      margin-bottom: 50px;
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 20px 60px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      color: #bfa57a;
+      margin-bottom: 30px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(230, 211, 177, 0.15);
+      border-radius: 18px;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-size: 18px;
+      color: #e6d3b1;
+      letter-spacing: 1px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #c9b18c;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      background: #0f0f0f;
+      border: 1px solid rgba(230, 211, 177, 0.2);
+      border-radius: 10px;
+      color: #e6d3b1;
+      font-size: 14px;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #8e7a57;
+    }
+
+    textarea {
+      resize: none;
+      height: 130px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 18px;
+    }
+
+    .btn {
+      background: transparent;
+      color: #e6d3b1;
+      border: 1px solid #e6d3b1;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #e6d3b1;
+      color: #000;
+    }
+
+    .info-item {
+      margin-bottom: 18px;
+      font-size: 14px;
+      color: #c9b18c;
+    }
+
+    .info-item strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #e6d3b1;
+    }
+
+    .hours {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      font-size: 13px;
+      color: #c9b18c;
+    }
+
+    .map {
+      margin-top: 50px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 320px;
+      border: 0;
+      border-radius: 18px;
+      filter: grayscale(100%) invert(90%);
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .top-banner {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page Heading -->
+  <header class="navbar">
+    <a href="/" class="home-btn">Home</a>
+    <a href="/" class="top-banner">What's New in Town</a>
+  </header>
+  
+
+  <div class="container">
+    <div class="section-title">CONTACT US</div>
+    <div class="section-sub">
+      Have a question, suggestion, or partnership idea? We'd love to hear from you.
+    </div>
+
+    <div class="contact-grid">
+      <!-- Contact Form -->
+      <div class="card">
+        <h3>GET IN TOUCH</h3>
+        <form action="mailto:yourmail@example.com" method="post" enctype="text/plain">
+          <div class="form-row">
+            <div style="flex:1;">
+              <label>Name</label>
+              <input type="text" name="Name" placeholder="Enter your name" required />
+            </div>
+            <div style="flex:1;">
+              <label>Phone Number</label>
+              <input type="tel" name="Phone" placeholder="Enter your phone number" required />
+            </div>
+          </div>
+
+          <div style="margin-bottom:18px;">
+            <label>Email</label>
+            <input type="email" name="Email" placeholder="Enter your email" required />
+          </div>
+
+          <div style="margin-bottom:25px;">
+            <label>Your Message</label>
+            <textarea name="Message" placeholder="Type your message..."></textarea>
+          </div>
+
+          <button type="submit" class="btn">SEND MESSAGE</button>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <div>
+        <div class="card" style="margin-bottom:25px;">
+          <h3>CONTACT INFORMATION</h3>
+          <div class="info-item"><strong>Phone</strong>773-365-1240</div>
+          <div class="info-item"><strong>Email</strong>office@stepntrans.com</div>
+          <div class="info-item"><strong>Address</strong>1425 N McLean Blvd, Elgin, IL</div>
+        </div>
+
+        <div class="card">
+          <h3>BUSINESS HOURS</h3>
+          <div class="hours">
+            <div><strong>Mon - Fri</strong><br/>9:00 am - 8:00 pm</div>
+            <div><strong>Saturday</strong><br/>9:00 am - 6:00 pm</div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="map">
+      <iframe src="https://www.google.com/maps?q=1425%20N%20McLean%20Blvd%20Elgin%20IL&output=embed" loading="lazy"></iframe>
+    </div>
+  </div>
+
+</body>
+</html>

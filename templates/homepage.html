@@ -248,9 +248,9 @@
       /* Header */
       .header {
         text-align: center;
-        margin-top: 60px;   /* ↓ thoda upar */
+        margin-top: 60px; /* ↓ thoda upar */
         margin-bottom: 50px;
-        padding-top: 30px;  /* ↓ thoda upar */
+        padding-top: 30px; /* ↓ thoda upar */
       }
 
       .logo-title {
@@ -537,7 +537,9 @@
         </a>
 
         <button class="dropdown-item">Support</button>
-        <button class="dropdown-item">Contact Us</button>
+        <a href="{{ url_for('contact_us') }}" style="text-decoration: none">
+          <button class="dropdown-item">Contact Us</button>
+        </a>
       </nav>
 
       <div class="auth-buttons">

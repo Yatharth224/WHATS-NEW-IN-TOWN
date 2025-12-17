@@ -330,6 +330,11 @@ def what_we_offer():
     return render_template('what_we_offer.html')
 
 
+@app.route('/contact')
+def contact_us():
+    return render_template('contact_us.html')
+
+
 @app.route('/admin')
 def admin_page():
     return redirect(url_for('admin_login'))
