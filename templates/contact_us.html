@@ -105,6 +105,29 @@ body{
   box-shadow:0 0 15px rgba(230,211,177,.6);
 }
 
+
+/* ===== TOP LEFT HOME BUTTON ===== */
+.home-btn-left{
+  position:absolute;
+  left:25px;
+  top:22px;
+  text-decoration:none;
+  color:#e6d3b1;
+  border:1px solid rgba(230,211,177,.5);
+  padding:8px 22px;
+  border-radius:30px;
+  font-size:14px;
+  transition:.3s;
+}
+
+.home-btn-left:hover{
+  background:#e6d3b1;
+  color:#000;
+  box-shadow:0 0 15px rgba(230,211,177,.6);
+}
+
+
+
 .top-banner{
   font-size:46px;
   font-weight:800;
@@ -246,7 +269,32 @@ textarea{
   .form-row{flex-direction:column;}
   .btn{width:100%;}
   .map-glow iframe{height:280px;}
+  
 }
+
+
+/* ===== CLICKABLE BRAND HOVER EFFECT ===== */
+.brand-link{
+  text-decoration:none;
+}
+
+.brand-link .top-banner{
+  cursor:pointer;
+  transition: 
+    transform .35s ease,
+    text-shadow .35s ease,
+    filter .35s ease;
+}
+
+.brand-link .top-banner:hover{
+  transform: scale(1.05);
+  text-shadow:
+    0 0 10px rgba(230,211,177,.8),
+    0 0 25px rgba(230,211,177,.6),
+    0 0 45px rgba(230,211,177,.35);
+  filter: brightness(1.15);
+}
+
 </style>
 </head>
 
@@ -263,9 +311,16 @@ textarea{
   {% endif %}
 {% endwith %}
 
-<header class="navbar">
-  <a href="/" class="home-btn">Home</a>
-  <div class="top-banner">What's New in Town</div>
+<header class="navbar"> 
+
+  <a href="/" class="home-btn-left">Home</a>
+
+  <a href="/" class="brand-link">
+    <div class="top-banner">
+      What's New in Town
+    </div>
+  </a>
+
 </header>
 
 <div class="container">
