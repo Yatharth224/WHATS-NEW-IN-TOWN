@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect, session, url_for, flash
 import mysql.connector
 from werkzeug.utils import secure_filename
-import smtplib
 from email.message import EmailMessage
+import smtplib
+
 
 
 from flask_bcrypt import Bcrypt
@@ -347,8 +348,45 @@ def what_we_offer():
 def contact_us():
     return render_template('contact_us.html')
 
+@app.route("/send-message", methods=["POST"])
+def send_message():
+    try:
+        name = request.form["name"]
+        phone = request.form["phone"]
+        email = request.form["email"]
+        message = request.form["message"]
 
+        msg = EmailMessage()
+        msg["Subject"] = "New Contact Message - What's New in Town"
+        msg["From"] = "chouhan.yatharth24@gmail.com"
+        msg["To"] = "chouhan.yatharth24@gmail.com"
+        msg["Reply-To"] = email
 
+        msg.set_content(f"""
+Name: {name}
+Phone: {phone}
+Email: {email}
+
+Message:
+{message}
+""")
+
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+            print("DEBUG APP PASSWORD:", os.getenv("GMAIL_APP_PASSWORD"))
+
+            smtp.login(
+                "chouhan.yatharth24@gmail.com",
+                os.getenv("GMAIL_APP_PASSWORD")  
+            )
+            smtp.send_message(msg)
+
+        flash("✅ Message sent successfully!")
+        return redirect("/contact")
+
+    except Exception as e:
+        print("EMAIL ERROR:", e)
+        flash("❌ Failed to send message. Try again later.")
+        return redirect("/contact")
 
 
 
