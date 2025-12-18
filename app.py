@@ -348,6 +348,7 @@ def what_we_offer():
 def contact_us():
     return render_template('contact_us.html')
 
+
 @app.route("/send-message", methods=["POST"])
 def send_message():
     try:
@@ -372,7 +373,7 @@ Message:
 """)
 
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-            print("DEBUG APP PASSWORD:", os.getenv("GMAIL_APP_PASSWORD"))
+            
 
             smtp.login(
                 "chouhan.yatharth24@gmail.com",
@@ -387,6 +388,7 @@ Message:
         print("EMAIL ERROR:", e)
         flash("❌ Failed to send message. Try again later.")
         return redirect("/contact")
+
 
 
 
