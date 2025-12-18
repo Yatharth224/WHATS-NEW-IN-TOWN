@@ -348,7 +348,6 @@ def what_we_offer():
 def contact_us():
     return render_template('contact_us.html')
 
-
 @app.route("/send-message", methods=["POST"])
 def send_message():
     try:
@@ -356,6 +355,23 @@ def send_message():
         phone = request.form["phone"]
         email = request.form["email"]
         message = request.form["message"]
+
+        # ===== REGEX VALIDATION =====
+        if not re.fullmatch(r"[A-Za-z ]{2,50}", name):
+            flash("❌ Please enter a valid name.", "error")
+            return redirect("/contact")
+
+        if not re.fullmatch(r"[6-9]\d{9}", phone):
+            flash("❌ Please enter a valid 10-digit phone number.", "error")
+            return redirect("/contact")
+
+        if not re.fullmatch(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", email):
+            flash("❌ Please enter a valid email address.", "error")
+            return redirect("/contact")
+
+        if len(message.strip()) < 5:
+            flash("❌ Message should be at least 5 characters long.", "error")
+            return redirect("/contact")
 
         msg = EmailMessage()
         msg["Subject"] = "New Contact Message - What's New in Town"
@@ -373,21 +389,20 @@ Message:
 """)
 
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-            
-
             smtp.login(
                 "chouhan.yatharth24@gmail.com",
-                os.getenv("GMAIL_APP_PASSWORD")  
+                os.getenv("GMAIL_APP_PASSWORD")
             )
             smtp.send_message(msg)
 
-        flash("✅ Message sent successfully!")
+        flash("Message sent successfully!", "success")
         return redirect("/contact")
 
     except Exception as e:
         print("EMAIL ERROR:", e)
-        flash("❌ Failed to send message. Try again later.")
+        flash("Failed to send message. Try again later.", "error")
         return redirect("/contact")
+
 
 
 
