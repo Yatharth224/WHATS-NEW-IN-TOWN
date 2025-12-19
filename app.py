@@ -357,7 +357,7 @@ def send_message():
         email = request.form["email"]
         message = request.form["message"]
 
-        # ===== REGEX VALIDATION =====
+        
         if not re.fullmatch(r"[A-Za-z ]{2,50}", name):
             flash("❌ Please enter a valid name.", "error")
             return redirect("/contact")
