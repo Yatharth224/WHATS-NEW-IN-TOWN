@@ -112,38 +112,38 @@
         }
         .signup-link a:hover { text-decoration: underline; }
 
-        /* ======= FLASH MESSAGE (signup-style) ======= */
-        /* keeps same width as inputs and aligns nicely inside card */
-        .flash-wrap { width: 100%; margin-bottom: 18px; box-sizing: border-box; }
-
+        /* Flash Message Styling */
         .alert {
-            width: 100%;
+            margin-bottom: 20px;
+            padding: 18px;
+            background-color: rgba(255, 0, 0, 0.2);  /* Slight red background */
+            border: 1px solid rgba(255, 0, 0, 0.4); /* Light red border */
             border-radius: 12px;
-            padding: 12px 14px;
-            box-sizing: border-box;
-            font-size: 15px;
+            color: #D9534F;
+            font-size: 16px;
             font-weight: 600;
-            line-height: 1.35;
-            animation: fadeIn 0.28s ease-out;
-            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+            animation: fadeIn 0.5s ease-out;
         }
 
+        /* For error messages specifically */
         .alert-danger {
-            background: linear-gradient(180deg, rgba(84,16,20,0.92), rgba(60,10,12,0.92));
-            border: 1px solid rgba(210,80,80,0.22);
-            color: #ffd7d5;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-            text-align: left;    /* left-align like signup screenshot */
-            padding-left: 16px;
-            padding-right: 16px;
+            background-color: rgba(255, 0, 0, 0.1); /* Slightly softer red background */
+            color: #D9534F; /* Dark red text */
         }
 
+        /* Animation to make the flash message fade in */
         @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(-8px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        /* ======= end flash ======= */
-
     </style>
 </head>
 
@@ -161,18 +161,8 @@
 
         <h2 style="margin-top: 10px;">Login</h2>
 
-        <!-- Flash Message Section (signup-style) -->
-        <div class="flash-wrap">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }}">
-                            <p style="margin:0;">{{ message }}</p>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        </div>
+        
+        
 
         <form method="POST">
 
