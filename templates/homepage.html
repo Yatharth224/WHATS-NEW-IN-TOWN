@@ -535,8 +535,9 @@
         <a href="{{ url_for('what_we_offer') }}">
           <button class="dropdown-item">What We Offer</button>
         </a>
-
-        <button class="dropdown-item">Support</button>
+        <a href="{{ url_for('feedback') }}" style="text-decoration: none">
+          <button class="dropdown-item">Feedback/Report</button>
+        </a>
         <a href="{{ url_for('contact_us') }}" style="text-decoration: none">
           <button class="dropdown-item">Contact Us</button>
         </a>

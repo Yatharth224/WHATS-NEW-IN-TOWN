@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's New In Town</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Your Specific Color */
+            --accent: #D2C5B6;
+            --accent-glow: rgba(210, 197, 182, 0.5);
+            
+            /* Backgrounds */
+            --bg-dark: #050505;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #8c8c8c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at top right, #1a1a1a 0%, #050505 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- Ambient Background Glow --- */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent);
+            top: -100px;
+            left: -100px;
+            opacity: 0.15;
+        }
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #2a2a2a;
+            bottom: -50px;
+            right: -50px;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            width: 100%;
+            padding: 25px 50px;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+
+        /* Home Button Style */
+        .home-btn {
+            text-decoration: none;
+            color: var(--accent);
+            background: transparent;
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            padding: 10px 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .home-btn:hover {
+            background: var(--accent);
+            color: #121212;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        /* --- Main Layout --- */
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* --- Title Link Wrapper --- */
+        .title-link {
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        /* --- Title Styling --- */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 0; /* Margin handled by link wrapper */
+            text-align: center;
+            letter-spacing: -1px;
+            cursor: pointer; /* Show pointer hand on hover */
+            transition: all 0.4s ease;
+        }
+
+        /* Hover Effect on Title */
+        h1:hover {
+            text-shadow: 0 0 20px rgba(210, 197, 182, 0.8), 
+                         0 0 50px rgba(210, 197, 182, 0.4);
+            transform: scale(1.02);
+        }
+
+        /* --- Glassmorphism Card --- */
+        .glass-card {
+            width: 100%;
+            max-width: 550px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            overflow: hidden;
+            animation: fadeUp 0.8s ease-out;
+            position: relative;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0.5;
+        }
+
+        /* --- Tabs --- */
+        .tabs-header {
+            display: flex;
+            padding: 8px;
+            margin: 20px 20px 0 20px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            z-index: 2;
+            transition: color 0.3s ease;
+        }
+
+        .tab-btn.active { color: #121212; }
+
+        .tab-indicator {
+            position: absolute;
+            top: 8px;
+            bottom: 8px;
+            left: 8px;
+            width: calc(50% - 12px);
+            background: var(--accent);
+            border-radius: 12px;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1;
+            box-shadow: 0 5px 15px var(--accent-glow);
+        }
+
+        /* --- Forms --- */
+        .form-content { padding: 40px; }
+        .form-section { display: none; animation: fadeIn 0.5s ease; }
+        .form-section.active { display: block; }
+
+        .input-group { position: relative; margin-bottom: 25px; }
+
+        label {
+            position: absolute;
+            left: 15px;
+            top: 16px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            background: transparent;
+            padding: 0 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        textarea { resize: vertical; min-height: 120px; }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent);
+            background: rgba(0,0,0,0.4);
+            box-shadow: 0 0 20px rgba(210, 197, 182, 0.1);
+        }
+
+        input:focus ~ label,
+        input:not(:placeholder-shown) ~ label,
+        select:valid ~ label,
+        textarea:focus ~ label,
+        textarea:not(:placeholder-shown) ~ label {
+            top: -10px;
+            left: 10px;
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: #0d0d0d;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* --- Button --- */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent) 0%, #a39284 100%);
+            color: #1a1a1a;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(210, 197, 182, 0.3);
+        }
+        
+        /* --- Toast --- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(20, 20, 20, 0.95);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 1000;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* --- Animations --- */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .navbar { padding: 20px; }
+            .form-content { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <nav class="navbar">
+        <a href="/" class="home-btn">Home</a>
+    </nav>
+
+    <div class="container">
+        
+        <a href="/" class="title-link">
+            <h1>What's New In Town</h1>
+        </a>
+
+        <div class="glass-card">
+            <div class="tabs-header">
+                <div class="tab-indicator" id="tab-pill"></div>
+                <button class="tab-btn active" onclick="switchTab(0)">Feedback</button>
+                <button class="tab-btn" onclick="switchTab(1)">Report Place</button>
+            </div>
+
+            <div class="form-content">
+                <div id="section-0" class="form-section active">
+                    <form onsubmit="handleSubmit(event, 'Feedback')">
+                        <div class="input-group">
+                            <input type="text" id="fb-name" placeholder=" " required>
+                            <label>Your Name</label>
+                        </div>
+                        <div class="input-group">
+                            <textarea id="fb-message" placeholder=" " required></textarea>
+                            <label>Your Message</label>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Feedback</button>
+                    </form>
+                </div>
+
+                <div id="section-1" class="form-section">
+                    <form onsubmit="handleSubmit(event, 'Report')">
+                        <div class="input-group">
+                            <select id="rp-category" required>
+                                <option value="" disabled selected></option>
+                                <option value="Fine Dine">Fine Dine</option>
+                                <option value="Restro Bar">Restro Bar</option>
+                                <option value="Arcade">Arcade</option>
+                                <option value="Bowling">Bowling</option>
+                            </select>
+                            <label>Category</label>
+                        </div>
+
+                        <div class="input-group">
+                            <select id="rp-state" onchange="updateCities()" required>
+                                <option value="" disabled selected></option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Karnataka">Karnataka</option>
+                            </select>
+                            <label>State</label>
+                        </div>
+
+                        <div class="input-group">
+                            <select id="rp-city" disabled required>
+                                <option value="" disabled selected></option>
+                            </select>
+                            <label>City</label>
+                        </div>
+
+                        <div class="input-group">
+                            <input type="text" id="rp-place" placeholder=" " required>
+                            <label>Place Name</label>
+                        </div>
+
+                        <div class="input-group">
+                            <textarea id="rp-reason" placeholder=" " required></textarea>
+                            <label>Reason for Reporting</label>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Submit Report</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-msg">Submission Successful!</span>
+    </div>
+
+    <script>
+        const cityData = {
+            "Madhya Pradesh": ["Indore"],
+            "Maharashtra": ["Mumbai"],
+            "Delhi": ["Delhi"],
+            "Karnataka": ["Bengaluru"]
+        };
+
+        function switchTab(index) {
+            const pill = document.getElementById('tab-pill');
+            pill.style.transform = index === 0 ? 'translateX(0)' : 'translateX(100%)';
+            pill.style.left = index === 0 ? '8px' : '16px'; 
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach((btn, i) => {
+                if (i === index) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            const sections = document.querySelectorAll('.form-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+            document.getElementById(`section-${index}`).classList.add('active');
+        }
+
+        function updateCities() {
+            const stateSelect = document.getElementById("rp-state");
+            const citySelect = document.getElementById("rp-city");
+            const selectedState = stateSelect.value;
+
+            citySelect.innerHTML = '<option value="" disabled selected></option>';
+
+            if (selectedState && cityData[selectedState]) {
+                citySelect.disabled = false;
+                cityData[selectedState].forEach(city => {
+                    const option = document.createElement("option");
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+                citySelect.focus();
+                citySelect.blur();
+            } else {
+                citySelect.disabled = true;
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3000);
+        }
+
+        function handleSubmit(event, type) {
+            event.preventDefault();
+            const btn = event.target.querySelector('.submit-btn');
+            const originalText = btn.textContent;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            btn.style.opacity = '0.8';
+
+            setTimeout(() => {
+                showToast(`${type} received successfully.`);
+                event.target.reset();
+                btn.textContent = originalText;
+                btn.style.opacity = '1';
+
+                if(type === 'Report') {
+                    document.getElementById("rp-city").disabled = true;
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

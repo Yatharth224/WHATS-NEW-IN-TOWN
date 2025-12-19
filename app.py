@@ -408,6 +408,15 @@ Message:
 
 
 
+@app.route('/support')
+def feedback():
+    return render_template('support.html')
+
+
+
+
+
+
 @app.route('/admin')
 def admin_page():
     return redirect(url_for('admin_login'))
