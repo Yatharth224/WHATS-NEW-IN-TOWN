@@ -144,10 +144,40 @@
                 transform: translateY(0);
             }
         }
+        /* HOME BUTTON */
+.home-btn {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(230, 211, 177, 0.45);
+    background: rgba(20,20,20,0.65);
+    color: #E6D3B1;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition: 0.35s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.home-btn:hover {
+    color: #000;
+    background: #E6D3B1;
+    box-shadow: 
+        0 0 15px rgba(230, 211, 177, 0.8),
+        0 0 30px rgba(230, 211, 177, 0.6);
+    transform: translateY(-2px);
+}
+
     </style>
 </head>
 
 <body>
+<!-- HOME BUTTON -->
+<a href="/" class="home-btn"> Home</a>
 
     <div class="background-orbs">
         <div class="orb orb1"></div>
