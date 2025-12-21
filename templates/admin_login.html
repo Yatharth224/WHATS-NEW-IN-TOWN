@@ -2,205 +2,296 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WNT Admin Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       :root {
-        --gold-light: #f3d9b1;
-        --gold: #d1af7a;
-        --gold-dark: #a58a63;
-        --light: #e5e5e5;
-        --dark: #000;
+        --gold-primary: #E6D3B1;
+        --gold-hover: #d4c09e;
+        --bg-panel: rgba(20, 20, 20, 0.7);
+        --text-light: #ffffff;
+        --border-color: rgba(230, 211, 177, 0.15);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
       body {
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(135deg, #000, #111);
-        font-family: Poppins, sans-serif;
-        color: var(--light);
+        font-family: 'Poppins', sans-serif;
+        background: radial-gradient(circle at 50% 30%, #1a1a1a 0%, #000000 70%);
+        color: var(--text-light);
         height: 100vh;
-      }
-
-      /* HEADER */
-      .top-header {
-        position: absolute;
-        top: 60px;
         width: 100%;
-        text-align: center;
-        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
       }
 
-      .top-header h1 {
-        font-size: 50px;
-        font-weight: 700;
-        background: linear-gradient(
-          180deg,
-          var(--gold-light),
-          var(--gold-dark)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0px 4px 20px rgba(191, 161, 129, 0.25);
-        margin-bottom: 5px;
-        transition: 0.35s ease; /* smooth */
-      }
-
-      /* HOVER GLOW ADDED */
-      .top-header h1:hover {
-        text-shadow: 0 0 20px rgba(191, 161, 129, 0.65),
-          0 0 40px rgba(191, 161, 129, 0.45), 0 0 60px rgba(191, 161, 129, 0.35);
-        transform: translateY(-3px);
-      }
-
-      .top-header p {
-        margin: 0;
-        font-size: 18px;
-        color: var(--gold);
-        opacity: 0.9;
-        transition: 0.35s ease;
-      }
-
-      .top-header p:hover {
-        text-shadow: 0 0 14px rgba(191, 161, 129, 0.65);
-        transform: translateY(-2px);
-      }
-
-      /* LOGIN BOX */
-      .container {
-        width: 380px;
-        padding: 35px;
-        background: rgba(20, 20, 20, 0.6);
-        border: 1px solid rgba(191, 161, 129, 0.35);
-        border-radius: 15px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(10px);
-        text-align: center;
-        margin: 220px auto 0 auto;
-      }
-
-      .container h2 {
-        font-size: 24px;
-        font-weight: 700;
-        background: linear-gradient(
-          180deg,
-          var(--gold-light),
-          var(--gold-dark)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-shadow: 0px 4px 18px rgba(191, 161, 129, 0.25);
-      }
-
-      .container p {
-        font-size: 15px;
-        color: var(--gold-light);
-        opacity: 0.85;
-        margin-bottom: 16px;
-      }
-
-      /* INPUTS */
-      input {
-        width: 100%;
-        padding: 12px;
-        margin-top: 15px;
-        border-radius: 10px;
-        border: 1px solid rgba(191, 161, 129, 0.4);
-        background: rgba(0, 0, 0, 0.4);
-        color: var(--light);
-        font-size: 14px;
-      }
-
-      input:focus {
-        border-color: var(--gold);
-        box-shadow: 0 0 10px rgba(191, 161, 129, 0.6);
-      }
-
-      /* BUTTON */
-      button {
-        width: 100%;
-        margin-top: 20px;
-        padding: 12px;
-        border: none;
-        border-radius: 10px;
-        background: var(--gold);
-        color: #000;
-        font-weight: 600;
-        font-size: 15px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      button:hover {
-        box-shadow: 0 0 15px var(--gold);
-        transform: translateY(-2px);
-      }
-
-      .error {
-        margin-top: 10px;
-        color: #ff4d4d;
-        font-size: 14px;
-      }
       /* HOME BUTTON */
       .home-btn {
-        position: fixed;
-        top: 25px;
-        left: 25px;
-        padding: 10px 18px;
-        border-radius: 10px;
-        border: 1px solid rgba(191, 161, 129, 0.45);
-        background: rgba(20, 20, 20, 0.65);
-        color: var(--gold-light);
-        font-weight: 600;
-        font-size: 14px;
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        border-radius: 30px;
+        border: 1px solid rgba(230, 211, 177, 0.2);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--gold-primary);
+        font-weight: 500;
+        font-size: 13px;
         text-decoration: none;
-        backdrop-filter: blur(10px);
-        transition: 0.35s ease;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
-        z-index: 1000;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        z-index: 100;
       }
 
       .home-btn:hover {
+        background: var(--gold-primary);
         color: #000;
-        background: var(--gold);
-        box-shadow: 0 0 18px rgba(191, 161, 129, 0.75);
+        border-color: var(--gold-primary);
         transform: translateY(-2px);
+      }
+
+      /* WRAPPER */
+      .center-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        width: 100%;
+        padding: 20px;
+        z-index: 1;
+      }
+
+      /* BRAND HEADER */
+      .brand-header {
+        text-align: center;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+
+      .brand-header h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: var(--gold-primary);
+        margin-bottom: 5px;
+        line-height: 1.2;
+        
+        /* Default Shadow */
+        text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        white-space: nowrap; 
+        
+        /* Smooth transition for the glow effect */
+        transition: all 0.4s ease-in-out;
+      }
+
+      .brand-header p {
+        font-size: 0.9rem;
+        color: var(--gold-primary);
+        opacity: 0.9; 
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-weight: 400;
+        transition: all 0.3s ease;
+      }
+
+      /* HOVER EFFECTS - GLOW ADDED HERE */
+      .brand-header:hover {
+        transform: scale(1.02);
+      }
+
+      .brand-header:hover h1 {
+        /* Multi-layered text shadow for realistic glow */
+        text-shadow: 
+          0 0 10px rgba(230, 211, 177, 0.8),
+          0 0 20px rgba(230, 211, 177, 0.6),
+          0 0 40px rgba(230, 211, 177, 0.4);
+      }
+      
+      .brand-header:hover p {
+        opacity: 1;
+        text-shadow: 0 0 8px rgba(230, 211, 177, 0.5);
+      }
+
+      /* LOGIN PANEL */
+      .login-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 40px;
+        background: var(--bg-panel);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        text-align: center;
+      }
+
+      .login-card h2 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 5px;
+      }
+
+      .login-card .subtitle {
+        font-size: 0.85rem;
+        color: #aaa;
+        margin-bottom: 25px;
+        display: block;
+      }
+
+      /* INPUTS */
+      .input-group {
+        position: relative;
+        margin-bottom: 15px;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 14px 14px 14px 45px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: #fff;
+        font-size: 0.9rem;
+        font-family: inherit;
+        outline: none;
+        transition: all 0.2s ease;
+      }
+
+      .input-group svg {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        fill: #666;
+        transition: fill 0.2s ease;
+      }
+
+      .input-group input:focus {
+        border-color: var(--gold-primary);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .input-group input:focus + svg {
+        fill: var(--gold-primary);
+      }
+
+      /* BUTTON STYLES */
+      .submit-btn {
+        width: 100%;
+        padding: 14px;
+        margin-top: 10px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        /* Default State */
+        background: #000;
+        color: var(--gold-primary);
+        border: 1px solid var(--gold-primary);
+      }
+
+      /* Hover & Focus */
+      .submit-btn:hover,
+      .submit-btn:focus {
+        background: var(--gold-primary);
+        color: #000;
+        box-shadow: 0 0 20px rgba(230, 211, 177, 0.4);
+        transform: translateY(-2px);
+        outline: none; 
+      }
+
+      .error-msg {
+        background: rgba(255, 77, 77, 0.15);
+        color: #ff4d4d;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+        text-align: left;
+        border: 1px solid rgba(255, 77, 77, 0.2);
+      }
+
+      @media (max-width: 600px) {
+        .brand-header h1 { 
+          font-size: 2.2rem;
+          white-space: normal;
+        }
+        .login-card { padding: 30px 20px; }
       }
     </style>
   </head>
 
   <body>
-    <!-- HOME BUTTON -->
-    <a href="/" class="home-btn">🏠 Home</a>
-
-    <!-- CLICKABLE HEADER -->
-    <a href="/" style="text-decoration: none">
-      <div class="top-header">
-        <h1>What's New in Town</h1>
-        <p>Discover the New Places</p>
-      </div>
+    <a href="/" class="home-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+        <path d="m8 3.293 6 6V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V9.293l6-6Z"/>
+      </svg>
+      Home
     </a>
 
-    <!-- LOGIN BOX -->
-    <div class="container">
-      <h2>WNT Admin Panel Login</h2>
-      <p>Access Admin Controls</p>
+    <div class="center-wrapper">
+      <a href="/" class="brand-header">
+        <h1>What's New in Town</h1>
+        <p>Discover New Places</p>
+      </a>
 
-      {% if errors %}
-      <div class="error">{{ errors }}</div>
-      {% endif %}
+      <div class="login-card">
+        <h2>Admin Panel</h2>
+        <span class="subtitle">Enter your credentials to access control panel</span>
 
-      <form method="POST">
-        <input type="email" name="email" placeholder="Email ID" required />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          required
-        />
+        {% if errors %}
+        <div class="error-msg">
+          ⚠️ {{ errors }}
+        </div>
+        {% endif %}
 
-        <button type="submit">Login</button>
-      </form>
+        <form method="POST">
+          <div class="input-group">
+            <input type="email" name="email" placeholder="Email Address" required autocomplete="email"/>
+            <svg viewBox="0 0 24 24">
+               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+
+          <div class="input-group">
+            <input type="password" name="password" placeholder="Password" required />
+            <svg viewBox="0 0 24 24">
+              <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3 3.1-3s3.1 1.29 3.1 3v2z"/>
+            </svg>
+          </div>
+
+          <button type="submit" class="submit-btn">Login to Dashboard</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>
