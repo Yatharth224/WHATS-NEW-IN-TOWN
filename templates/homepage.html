@@ -514,17 +514,20 @@
           right: 10px;
         }
       }
+      /* Remove underline from all links */
+      .dropdown-menu a {
+        text-decoration: none; /* This removes the blue underline */
+        color: inherit; /* Inherit color from parent */
+      }
+
+      /* Optional: Change color on hover */
+      .dropdown-menu a:hover {
+        color: var(--gold); /* You can change the hover color if desired */
+      }
     </style>
   </head>
 
   <body>
-    {% if show_logout_toast %}
-    <div id="flash-toast" class="toast toast-logout">
-      <span class="toast-icon">⎋</span>
-      <span class="toast-text">Logged out successfully</span>
-    </div>
-    {% endif %}
-
     <div class="background-orbs">
       <div class="orb orb1"></div>
       <div class="orb orb2"></div>
@@ -611,16 +614,6 @@
           dropdownMenu.classList.remove("active");
         }
       });
-    </script>
-    <script>
-      const toast = document.getElementById("flash-toast");
-
-      if (toast) {
-        setTimeout(() => {
-          toast.classList.add("toast-hide");
-          setTimeout(() => toast.remove(), 600);
-        }, 5000); // visible for 5 seconds
-      }
     </script>
   </body>
 </html>
