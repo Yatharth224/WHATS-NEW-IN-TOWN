@@ -1,704 +1,972 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>What We Offer | What's New In Town</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <title>What We Offer | What's New In Town</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    :root {
-      /* Theme Core */
-      --gold: #E6D3B1;
-      --gold-light: #F7EDD4;
-      --gold-dark: #C5B496;
-      --gold-dim: rgba(230, 211, 177, 0.1);
-      --gold-glow: rgba(230, 211, 177, 0.4);
-      --bg-deep: #050505;
-      --text-main: #FFFFFF;
-      --text-muted: #A1A1AA;
-      
-      /* Glassmorphism Variables */
-      --glass-bg: rgba(20, 20, 20, 0.65);
-      --glass-border: rgba(230, 211, 177, 0.15);
-      --glass-blur: 24px;
-      
-      /* Spacing & Shape */
-      --radius-card: 24px;
-      --radius-pill: 100px;
-      --container-width: 1200px;
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&display=swap"
+      rel="stylesheet"
+    />
 
-    /* Reset */
-    * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
-    html { scroll-behavior: smooth; }
+    <style>
+      :root {
+        /* Theme Core */
+        --gold: #e6d3b1;
+        --gold-light: #f7edd4;
+        --gold-dark: #c5b496;
+        --gold-dim: rgba(230, 211, 177, 0.1);
+        --gold-glow: rgba(230, 211, 177, 0.4);
+        --bg-deep: #050505;
+        --text-main: #ffffff;
+        --text-muted: #a1a1aa;
 
-    body {
-      font-family: 'Manrope', sans-serif;
-      background-color: var(--bg-deep);
-      color: var(--text-main);
-      line-height: 1.7;
-      min-height: 100vh;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+        /* Glassmorphism Variables */
+        --glass-bg: rgba(20, 20, 20, 0.65);
+        --glass-border: rgba(230, 211, 177, 0.15);
+        --glass-blur: 24px;
 
-    h1, h2, h3, h4 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      color: var(--text-main);
-      line-height: 1.2;
-    }
+        /* Spacing & Shape */
+        --radius-card: 24px;
+        --radius-pill: 100px;
+        --container-width: 1200px;
+      }
 
-    /* --- Ambient Background Lighting --- */
-    .ambient-light {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1;
-      pointer-events: none;
-      background: var(--bg-deep);
-      overflow: hidden;
-    }
+      /* Reset */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        outline: none;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    .light-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.2;
-      animation: floatLight 20s infinite alternate ease-in-out;
-    }
+      body {
+        font-family: "Manrope", sans-serif;
+        background-color: var(--bg-deep);
+        color: var(--text-main);
+        line-height: 1.7;
+        min-height: 100vh;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
 
-    .orb-1 { width: 600px; height: 600px; background: #E6D3B1; top: -20%; left: -10%; }
-    .orb-2 { width: 500px; height: 500px; background: #8C7D63; bottom: -10%; right: -5%; animation-delay: -5s; }
-    .orb-3 { width: 300px; height: 300px; background: #E6D3B1; top: 40%; right: 20%; opacity: 0.1; animation-delay: -10s; }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        color: var(--text-main);
+        line-height: 1.2;
+      }
 
-    @keyframes floatLight {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(30px, -30px) scale(1.1); }
-    }
+      /* --- Ambient Background Lighting --- */
+      .ambient-light {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+        background: var(--bg-deep);
+        overflow: hidden;
+      }
 
-    /* --- Layout --- */
-    .page-container {
-      max-width: var(--container-width);
-      margin: 0 auto;
-      padding: 40px 24px 100px;
-    }
+      .light-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.2;
+        animation: floatLight 20s infinite alternate ease-in-out;
+      }
 
-    /* --- Header --- */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 16px;
-      background: rgba(5, 5, 5, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius-pill);
-      position: sticky;
-      top: 24px;
-      z-index: 100;
-      margin-bottom: 80px;
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-    }
+      .orb-1 {
+        width: 600px;
+        height: 600px;
+        background: #e6d3b1;
+        top: -20%;
+        left: -10%;
+      }
+      .orb-2 {
+        width: 500px;
+        height: 500px;
+        background: #8c7d63;
+        bottom: -10%;
+        right: -5%;
+        animation-delay: -5s;
+      }
+      .orb-3 {
+        width: 300px;
+        height: 300px;
+        background: #e6d3b1;
+        top: 40%;
+        right: 20%;
+        opacity: 0.1;
+        animation-delay: -10s;
+      }
 
-    .brand { display: flex; align-items: center; gap: 14px; padding-left: 8px; }
-    
-    /* UPGRADED LOGO */
-    .brand-logo {
-      width: 46px; height: 46px;
-      background: linear-gradient(135deg, var(--gold), #8C7D63);
-      color: #050505;
-      font-weight: 800;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 17px;
-      box-shadow: 0 0 25px rgba(230, 211, 177, 0.3);
-      border: 2px solid rgba(255,255,255,0.1);
-    }
+      @keyframes floatLight {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        100% {
+          transform: translate(30px, -30px) scale(1.1);
+        }
+      }
 
-    /* UPGRADED HEADING TEXT - GOLD FOIL EFFECT */
-    .brand-text h1 { 
-        font-family: 'Playfair Display', serif;
-        font-size: 20px; 
-        letter-spacing: 0.08em; 
-        margin: 0; 
+      /* --- Layout --- */
+      .page-container {
+        max-width: var(--container-width);
+        margin: 0 auto;
+        padding: 40px 24px 100px;
+      }
+
+      /* --- Header --- */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 16px;
+        background: rgba(5, 5, 5, 0.85);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--radius-pill);
+        position: sticky;
+        top: 24px;
+        z-index: 100;
+        margin-bottom: 80px;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-left: 8px;
+      }
+
+      /* UPGRADED LOGO */
+      .brand-logo {
+        width: 46px;
+        height: 46px;
+        background: linear-gradient(135deg, var(--gold), #8c7d63);
+        color: #050505;
+        font-weight: 800;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        box-shadow: 0 0 25px rgba(230, 211, 177, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* UPGRADED HEADING TEXT - GOLD FOIL EFFECT */
+      .brand-text h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        letter-spacing: 0.08em;
+        margin: 0;
         font-weight: 800;
         text-transform: uppercase;
-        
+
         /* Gradient Text Magic */
-        background: linear-gradient(to right, #fff 0%, var(--gold) 40%, #B09A75 100%);
+        background: linear-gradient(
+          to right,
+          #fff 0%,
+          var(--gold) 40%,
+          #b09a75 100%
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        
+
         /* Subtle Glow */
         filter: drop-shadow(0 0 15px rgba(230, 211, 177, 0.2));
-    }
-    
-    nav { display: flex; gap: 8px; }
+      }
 
-    /* Navigation Tabs */
-    nav a {
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--gold); 
-      background: #000000; 
-      border: 1px solid var(--glass-border);
-      padding: 12px 24px;
-      border-radius: var(--radius-pill);
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
+      nav {
+        display: flex;
+        gap: 8px;
+      }
 
-    nav a:hover, nav a.active-link { 
+      /* Navigation Tabs */
+      nav a {
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: var(--gold);
+        background: #000000;
+        border: 1px solid var(--glass-border);
+        padding: 12px 24px;
+        border-radius: var(--radius-pill);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      nav a:hover,
+      nav a.active-link {
         background: var(--gold);
         color: #000000;
         border-color: var(--gold);
         box-shadow: 0 0 25px rgba(230, 211, 177, 0.35);
-    }
-    
-    /* --- Hero Section --- */
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 64px;
-      align-items: center;
-      margin-bottom: 120px;
-    }
+      }
 
-    .hero-label {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 6px 16px;
-      background: var(--gold-dim);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-pill);
-      font-size: 12px;
-      color: var(--gold);
-      margin-bottom: 24px;
-      letter-spacing: 0.05em;
-    }
+      /* --- Hero Section --- */
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 64px;
+        align-items: center;
+        margin-bottom: 120px;
+      }
 
-    /* UPGRADED HERO TITLE */
-    .hero-title {
-      font-size: clamp(48px, 5.5vw, 72px);
-      margin-bottom: 24px;
-      line-height: 1.05;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
+      .hero-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 16px;
+        background: var(--gold-dim);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-pill);
+        font-size: 12px;
+        color: var(--gold);
+        margin-bottom: 24px;
+        letter-spacing: 0.05em;
+      }
 
-    .hero-title .highlight {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-style: italic;
-      padding-right: 10px;
-    }
+      /* UPGRADED HERO TITLE */
+      .hero-title {
+        font-size: clamp(48px, 5.5vw, 72px);
+        margin-bottom: 24px;
+        line-height: 1.05;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
 
-    .hero-desc {
-      font-size: 17px;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      max-width: 90%;
-      font-weight: 300;
-    }
+      .hero-title .highlight {
+        background: linear-gradient(135deg, var(--gold-light), var(--gold));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-style: italic;
+        padding-right: 10px;
+      }
 
-    .hero-actions { display: flex; gap: 16px; margin-bottom: 40px; }
+      .hero-desc {
+        font-size: 17px;
+        color: var(--text-muted);
+        margin-bottom: 32px;
+        max-width: 90%;
+        font-weight: 300;
+      }
 
-    .btn {
-      padding: 14px 32px;
-      border-radius: var(--radius-pill);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex; align-items: center; gap: 8px;
-    }
+      .hero-actions {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 40px;
+      }
 
-    .btn-primary {
-      background: var(--gold);
-      color: #000;
-      border: 1px solid var(--gold);
-      box-shadow: 0 0 25px rgba(230, 211, 177, 0.2);
-    }
+      .btn {
+        padding: 14px 32px;
+        border-radius: var(--radius-pill);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
-    .btn-primary:hover {
-      background: #fff; border-color: #fff;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
-    }
+      .btn-primary {
+        background: var(--gold);
+        color: #000;
+        border: 1px solid var(--gold);
+        box-shadow: 0 0 25px rgba(230, 211, 177, 0.2);
+      }
 
-    .btn-ghost {
-      background: transparent;
-      border: 1px solid var(--glass-border);
-      color: var(--text-main);
-    }
+      .btn-primary:hover {
+        background: #fff;
+        border-color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+      }
 
-    .btn-ghost:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid var(--glass-border);
+        color: var(--text-main);
+      }
 
-    /* --- Premium Glass Card --- */
-    .glass-panel {
-      background: var(--glass-bg);
-      backdrop-filter: blur(var(--glass-blur));
-      -webkit-backdrop-filter: blur(var(--glass-blur));
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-card);
-      padding: 32px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.4s ease, border-color 0.4s ease;
-    }
+      .btn-ghost:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
 
-    .glass-panel:hover {
-      border-color: var(--gold-glow);
-      transform: translateY(-5px);
-    }
-    
-    .glass-panel::after {
-        content: ''; position: absolute; top:0; left:0; right:0; height: 1px;
-        background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      /* --- Premium Glass Card --- */
+      .glass-panel {
+        background: var(--glass-bg);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-card);
+        padding: 32px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.4s ease, border-color 0.4s ease;
+      }
+
+      .glass-panel:hover {
+        border-color: var(--gold-glow);
+        transform: translateY(-5px);
+      }
+
+      .glass-panel::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold),
+          transparent
+        );
         opacity: 0.5;
-    }
+      }
 
-    .card-top {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 24px; padding-bottom: 16px;
-      border-bottom: 1px solid var(--glass-border);
-    }
+      .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--glass-border);
+      }
 
-    .card-badge {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-      background: var(--gold); color: #000;
-      padding: 4px 8px; border-radius: 4px;
-      text-transform: uppercase;
-    }
+      .card-badge {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        background: var(--gold);
+        color: #000;
+        padding: 4px 8px;
+        border-radius: 4px;
+        text-transform: uppercase;
+      }
 
-    .stats-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
-    }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
 
-    .stat-box {
-      background: rgba(0,0,0,0.3);
-      padding: 16px; border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
+      .stat-box {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
 
-    .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
-    .stat-val { font-size: 14px; color: var(--text-main); font-weight: 600; }
+      .stat-label {
+        font-size: 11px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .stat-val {
+        font-size: 14px;
+        color: var(--text-main);
+        font-weight: 600;
+      }
 
-    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-    .tag {
-      font-size: 11px; color: var(--gold);
-      border: 1px solid var(--gold-dim);
-      padding: 6px 12px; border-radius: 100px;
-    }
+      .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 20px;
+      }
+      .tag {
+        font-size: 11px;
+        color: var(--gold);
+        border: 1px solid var(--gold-dim);
+        padding: 6px 12px;
+        border-radius: 100px;
+      }
 
-    /* --- Features Grid --- */
-    .section-header {
-      margin-bottom: 40px;
-      display: flex; justify-content: space-between; align-items: flex-end;
-      border-bottom: 1px solid var(--glass-border);
-      padding-bottom: 24px;
-    }
+      /* --- Features Grid --- */
+      .section-header {
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        border-bottom: 1px solid var(--glass-border);
+        padding-bottom: 24px;
+      }
 
-    .section-title { font-size: 32px; color: var(--text-main); }
-    .section-sub { font-size: 14px; color: var(--text-muted); max-width: 400px; text-align: right; }
+      .section-title {
+        font-size: 32px;
+        color: var(--text-main);
+      }
+      .section-sub {
+        font-size: 14px;
+        color: var(--text-muted);
+        max-width: 400px;
+        text-align: right;
+      }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-    }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+      }
 
-    .feature-card {
-      background: linear-gradient(160deg, rgba(20,20,20,0.8), rgba(5,5,5,0.9));
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-card);
-      padding: 28px;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      group: hover;
-    }
+      .feature-card {
+        background: linear-gradient(
+          160deg,
+          rgba(20, 20, 20, 0.8),
+          rgba(5, 5, 5, 0.9)
+        );
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-card);
+        padding: 28px;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        group: hover;
+      }
 
-    .feature-card:hover {
-      border-color: var(--gold);
-      box-shadow: 0 0 30px rgba(230, 211, 177, 0.1);
-      transform: translateY(-8px);
-    }
+      .feature-card:hover {
+        border-color: var(--gold);
+        box-shadow: 0 0 30px rgba(230, 211, 177, 0.1);
+        transform: translateY(-8px);
+      }
 
-    .icon-box {
-      width: 48px; height: 48px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; color: var(--gold);
-      margin-bottom: 20px;
-      transition: 0.3s;
-    }
+      .icon-box {
+        width: 48px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: var(--gold);
+        margin-bottom: 20px;
+        transition: 0.3s;
+      }
 
-    .feature-card:hover .icon-box { background: var(--gold); color: #000; }
+      .feature-card:hover .icon-box {
+        background: var(--gold);
+        color: #000;
+      }
 
-    .f-title { font-size: 18px; margin-bottom: 12px; font-family: 'Playfair Display', serif; }
-    .f-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+      .f-title {
+        font-size: 18px;
+        margin-bottom: 12px;
+        font-family: "Playfair Display", serif;
+      }
+      .f-desc {
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
 
-    .f-tags span {
-      font-size: 10px; color: #888; background: #111;
-      padding: 4px 8px; border-radius: 4px; margin-right: 6px;
-    }
+      .f-tags span {
+        font-size: 10px;
+        color: #888;
+        background: #111;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-right: 6px;
+      }
 
-    /* --- Value & Timeline --- */
-    .split-section {
-      display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; margin-top: 100px;
-    }
+      /* --- Value & Timeline --- */
+      .split-section {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 40px;
+        margin-top: 100px;
+      }
 
-    .value-card {
-      background: var(--glass-bg); border: 1px solid var(--glass-border);
-      border-radius: var(--radius-card); padding: 32px; height: 100%;
-    }
+      .value-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-card);
+        padding: 32px;
+        height: 100%;
+      }
 
-    .value-list li {
-      list-style: none; padding-left: 24px; position: relative;
-      margin-bottom: 12px; color: var(--text-muted); font-size: 14px;
-    }
-    
-    .value-list li::before {
-      content: '✦'; position: absolute; left: 0; color: var(--gold); top: 2px; font-size: 10px;
-    }
+      .value-list li {
+        list-style: none;
+        padding-left: 24px;
+        position: relative;
+        margin-bottom: 12px;
+        color: var(--text-muted);
+        font-size: 14px;
+      }
 
-    .timeline { border-left: 1px solid var(--glass-border); padding-left: 32px; margin-top: 24px; }
-    .step { position: relative; margin-bottom: 32px; }
-    .step::before {
-      content: ''; position: absolute; left: -37px; top: 6px;
-      width: 9px; height: 9px; background: var(--bg-deep);
-      border: 2px solid var(--gold); border-radius: 50%;
-    }
-    .step h4 { font-size: 16px; margin-bottom: 4px; color: var(--text-main); }
-    .step p { font-size: 13px; color: var(--text-muted); }
+      .value-list li::before {
+        content: "✦";
+        position: absolute;
+        left: 0;
+        color: var(--gold);
+        top: 2px;
+        font-size: 10px;
+      }
 
-    /* --- Animations --- */
-    .fade-up {
-      opacity: 0; transform: translateY(20px);
-      transition: all 0.8s ease;
-    }
-    .visible { opacity: 1; transform: translateY(0); }
+      .timeline {
+        border-left: 1px solid var(--glass-border);
+        padding-left: 32px;
+        margin-top: 24px;
+      }
+      .step {
+        position: relative;
+        margin-bottom: 32px;
+      }
+      .step::before {
+        content: "";
+        position: absolute;
+        left: -37px;
+        top: 6px;
+        width: 9px;
+        height: 9px;
+        background: var(--bg-deep);
+        border: 2px solid var(--gold);
+        border-radius: 50%;
+      }
+      .step h4 {
+        font-size: 16px;
+        margin-bottom: 4px;
+        color: var(--text-main);
+      }
+      .step p {
+        font-size: 13px;
+        color: var(--text-muted);
+      }
 
-    /* Responsive */
-    @media (max-width: 900px) {
-      .hero, .split-section { grid-template-columns: 1fr; gap: 40px; }
-      header { flex-direction: column; gap: 16px; align-items: flex-start; }
-      nav { flex-wrap: wrap; }
-      .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .section-sub { text-align: left; }
-    }
-    /* HOME BUTTON */
-.home-btn {
-    position: fixed;
-    top: 25px;
-    left: 25px;
-    padding: 10px 18px;
-    border-radius: 10px;
-    border: 1px solid rgba(230, 211, 177, 0.45);
-    background: rgba(20,20,20,0.65);
-    color: #E6D3B1;
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    backdrop-filter: blur(10px);
-    transition: 0.35s ease;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-    z-index: 1000;
-}
+      /* --- Animations --- */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.8s ease;
+      }
+      .visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-.home-btn:hover {
-    color: #000;
-    background: #E6D3B1;
-    box-shadow: 
-        0 0 15px rgba(230, 211, 177, 0.8),
-        0 0 30px rgba(230, 211, 177, 0.6);
-    transform: translateY(-2px);
-}
-/* HOME BUTTON */
-.home-btn {
-    position: fixed;
-    top: 25px;
-    left: 25px;
-    padding: 10px 18px;
-    border-radius: 10px;
-    border: 1px solid rgba(230, 211, 177, 0.45);
-    background: rgba(20,20,20,0.65);
-    color: #E6D3B1;
-    font-weight: 600;
-    font-size: 14px;
-    text-decoration: none;
-    backdrop-filter: blur(10px);
-    transition: 0.35s ease;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-    z-index: 1000;
-}
+      /* Responsive */
+      @media (max-width: 900px) {
+        .hero,
+        .split-section {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        header {
+          flex-direction: column;
+          gap: 16px;
+          align-items: flex-start;
+        }
+        nav {
+          flex-wrap: wrap;
+        }
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
+        .section-sub {
+          text-align: left;
+        }
+      }
+      /* HOME BUTTON */
+      .home-btn {
+        position: fixed;
+        top: 25px;
+        left: 25px;
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: 1px solid rgba(230, 211, 177, 0.45);
+        background: rgba(20, 20, 20, 0.65);
+        color: #e6d3b1;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+        transition: 0.35s ease;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
 
-.home-btn:hover {
-    color: #000;
-    background: #E6D3B1;
-    box-shadow: 
-        0 0 15px rgba(230, 211, 177, 0.8),
-        0 0 30px rgba(230, 211, 177, 0.6);
-    transform: translateY(-2px);
-}
+      .home-btn:hover {
+        color: #000;
+        background: #e6d3b1;
+        box-shadow: 0 0 15px rgba(230, 211, 177, 0.8),
+          0 0 30px rgba(230, 211, 177, 0.6);
+        transform: translateY(-2px);
+      }
+      /* HOME BUTTON */
+      .home-btn {
+        position: fixed;
+        top: 25px;
+        left: 25px;
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: 1px solid rgba(230, 211, 177, 0.45);
+        background: rgba(20, 20, 20, 0.65);
+        color: #e6d3b1;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+        transition: 0.35s ease;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
 
+      .home-btn:hover {
+        color: #000;
+        background: #e6d3b1;
+        box-shadow: 0 0 15px rgba(230, 211, 177, 0.8),
+          0 0 30px rgba(230, 211, 177, 0.6);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HOME BUTTON -->
+    <a href="/" class="home-btn"> Home</a>
 
-  </style>
-</head>
-<body>
-<!-- HOME BUTTON -->
-<a href="/" class="home-btn"> Home</a>
+    <!-- HOME BUTTON -->
+    <a href="/" class="home-btn"> Home</a>
 
-<!-- HOME BUTTON -->
-<a href="/" class="home-btn"> Home</a>
-
-  <div class="ambient-light">
-    <div class="light-orb orb-1"></div>
-    <div class="light-orb orb-2"></div>
-    <div class="light-orb orb-3"></div>
-  </div>
-
-  <div class="page-container">
-    
-    <header>
-      <div class="brand">
-        <div class="brand-logo">WN</div>
-        <div class="brand-text">
-          <h1>What's New In Town</h1>
-        </div>
-      </div>
-      <nav>
-        <a href="#overview" class="active-link" onclick="setActive(this)">Overview</a>
-        <a href="#features" onclick="setActive(this)">Features</a>
-        <a href="#value" onclick="setActive(this)">Value</a>
-        <a href="#how-it-works" onclick="setActive(this)">Journey</a>
-      </nav>
-    </header>
-
-    <section class="hero" id="overview">
-      <div class="hero-left fade-up">
-        <div class="hero-label">
-          <span>●</span> LIVE CITY GUIDE
-        </div>
-        <h1 class="hero-title">
-          Discover the city's <br>
-          <span class="highlight">Best Kept Secrets.</span>
-        </h1>
-        <p class="hero-desc">
-          <strong>What's New In Town</strong> is a premium hyper-local discovery platform. 
-          We curate events, hidden cafés, and exclusive offers in real-time, so you never miss the pulse of the city.
-        </p>
-        <div class="hero-actions">
-          <button class="btn btn-primary" onclick="scrollToSection('features')">
-            Explore Features <span>→</span>
-          </button>
-          <button class="btn btn-ghost" onclick="scrollToSection('how-it-works')">
-            User Journey
-          </button>
-        </div>
-      </div>
-
-      <div class="hero-right fade-up" style="transition-delay: 0.2s;">
-        <div class="glass-panel">
-          <div class="card-top">
-            <span style="font-size:12px; color:#aaa; letter-spacing:1px;">PLATFORM SNAPSHOT</span>
-            <span class="card-badge">LIVE FEED</span>
-          </div>
-          
-          <div class="stats-grid">
-            <div class="stat-box">
-              <div class="stat-label">Mission</div>
-              <div class="stat-val">Curated Discovery</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-label">Audience</div>
-              <div class="stat-val">Locals & Travelers</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-label">Speed</div>
-              <div class="stat-val">Real-time Updates</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-label">Vibe</div>
-              <div class="stat-val">Zero FOMO</div>
-            </div>
-          </div>
-
-          <p style="font-size:13px; color:#bbb; line-height:1.6; border-top:1px solid rgba(255,255,255,0.1); padding-top:16px;">
-            A central hub where users scroll through newly opened places, ongoing offers, and trending events personalized around their location.
-          </p>
-
-          <div class="tag-cloud">
-            <div class="tag">📍 Geo-Aware</div>
-            <div class="tag">⚡ Instant Feed</div>
-            <div class="tag">⭐ Verified Reviews</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="features" class="fade-up">
-      <div class="section-header">
-        <div>
-          <span style="color:var(--gold); font-size:12px; letter-spacing:2px; font-weight:700;">CAPABILITIES</span>
-          <h2 class="section-title">Core Features</h2>
-        </div>
-        <p class="section-sub">
-          Designed to solve the problem of discovery and planning with engagement tools built for modern city life.
-        </p>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="icon-box">📍</div>
-          <h3 class="f-title">Hyper-local Feed</h3>
-          <p class="f-desc">A curated feed based on your GPS showing nearby cafés, gigs, and pop-ups. You only see content relevant to your area.</p>
-          <div class="f-tags">
-            <span>Geo-Fencing</span>
-            <span>No Spam</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div class="icon-box">🧠</div>
-          <h3 class="f-title">AI Personalization</h3>
-          <p class="f-desc">Recommendations improve over time. The system learns if you prefer Jazz clubs over Techno raves, or cozy cafés over pubs.</p>
-          <div class="f-tags">
-            <span>Machine Learning</span>
-            <span>Smart Tags</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div class="icon-box">🎫</div>
-          <h3 class="f-title">Events Hub</h3>
-          <p class="f-desc">Stand-up shows, workshops, and fests. See crowd expectations, timings, and booking links in one glance.</p>
-          <div class="f-tags">
-            <span>Calendar</span>
-            <span>Reminders</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div class="icon-box">💎</div>
-          <h3 class="f-title">Exclusive Deals</h3>
-          <p class="f-desc">Unlock "Happy Hours" or "Student Discounts" that aren't advertised anywhere else. Verified by our team.</p>
-          <div class="f-tags">
-            <span>Coupons</span>
-            <span>Expiry Tracking</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div class="icon-box">⭐</div>
-          <h3 class="f-title">Community Trust</h3>
-          <p class="f-desc">Real photos and reviews from verified users. We prioritize quality-first ranking over paid promotions.</p>
-          <div class="f-tags">
-            <span>Social Proof</span>
-            <span>Ranking</span>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div class="icon-box">🗺️</div>
-          <h3 class="f-title">Interactive Map</h3>
-          <p class="f-desc">Visualise the city. Toggle between list view and map view to see heatmaps of where the action is tonight.</p>
-          <div class="f-tags">
-            <span>Heatmap</span>
-            <span>Navigation</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="how-it-works" class="split-section fade-up">
-      
-      <div id="value" class="glass-panel">
-        <h3 class="f-title" style="margin-bottom:24px;">The Value Proposition</h3>
-        <div style="margin-bottom: 32px;">
-          <h4 style="font-size:16px; color:var(--text-main); margin-bottom:12px;">👤 For Explorers</h4>
-          <ul class="value-list">
-            <li>Ready-made ideas for weekend plans & café crawls.</li>
-            <li>Filter by budget, mood, and crowd type.</li>
-            <li>Reduce the risk of bad experiences with real photos.</li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="font-size:16px; color:var(--text-main); margin-bottom:12px;">🏪 For Businesses</h4>
-          <ul class="value-list">
-            <li>Reach hyper-local audiences without ad spend.</li>
-            <li>Announce flash sales to people walking nearby.</li>
-            <li>Get authentic feedback to improve services.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="value-card" style="background: transparent; border: none; padding: 0;">
-        <h3 class="f-title">User Journey</h3>
-        <p style="font-size:13px; color:#888; margin-bottom:20px;">From app open to final review.</p>
-        
-        <div class="timeline">
-          <div class="step">
-            <h4>1. Onboarding</h4>
-            <p>Select city & interest tags (e.g., Nightlife, Food).</p>
-          </div>
-          <div class="step">
-            <h4>2. Context Capture</h4>
-            <p>App detects location & time (Friday Night vs Monday Morning).</p>
-          </div>
-          <div class="step">
-            <h4>3. Discovery</h4>
-            <p>Scroll through a visual, clutter-free feed of recommendations.</p>
-          </div>
-          <div class="step">
-            <h4>4. Experience</h4>
-            <p>Visit the spot, use the offer, and enjoy.</p>
-          </div>
-          <div class="step">
-            <h4>5. Feedback</h4>
-            <p>Rate the vibe to help the community.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
+    <div class="ambient-light">
+      <div class="light-orb orb-1"></div>
+      <div class="light-orb orb-2"></div>
+      <div class="light-orb orb-3"></div>
     </div>
 
-  <script>
-    // Smooth Scroll Script
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-    }
-    
-    // Tab Click Interaction
-    function setActive(el) {
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-link'));
-        el.classList.add('active-link');
-    }
+    <div class="page-container">
+      <header>
+        <div class="brand">
+          <div class="brand-logo">WN</div>
+          <div class="brand-text">
+            <!-- Make the logo text clickable -->
+            <a href="/" class="logo-link">
+              <h1>What's New In Town</h1>
+            </a>
+          </div>
+        </div>
+        <nav>
+          <a href="#overview" class="active-link" onclick="setActive(this)"
+            >Overview</a
+          >
+          <a href="#features" onclick="setActive(this)">Features</a>
+          <a href="#value" onclick="setActive(this)">Value</a>
+          <a href="#how-it-works" onclick="setActive(this)">Journey</a>
+        </nav>
+      </header>
 
-    // Intersection Observer for Fade Up Animation
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+      <section class="hero" id="overview">
+        <div class="hero-left fade-up">
+          <div class="hero-label"><span>●</span> LIVE CITY GUIDE</div>
+          <h1 class="hero-title">
+            Discover the city's <br />
+            <span class="highlight">Best Kept Secrets.</span>
+          </h1>
+          <p class="hero-desc">
+            <strong>What's New In Town</strong> is a premium hyper-local
+            discovery platform. We curate events, hidden cafés, and exclusive
+            offers in real-time, so you never miss the pulse of the city.
+          </p>
+          <div class="hero-actions">
+            <button
+              class="btn btn-primary"
+              onclick="scrollToSection('features')"
+            >
+              Explore Features <span>→</span>
+            </button>
+            <button
+              class="btn btn-ghost"
+              onclick="scrollToSection('how-it-works')"
+            >
+              User Journey
+            </button>
+          </div>
+        </div>
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
+        <div class="hero-right fade-up" style="transition-delay: 0.2s">
+          <div class="glass-panel">
+            <div class="card-top">
+              <span style="font-size: 12px; color: #aaa; letter-spacing: 1px"
+                >PLATFORM SNAPSHOT</span
+              >
+              <span class="card-badge">LIVE FEED</span>
+            </div>
 
-</body>
+            <div class="stats-grid">
+              <div class="stat-box">
+                <div class="stat-label">Mission</div>
+                <div class="stat-val">Curated Discovery</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Audience</div>
+                <div class="stat-val">Locals & Travelers</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Speed</div>
+                <div class="stat-val">Real-time Updates</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-label">Vibe</div>
+                <div class="stat-val">Zero FOMO</div>
+              </div>
+            </div>
+
+            <p
+              style="
+                font-size: 13px;
+                color: #bbb;
+                line-height: 1.6;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 16px;
+              "
+            >
+              A central hub where users scroll through newly opened places,
+              ongoing offers, and trending events personalized around their
+              location.
+            </p>
+
+            <div class="tag-cloud">
+              <div class="tag">📍 Geo-Aware</div>
+              <div class="tag">⚡ Instant Feed</div>
+              <div class="tag">⭐ Verified Reviews</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="fade-up">
+        <div class="section-header">
+          <div>
+            <span
+              style="
+                color: var(--gold);
+                font-size: 12px;
+                letter-spacing: 2px;
+                font-weight: 700;
+              "
+              >CAPABILITIES</span
+            >
+            <h2 class="section-title">Core Features</h2>
+          </div>
+          <p class="section-sub">
+            Designed to solve the problem of discovery and planning with
+            engagement tools built for modern city life.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="icon-box">📍</div>
+            <h3 class="f-title">Hyper-local Feed</h3>
+            <p class="f-desc">
+              A curated feed based on your GPS showing nearby cafés, gigs, and
+              pop-ups. You only see content relevant to your area.
+            </p>
+            <div class="f-tags">
+              <span>Geo-Fencing</span>
+              <span>No Spam</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon-box">🧠</div>
+            <h3 class="f-title">AI Personalization</h3>
+            <p class="f-desc">
+              Recommendations improve over time. The system learns if you prefer
+              Jazz clubs over Techno raves, or cozy cafés over pubs.
+            </p>
+            <div class="f-tags">
+              <span>Machine Learning</span>
+              <span>Smart Tags</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon-box">🎫</div>
+            <h3 class="f-title">Events Hub</h3>
+            <p class="f-desc">
+              Stand-up shows, workshops, and fests. See crowd expectations,
+              timings, and booking links in one glance.
+            </p>
+            <div class="f-tags">
+              <span>Calendar</span>
+              <span>Reminders</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon-box">💎</div>
+            <h3 class="f-title">Exclusive Deals</h3>
+            <p class="f-desc">
+              Unlock "Happy Hours" or "Student Discounts" that aren't advertised
+              anywhere else. Verified by our team.
+            </p>
+            <div class="f-tags">
+              <span>Coupons</span>
+              <span>Expiry Tracking</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon-box">⭐</div>
+            <h3 class="f-title">Community Trust</h3>
+            <p class="f-desc">
+              Real photos and reviews from verified users. We prioritize
+              quality-first ranking over paid promotions.
+            </p>
+            <div class="f-tags">
+              <span>Social Proof</span>
+              <span>Ranking</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="icon-box">🗺️</div>
+            <h3 class="f-title">Interactive Map</h3>
+            <p class="f-desc">
+              Visualise the city. Toggle between list view and map view to see
+              heatmaps of where the action is tonight.
+            </p>
+            <div class="f-tags">
+              <span>Heatmap</span>
+              <span>Navigation</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="split-section fade-up">
+        <div id="value" class="glass-panel">
+          <h3 class="f-title" style="margin-bottom: 24px">
+            The Value Proposition
+          </h3>
+          <div style="margin-bottom: 32px">
+            <h4
+              style="
+                font-size: 16px;
+                color: var(--text-main);
+                margin-bottom: 12px;
+              "
+            >
+              👤 For Explorers
+            </h4>
+            <ul class="value-list">
+              <li>Ready-made ideas for weekend plans & café crawls.</li>
+              <li>Filter by budget, mood, and crowd type.</li>
+              <li>Reduce the risk of bad experiences with real photos.</li>
+            </ul>
+          </div>
+          <div>
+            <h4
+              style="
+                font-size: 16px;
+                color: var(--text-main);
+                margin-bottom: 12px;
+              "
+            >
+              🏪 For Businesses
+            </h4>
+            <ul class="value-list">
+              <li>Reach hyper-local audiences without ad spend.</li>
+              <li>Announce flash sales to people walking nearby.</li>
+              <li>Get authentic feedback to improve services.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="value-card"
+          style="background: transparent; border: none; padding: 0"
+        >
+          <h3 class="f-title">User Journey</h3>
+          <p style="font-size: 13px; color: #888; margin-bottom: 20px">
+            From app open to final review.
+          </p>
+
+          <div class="timeline">
+            <div class="step">
+              <h4>1. Onboarding</h4>
+              <p>Select city & interest tags (e.g., Nightlife, Food).</p>
+            </div>
+            <div class="step">
+              <h4>2. Context Capture</h4>
+              <p>
+                App detects location & time (Friday Night vs Monday Morning).
+              </p>
+            </div>
+            <div class="step">
+              <h4>3. Discovery</h4>
+              <p>
+                Scroll through a visual, clutter-free feed of recommendations.
+              </p>
+            </div>
+            <div class="step">
+              <h4>4. Experience</h4>
+              <p>Visit the spot, use the offer, and enjoy.</p>
+            </div>
+            <div class="step">
+              <h4>5. Feedback</h4>
+              <p>Rate the vibe to help the community.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      // Smooth Scroll Script
+      function scrollToSection(id) {
+        document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+      }
+
+      // Tab Click Interaction
+      function setActive(el) {
+        document
+          .querySelectorAll("nav a")
+          .forEach((a) => a.classList.remove("active-link"));
+        el.classList.add("active-link");
+      }
+
+      // Intersection Observer for Fade Up Animation
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      document
+        .querySelectorAll(".fade-up")
+        .forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
