@@ -202,9 +202,38 @@
         font-size: 14px;
         color: var(--text-muted);
       }
+      /* HOME BUTTON */
+      .home-btn {
+        position: fixed;
+        top: 25px;
+        left: 25px;
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: 1px solid rgba(230, 211, 177, 0.45);
+        background: rgba(20, 20, 20, 0.65);
+        color: #e6d3b1;
+        font-weight: 600;
+        font-size: 14px;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+        transition: 0.35s ease;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .home-btn:hover {
+        color: #000;
+        background: #e6d3b1;
+        box-shadow: 0 0 15px rgba(230, 211, 177, 0.8),
+          0 0 30px rgba(230, 211, 177, 0.6);
+        transform: translateY(-2px);
+      }
     </style>
   </head>
   <body>
+    <!-- HOME BUTTON -->
+    <a href="/" class="home-btn"> Home</a>
+
     <header>
       <a href="{{ url_for('home') }}" class="glow-link">
         <h1 class="glow-title">What's New in Town</h1>
@@ -222,30 +251,27 @@
       <div class="cards">
         {% for r in data %}
         <div class="card">
-          
           <div class="swiper card-swiper">
-            {# BUILD PHOTO LIST AND ITERATE - robust and concise #}
-            {% set photos = [r.photo1, r.photo2, r.photo3, r.photo4, r.photo5] %}
+            {# BUILD PHOTO LIST AND ITERATE - robust and concise #} {% set
+            photos = [r.photo1, r.photo2, r.photo3, r.photo4, r.photo5] %}
             <div class="swiper-wrapper">
-              {% set shown = 0 %}
-              {% for p in photos %}
-                {% if p and p|string|trim %}
-                  <div class="swiper-slide">
-                    <img
-                      src="{% if p[:4] == 'http' %}{{ p }}{% else %}{{ url_for('static', filename='uploads/' ~ p) }}{% endif %}"
-                      alt="{{ r.name }} image {{ loop.index }}"
-                      onerror="this.onerror=null;this.src='{{ url_for('static', filename='defaults/no-image.png') }}';"
-                    />
-                  </div>
-                  {% set shown = shown + 1 %}
-                {% endif %}
-              {% endfor %}
-
-              {# if no valid photos, show placeholder #}
-              {% if shown == 0 %}
-                <div class="swiper-slide">
-                  <img src="{{ url_for('static', filename='defaults/no-image.png') }}" alt="no image" />
-                </div>
+              {% set shown = 0 %} {% for p in photos %} {% if p and
+              p|string|trim %}
+              <div class="swiper-slide">
+                <img
+                  src="{% if p[:4] == 'http' %}{{ p }}{% else %}{{ url_for('static', filename='uploads/' ~ p) }}{% endif %}"
+                  alt="{{ r.name }} image {{ loop.index }}"
+                  onerror="this.onerror=null;this.src='{{ url_for('static', filename='defaults/no-image.png') }}';"
+                />
+              </div>
+              {% set shown = shown + 1 %} {% endif %} {% endfor %} {# if no
+              valid photos, show placeholder #} {% if shown == 0 %}
+              <div class="swiper-slide">
+                <img
+                  src="{{ url_for('static', filename='defaults/no-image.png') }}"
+                  alt="no image"
+                />
+              </div>
               {% endif %}
             </div>
 
@@ -254,15 +280,16 @@
 
           <div class="title">{{ r.name }}</div>
 
-          {# Optional temporary debug (uncomment while debugging) #}
-          {# <small style="color:var(--text-muted);display:block;margin-top:6px;">DB: {{ r.photo1 }} {{ r.photo2 }} {{ r.photo3 }}</small> #}
+          {# Optional temporary debug (uncomment while debugging) #} {#
+          <small
+            style="color: var(--text-muted); display: block; margin-top: 6px"
+            >DB: {{ r.photo1 }} {{ r.photo2 }} {{ r.photo3 }}</small
+          >
+          #}
 
           <p class="cost">
-            ₹
-            {% if category|lower == "arcade" or category|lower == "bowling" %}
-              {{ r.cost_for_two }} price
-            {% else %}
-              {{ r.cost_for_two }} for two
+            ₹ {% if category|lower == "arcade" or category|lower == "bowling" %}
+            {{ r.cost_for_two }} price {% else %} {{ r.cost_for_two }} for two
             {% endif %}
           </p>
 
@@ -273,18 +300,22 @@
         {% endfor %}
       </div>
 
-      
       <div class="pagination-wrapper">
-        
         <form method="post" action="{{ url_for('filter_data') }}">
-          <input type="hidden" name="category" value="{{ category }}">
-          <input type="hidden" name="state" value="{{ state }}">
-          <input type="hidden" name="city" value="{{ city }}">
-          <input type="hidden" name="page" value="{{ page - 1 }}">
+          <input type="hidden" name="category" value="{{ category }}" />
+          <input type="hidden" name="state" value="{{ state }}" />
+          <input type="hidden" name="city" value="{{ city }}" />
+          <input type="hidden" name="page" value="{{ page - 1 }}" />
           <button
             type="submit"
             class="pagination-btn"
-            {% if not has_prev %}disabled{% endif %}
+            {%
+            if
+            not
+            has_prev
+            %}disabled{%
+            endif
+            %}
           >
             ‹ Previous
           </button>
@@ -294,16 +325,21 @@
           Page {{ page }} of {{ total_pages }}
         </span>
 
-        
         <form method="post" action="{{ url_for('filter_data') }}">
-          <input type="hidden" name="category" value="{{ category }}">
-          <input type="hidden" name="state" value="{{ state }}">
-          <input type="hidden" name="city" value="{{ city }}">
-          <input type="hidden" name="page" value="{{ page + 1 }}">
+          <input type="hidden" name="category" value="{{ category }}" />
+          <input type="hidden" name="state" value="{{ state }}" />
+          <input type="hidden" name="city" value="{{ city }}" />
+          <input type="hidden" name="page" value="{{ page + 1 }}" />
           <button
             type="submit"
             class="pagination-btn"
-            {% if not has_next %}disabled{% endif %}
+            {%
+            if
+            not
+            has_next
+            %}disabled{%
+            endif
+            %}
           >
             Next ›
           </button>
@@ -324,14 +360,13 @@
       {% endif %}
     </div>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
       document.querySelectorAll(".card-swiper").forEach((swiperContainer) => {
         const swiper = new Swiper(swiperContainer, {
           loop: true,
-          autoplay: false, 
+          autoplay: false,
           speed: 650,
           pagination: {
             el: swiperContainer.querySelector(".swiper-pagination"),
