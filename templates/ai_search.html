@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whats New AI</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont;
+            background: #0f172a;
+            color: #e5e7eb;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .header {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .chat {
+            min-height: 75vh;
+            padding-bottom: 120px;
+        }
+
+        .msg {
+            margin: 14px 0;
+            padding: 14px 16px;
+            border-radius: 10px;
+            line-height: 1.5;
+            max-width: 80%;
+        }
+
+        .user {
+            background: #1e293b;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .ai {
+            background: #020617;
+            border: 1px solid #1e293b;
+        }
+
+        .city {
+            margin-top: 14px;
+            font-weight: 600;
+            color: #38bdf8;
+        }
+
+        .restaurant {
+            border-bottom: 1px solid #334155;
+            padding: 10px 0;
+            margin-top: 8px;
+        }
+
+        .restaurant:last-child {
+            border-bottom: none;
+        }
+
+        .input-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #020617;
+            border-top: 1px solid #1e293b;
+            padding: 15px;
+        }
+
+        .input-inner {
+            max-width: 900px;
+            margin: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 14px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            background: #020617;
+            color: #e5e7eb;
+            border: 1px solid #334155;
+        }
+
+        button {
+            padding: 14px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background: #2563eb;
+            color: white;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header">🤖 Whats New AI</div>
+    <div id="chat" class="chat"></div>
+</div>
+
+<div class="input-bar">
+    <div class="input-inner">
+        <input
+            id="query"
+            placeholder="Ask anything… e.g. romantic place in mumbai"
+            onkeypress="if(event.key==='Enter') sendQuery()"
+        >
+        <button onclick="sendQuery()">Send</button>
+    </div>
+</div>
+
+<script>
+async function sendQuery() {
+    const input = document.getElementById("query");
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = "";
+
+    const chat = document.getElementById("chat");
+
+    // USER MESSAGE
+    chat.innerHTML += `
+        <div class="msg user">${text}</div>
+    `;
+
+    // AI THINKING
+    const thinking = document.createElement("div");
+    thinking.className = "msg ai";
+    thinking.innerText = "Thinking...";
+    chat.appendChild(thinking);
+    chat.scrollTop = chat.scrollHeight;
+
+    const response = await fetch("/ai-search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: text })
+    });
+
+    const data = await response.json();
+    thinking.remove();
+
+    let html = `<div class="msg ai">`;
+
+    if (!data.results || Object.keys(data.results).length === 0) {
+        html += "No places found. Try a different query.";
+    } else {
+        for (const city in data.results) {
+            html += `<div class="city">${city}</div>`;
+            data.results[city].forEach(r => {
+                html += `
+                    <div class="restaurant">
+                        <strong>${r.name}</strong><br>
+                        ⭐ Rating: ${r.rating}<br>
+                        🔥 Score: ${r.score}
+                    </div>
+                `;
+            });
+        }
+    }
+
+    html += `</div>`;
+    chat.innerHTML += html;
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>
+
+
