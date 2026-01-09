@@ -25,10 +25,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="yatharth",
-        password="Rachit@224",
-        database="Whatsnewdb"
+        host=os.getenv("DB_HOST", "localhost"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME")
     )
 
 
