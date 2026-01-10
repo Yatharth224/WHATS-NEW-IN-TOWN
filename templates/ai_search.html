@@ -1,272 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>WNIT Intelligence ✨</title>
+  <meta charset="UTF-8" />
+  <title>WNIT Intelligence ✨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 
-    <style>
-        :root {
-            --bg-main: #0b0f14;
-            --bg-panel: #0f1623;
-            --bg-input: #111827;
-            --border: #1f2937;
-            --text-main: #e5e7eb;
-            --text-muted: #9ca3af;
-            --accent: #d4af37;
-        }
+  <style>
+    :root {
+      --gold: #bfa181;
+      --gold-light: #e5e5e5;
+      --dark-bg: #000;
+      --panel-bg: rgba(28, 28, 28, 0.85);
+      --border-gold: rgba(191, 161, 129, 0.35);
+      --text-main: #e5e5e5;
+      --text-muted: #a0a0a0;
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        body {
-            margin: 0;
-            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont;
-            background: radial-gradient(circle at top, #141a26, #05070c 70%);
-            color: var(--text-main);
-        }
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #000 0%, #1c1c1c 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        /* ---------------- HEADER ---------------- */
-        .top-bar {
-            height: 60px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
-            background: rgba(10, 14, 20, 0.8);
-            backdrop-filter: blur(8px);
-        }
+    /* -------- HEADER -------- */
+    .top-bar {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      border-bottom: 1px solid var(--border-gold);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-        .brand {
-            font-weight: 600;
-            letter-spacing: 0.3px;
-            color: var(--accent);
-        }
+    .brand {
+      font-size: 18px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        .back-link {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
+    .back {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
 
-        .back-link:hover {
-            color: white;
-        }
+    .back:hover {
+      color: var(--gold);
+    }
 
-        /* ---------------- LAYOUT ---------------- */
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 30px 20px 120px;
-        }
+    /* -------- LAYOUT -------- */
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px 130px;
+    }
 
-        .intro {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    .intro {
+      text-align: center;
+      margin-bottom: 35px;
+    }
 
-        .intro span {
-            display: inline-block;
-            padding: 10px 18px;
-            background: linear-gradient(135deg, #0f172a, #020617);
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            font-size: 14px;
-            color: var(--text-muted);
-        }
+    .intro-box {
+      display: inline-block;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: var(--panel-bg);
+      border: 1px solid var(--border-gold);
+      box-shadow: 0 0 30px rgba(191,161,129,0.15);
+      font-size: 14px;
+    }
 
-        /* ---------------- CHAT ---------------- */
-        .chat {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
+    /* -------- CHAT -------- */
+    .chat {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-        .msg {
-            max-width: 85%;
-            padding: 14px 16px;
-            border-radius: 14px;
-            line-height: 1.6;
-            font-size: 15px;
-            animation: fadeIn 0.3s ease;
-        }
+    .msg {
+      max-width: 85%;
+      padding: 16px 18px;
+      border-radius: 16px;
+      line-height: 1.7;
+      font-size: 15px;
+      animation: fadeIn 0.25s ease;
+    }
 
-        .user {
-            margin-left: auto;
-            background: linear-gradient(135deg, #1e293b, #020617);
-            border: 1px solid var(--border);
-            text-align: right;
-        }
+    .user {
+      margin-left: auto;
+      background: linear-gradient(135deg, #1c1c1c, #000);
+      border: 1px solid var(--border-gold);
+      text-align: right;
+    }
 
-        .ai {
-            background: var(--bg-panel);
-            border: 1px solid var(--border);
-        }
+    .ai {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-gold);
+    }
 
-        .city {
-            margin-top: 16px;
-            font-weight: 600;
-            color: var(--accent);
-            letter-spacing: 0.3px;
-        }
+    .city {
+      margin-top: 16px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
 
-        .restaurant {
-            padding: 10px 0;
-            border-bottom: 1px dashed #1f2937;
-        }
+    .restaurant {
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(191,161,129,0.25);
+    }
 
-        .restaurant:last-child {
-            border-bottom: none;
-        }
+    .restaurant:last-child {
+      border-bottom: none;
+    }
 
-        .restaurant strong {
-            font-size: 15px;
-        }
+    .restaurant strong {
+      font-size: 15px;
+      font-weight: 600;
+    }
 
-        .meta {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
+    .meta {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
 
-        /* ---------------- INPUT ---------------- */
-        .input-bar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(5, 7, 12, 0.9);
-            border-top: 1px solid var(--border);
-            backdrop-filter: blur(10px);
-            padding: 14px 18px;
-        }
+    /* -------- INPUT -------- */
+    .input-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.8);
+      border-top: 1px solid var(--border-gold);
+      backdrop-filter: blur(10px);
+      padding: 16px 20px;
+    }
 
-        .input-inner {
-            max-width: 900px;
-            margin: auto;
-            display: flex;
-            gap: 10px;
-        }
+    .input-inner {
+      max-width: 900px;
+      margin: auto;
+      display: flex;
+      gap: 12px;
+    }
 
-        input {
-            flex: 1;
-            padding: 14px 16px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: var(--bg-input);
-            color: var(--text-main);
-            font-size: 15px;
-            outline: none;
-        }
+    input {
+      flex: 1;
+      padding: 15px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border-gold);
+      background: #000;
+      color: var(--text-main);
+      font-size: 15px;
+      outline: none;
+    }
 
-        input::placeholder {
-            color: #6b7280;
-        }
+    input::placeholder {
+      color: #777;
+    }
 
-        button {
-            padding: 0 22px;
-            border-radius: 999px;
-            border: none;
-            cursor: pointer;
-            background: linear-gradient(135deg, #e6c98a, #c8a951);
-            color: #020617;
-            font-weight: 600;
-        }
+    button {
+      padding: 0 26px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #000;
+      transition: 0.3s;
+      box-shadow: 0 0 20px rgba(191,161,129,0.4);
+    }
 
-        button:hover {
-            opacity: 0.9;
-        }
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 30px rgba(191,161,129,0.6);
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<div class="top-bar">
-    <a href="/" class="back-link">← Back to Home</a>
+  <!-- HEADER -->
+  <div class="top-bar">
+    <a href="/" class="back">← Back to Home</a>
     <div class="brand">WNIT Intelligence ✨</div>
-</div>
+  </div>
 
-<!-- CONTENT -->
-<div class="container">
+  <!-- CONTENT -->
+  <div class="container">
     <div class="intro">
-        <span>
-            Hello! I’m your city guide. Ask me about <b>restaurants, cafes, nightlife</b> in your city 🍽️
-        </span>
+      <div class="intro-box">
+        Hello! I’m your AI concierge. Ask me about <b>restaurants, cafés, nightlife</b> in your city ✨
+      </div>
     </div>
 
     <div id="chat" class="chat"></div>
-</div>
+  </div>
 
-<!-- INPUT -->
-<div class="input-bar">
+  <!-- INPUT -->
+  <div class="input-bar">
     <div class="input-inner">
-        <input
-            id="query"
-            placeholder="Ask anything… e.g. Romantic place in Mumbai"
-            onkeypress="if(event.key==='Enter') sendQuery()"
-        >
-        <button onclick="sendQuery()">Send →</button>
+      <input
+        id="query"
+        placeholder="Ask anything… e.g. Romantic cafe in Mumbai"
+        onkeypress="if(event.key==='Enter') sendQuery()"
+      />
+      <button onclick="sendQuery()">Send</button>
     </div>
-</div>
+  </div>
 
 <script>
 async function sendQuery() {
-    const input = document.getElementById("query");
-    const text = input.value.trim();
-    if (!text) return;
+  const input = document.getElementById("query");
+  const text = input.value.trim();
+  if (!text) return;
 
-    input.value = "";
-    const chat = document.getElementById("chat");
+  input.value = "";
+  const chat = document.getElementById("chat");
 
-    // USER
-    chat.innerHTML += `<div class="msg user">${text}</div>`;
+  // USER
+  chat.innerHTML += `<div class="msg user">${text}</div>`;
 
-    // AI THINKING
-    const thinking = document.createElement("div");
-    thinking.className = "msg ai";
-    thinking.innerText = "Thinking...";
-    chat.appendChild(thinking);
-    chat.scrollTop = chat.scrollHeight;
+  // THINKING
+  const thinking = document.createElement("div");
+  thinking.className = "msg ai";
+  thinking.innerText = "Thinking...";
+  chat.appendChild(thinking);
+  chat.scrollTop = chat.scrollHeight;
 
-    const response = await fetch("/ai-search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: text })
-    });
+  const response = await fetch("/ai-search", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query: text })
+  });
 
-    const data = await response.json();
-    thinking.remove();
+  const data = await response.json();
+  thinking.remove();
 
-    let html = `<div class="msg ai">`;
+  let html = `<div class="msg ai">`;
 
-    if (!data.results || Object.keys(data.results).length === 0) {
-        html += "I couldn’t find relevant places. Try rephrasing your query.";
-    } else {
-        for (const city in data.results) {
-            html += `<div class="city">${city}</div>`;
-            data.results[city].forEach(r => {
-                html += `
-                    <div class="restaurant">
-                        <strong>${r.name}</strong>
-                        <div class="meta">
-                            ⭐ Rating: ${r.rating ?? "N/A"} &nbsp; • &nbsp; 🔥 Score: ${r.score.toFixed(3)}
-                        </div>
-                    </div>
-                `;
-            });
-        }
+  if (!data.results || Object.keys(data.results).length === 0) {
+    html += "No relevant places found. Try refining your query.";
+  } else {
+    for (const city in data.results) {
+      html += `<div class="city">${city}</div>`;
+      data.results[city].forEach(r => {
+        html += `
+          <div class="restaurant">
+            <strong>${r.name}</strong>
+            <div class="meta">
+              ⭐ Rating: ${r.rating ?? "N/A"} &nbsp; • &nbsp; 🔥 Score: ${r.score.toFixed(3)}
+            </div>
+          </div>
+        `;
+      });
     }
+  }
 
-    html += `</div>`;
-    chat.innerHTML += html;
-    chat.scrollTop = chat.scrollHeight;
+  html += `</div>`;
+  chat.innerHTML += html;
+  chat.scrollTop = chat.scrollHeight;
 }
 </script>
 
