@@ -3,6 +3,9 @@ import mysql.connector
 from werkzeug.utils import secure_filename
 from email.message import EmailMessage
 import smtplib
+
+from ml.recommendation import get_recommendations
+
 from dotenv import load_dotenv
 
 
@@ -554,5 +557,21 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
-if __name__ == '__main__':
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+if __name__ == "__main__":
     app.run(debug=True)
