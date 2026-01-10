@@ -558,7 +558,26 @@ def uploaded_file(filename):
 
 
 
+from flask import jsonify
 
+@app.route("/ai-search", methods=["GET", "POST"])
+def ai_search():
+    
+    if request.method == "GET":
+        return render_template("ai_search.html")
+
+    
+    data = request.get_json()
+    if not data or "query" not in data:
+        return jsonify({"error": "Query missing"}), 400
+
+    user_query = data["query"]
+    print("USER QUERY =>", user_query)
+
+    results = get_recommendations(user_query)
+    print("AI RESULTS =>", results)
+
+    return jsonify(results)
 
 
 
