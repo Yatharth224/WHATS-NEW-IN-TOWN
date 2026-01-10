@@ -157,12 +157,15 @@ def get_recommendations(user_text):
         )
 
         scored.append({
-            "name": r["name"],
-            "city": r["city"],
-            "rating": r["rating"],
-            # "cost_for_two": r["cost_for_two"],
-            "score": round(final_score, 3)
-        })
+        "id": r["restaurant_id"],     
+        "name": r["name"],
+        "image": r["image_url"],      
+        "cuisines": r["cuisines"],    
+        "locality": r["locality"],    
+        "city": r["city"],
+        "rating": r["rating"],
+        "score": round(final_score, 3)
+})
 
     conn.close()
 
