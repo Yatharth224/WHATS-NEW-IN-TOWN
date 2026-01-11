@@ -1,284 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>WNIT Intelligence ✨</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<title>WNIT Intelligence ✨</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --gold: #bfa181;
-      --gold-light: #e5e5e5;
-      --dark-bg: #000;
-      --panel-bg: rgba(28, 28, 28, 0.85);
-      --border-gold: rgba(191, 161, 129, 0.35);
-      --text-main: #e5e5e5;
-      --text-muted: #a0a0a0;
-    }
+<style>
+:root{
+  --gold:#bfa181;
+  --gold-light:#e5e5e5;
+  --panel:rgba(28,28,28,.88);
+  --border:rgba(191,161,129,.35);
+  --text:#e5e5e5;
+  --muted:#a0a0a0;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+*{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg, #000 0%, #1c1c1c 100%);
-      color: var(--text-main);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:radial-gradient(circle at top,#1a1a1a,#000);
+  color:var(--text);
+}
 
-    /* -------- HEADER -------- */
-    .top-bar {
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-      border-bottom: 1px solid var(--border-gold);
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+/* HEADER */
+.top-bar{
+  height:64px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 28px;
+  border-bottom:1px solid var(--border);
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
 
-    .brand {
-      font-size: 18px;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.brand{
+  font-weight:700;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-    .back {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 14px;
-    }
+.back{
+  color:var(--muted);
+  text-decoration:none;
+}
+.back:hover{color:var(--gold)}
 
-    .back:hover {
-      color: var(--gold);
-    }
+/* LAYOUT */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:30px 20px 140px;
+}
 
-    /* -------- LAYOUT -------- */
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 30px 20px 130px;
-    }
+.intro{
+  text-align:center;
+  margin-bottom:30px;
+}
 
-    .intro {
-      text-align: center;
-      margin-bottom: 35px;
-    }
+.intro-box{
+  display:inline-block;
+  padding:14px 26px;
+  border-radius:999px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  box-shadow:0 0 25px rgba(191,161,129,.2);
+  font-size:14px;
+}
 
-    .intro-box {
-      display: inline-block;
-      padding: 14px 28px;
-      border-radius: 999px;
-      background: var(--panel-bg);
-      border: 1px solid var(--border-gold);
-      box-shadow: 0 0 30px rgba(191,161,129,0.15);
-      font-size: 14px;
-    }
+/* CHAT */
+.chat{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
 
-    /* -------- CHAT -------- */
-    .chat {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
+.msg{
+  max-width:92%;
+  padding:16px 18px;
+  border-radius:16px;
+  line-height:1.7;
+  animation:fade .3s ease;
+}
 
-    .msg {
-      max-width: 85%;
-      padding: 16px 18px;
-      border-radius: 16px;
-      line-height: 1.7;
-      font-size: 15px;
-      animation: fadeIn 0.25s ease;
-    }
+.user{
+  margin-left:auto;
+  border:1px solid var(--border);
+  background:linear-gradient(135deg,#1c1c1c,#000);
+}
 
-    .user {
-      margin-left: auto;
-      background: linear-gradient(135deg, #1c1c1c, #000);
-      border: 1px solid var(--border-gold);
-      text-align: right;
-    }
+.ai{
+  background:var(--panel);
+  border:1px solid var(--border);
+}
 
-    .ai {
-      background: var(--panel-bg);
-      border: 1px solid var(--border-gold);
-    }
+.city{
+  margin:18px 0 6px;
+  font-weight:700;
+  color:var(--gold);
+}
 
-    .city {
-      margin-top: 16px;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.5px;
-    }
+/* CARD */
+.card{
+  display:flex;
+  gap:14px;
+  padding:14px;
+  border-radius:18px;
+  background:rgba(18,18,18,.9);
+  border:1px solid var(--border);
+  margin-top:12px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
 
-    .restaurant {
-      padding: 10px 0;
-      border-bottom: 1px dashed rgba(191,161,129,0.25);
-    }
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 35px rgba(191,161,129,.35);
+}
 
-    .restaurant:last-child {
-      border-bottom: none;
-    }
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent 40%,rgba(191,161,129,.08),transparent 60%);
+  opacity:0;
+  transition:.3s;
+}
+.card:hover::after{opacity:1}
 
-    .restaurant strong {
-      font-size: 15px;
-      font-weight: 600;
-    }
+.card img{
+  width:96px;
+  height:96px;
+  border-radius:14px;
+  object-fit:cover;
+}
 
-    .meta {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
+.card-body{flex:1}
 
-    /* -------- INPUT -------- */
-    .input-bar {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.8);
-      border-top: 1px solid var(--border-gold);
-      backdrop-filter: blur(10px);
-      padding: 16px 20px;
-    }
+.card-body h4{
+  margin:0;
+  font-size:16px;
+}
 
-    .input-inner {
-      max-width: 900px;
-      margin: auto;
-      display: flex;
-      gap: 12px;
-    }
+.card-meta{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:4px;
+}
 
-    input {
-      flex: 1;
-      padding: 15px 20px;
-      border-radius: 999px;
-      border: 1px solid var(--border-gold);
-      background: #000;
-      color: var(--text-main);
-      font-size: 15px;
-      outline: none;
-    }
+.card-tags{
+  margin-top:6px;
+  font-size:13px;
+}
 
-    input::placeholder {
-      color: #777;
-    }
+.ai-tag{
+  display:inline-block;
+  margin-top:6px;
+  padding:3px 8px;
+  font-size:11px;
+  border-radius:999px;
+  color:var(--gold);
+  background:rgba(191,161,129,.15);
+  border:1px solid var(--border);
+}
 
-    button {
-      padding: 0 26px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #000;
-      transition: 0.3s;
-      box-shadow: 0 0 20px rgba(191,161,129,0.4);
-    }
+.view{
+  margin-top:6px;
+  font-size:13px;
+  color:var(--gold);
+}
 
-    button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 0 30px rgba(191,161,129,0.6);
-    }
+.bookmark{
+  position:absolute;
+  top:12px;
+  right:14px;
+  font-size:18px;
+  color:var(--muted);
+  cursor:pointer;
+}
+.bookmark.active{color:var(--gold)}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+.fade{
+  opacity:0;
+  animation:fadeUp .45s ease forwards;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+
+@keyframes fadeUp{
+  to{opacity:1;transform:none}
+}
+
+/* INPUT */
+.input-bar{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  padding:16px 20px;
+  background:rgba(0,0,0,.85);
+  backdrop-filter:blur(10px);
+  border-top:1px solid var(--border);
+}
+
+.input-inner{
+  max-width:900px;
+  margin:auto;
+  display:flex;
+  gap:12px;
+}
+
+input{
+  flex:1;
+  padding:14px 20px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:#000;
+  color:var(--text);
+}
+
+button{
+  padding:0 26px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <div class="top-bar">
-    <a href="/" class="back">← Back to Home</a>
-    <div class="brand">WNIT Intelligence ✨</div>
-  </div>
+<div class="top-bar">
+  <a href="/" class="back">← Back</a>
+  <div class="brand">WNIT Intelligence ✨</div>
+</div>
 
-  <!-- CONTENT -->
-  <div class="container">
-    <div class="intro">
-      <div class="intro-box">
-        Hello! I’m your AI concierge. Ask me about <b>restaurants, cafés, nightlife</b> in your city ✨
-      </div>
-    </div>
-
-    <div id="chat" class="chat"></div>
-  </div>
-
-  <!-- INPUT -->
-  <div class="input-bar">
-    <div class="input-inner">
-      <input
-        id="query"
-        placeholder="Ask anything… e.g. Romantic cafe in Mumbai"
-        onkeypress="if(event.key==='Enter') sendQuery()"
-      />
-      <button onclick="sendQuery()">Send</button>
+<div class="container">
+  <div class="intro">
+    <div class="intro-box">
+      Hello! I’m your AI concierge. Ask about <b>restaurants, cafés, nightlife</b> ✨
     </div>
   </div>
+
+  <div id="chat" class="chat"></div>
+</div>
+
+<div class="input-bar">
+  <div class="input-inner">
+    <input id="query" placeholder="Ask anything…" onkeypress="if(event.key==='Enter') sendQuery()" />
+    <button onclick="sendQuery()">Send</button>
+  </div>
+</div>
 
 <script>
-async function sendQuery() {
-  const input = document.getElementById("query");
-  const text = input.value.trim();
-  if (!text) return;
+async function sendQuery(){
+  const input=document.getElementById("query");
+  const text=input.value.trim();
+  if(!text)return;
+  input.value="";
 
-  input.value = "";
-  const chat = document.getElementById("chat");
+  const chat=document.getElementById("chat");
+  chat.innerHTML+=`<div class="msg user">${text}</div>`;
 
-  // USER
-  chat.innerHTML += `<div class="msg user">${text}</div>`;
-
-  // THINKING
-  const thinking = document.createElement("div");
-  thinking.className = "msg ai";
-  thinking.innerText = "Thinking...";
+  const thinking=document.createElement("div");
+  thinking.className="msg ai";
+  thinking.innerText="Thinking...";
   chat.appendChild(thinking);
-  chat.scrollTop = chat.scrollHeight;
 
-  const response = await fetch("/ai-search", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: text })
+  const res=await fetch("/ai-search",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({query:text})
   });
 
-  const data = await response.json();
+  const data=await res.json();
   thinking.remove();
 
-  let html = `<div class="msg ai">`;
+  let html=`<div class="msg ai">`;
 
-  if (!data.results || Object.keys(data.results).length === 0) {
-    html += "No relevant places found. Try refining your query.";
-  } else {
-    for (const city in data.results) {
-      html += `<div class="city">${city}</div>`;
-      data.results[city].forEach(r => {
-        html += `
-          <div class="restaurant">
-            <strong>${r.name}</strong>
-            <div class="meta">
-              ⭐ Rating: ${r.rating ?? "N/A"} &nbsp; • &nbsp; 🔥 Score: ${r.score.toFixed(3)}
-            </div>
+  if(!data.results||Object.keys(data.results).length===0){
+    html+="No relevant places found.";
+  }else{
+    for(const city in data.results){
+      html+=`<div class="city">${city}</div>`;
+      data.results[city].forEach((r,i)=>{
+        html+=`
+        <div class="card fade" style="animation-delay:${i*80}ms"
+             onclick="location.href='/restaurant/${r.id}'">
+
+          <div class="bookmark" onclick="event.stopPropagation();toggle(this)">☆</div>
+
+          <img src="${r.image||'/static/no-image.jpg'}"
+               onerror="this.src='/static/no-image.jpg'">
+
+          <div class="card-body">
+            <h4>${r.name}</h4>
+            <div class="card-meta">📍 ${r.locality}, ${r.city}</div>
+            <div class="card-tags">🍽 ${r.cuisines}</div>
+            <div class="ai-tag">🤖 Recommended for you</div>
+            <div class="card-meta">⭐ ${r.rating??"N/A"} • 🔥 ${r.score.toFixed(3)}</div>
+            <div class="view">View details →</div>
           </div>
-        `;
+        </div>`;
       });
     }
   }
 
-  html += `</div>`;
-  chat.innerHTML += html;
-  chat.scrollTop = chat.scrollHeight;
+  html+=`</div>`;
+  chat.innerHTML+=html;
+  chat.scrollTop=chat.scrollHeight;
+}
+
+function toggle(el){
+  el.classList.toggle("active");
+  el.innerText=el.classList.contains("active")?"★":"☆";
 }
 </script>
 
