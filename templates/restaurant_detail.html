@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ r.name }} • WNIT Intelligence ✨</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --gold:#bfa181;
+  --panel:rgba(28,28,28,.88);
+  --border:rgba(191,161,129,.35);
+  --text:#e5e5e5;
+  --muted:#a0a0a0;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:radial-gradient(circle at top,#1b1b1b,#000);
+  color:var(--text);
+}
+
+/* HEADER */
+.top-bar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 26px;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+
+.back{
+  color:var(--muted);
+  text-decoration:none;
+}
+.back:hover{color:var(--gold)}
+
+.brand{
+  font-weight:700;
+  background:linear-gradient(135deg,var(--gold),#eee);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* HERO */
+.hero{
+  max-width:1100px;
+  margin:30px auto 0;
+  padding:0 20px;
+}
+
+.hero-wrap{
+  position:relative;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 35px 90px rgba(0,0,0,.7);
+}
+
+.hero-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.25),
+    rgba(0,0,0,.85)
+  );
+}
+
+.hero-img{
+  width:100%;
+  height:400px;
+  object-fit:cover;
+  display:block;
+}
+
+.hero-content{
+  position:absolute;
+  bottom:30px;
+  left:30px;
+  z-index:2;
+}
+
+.hero-content h1{
+  margin:0;
+  font-size:36px;
+  font-weight:800;
+}
+
+.hero-content p{
+  margin-top:8px;
+  font-size:14px;
+  color:#ddd;
+}
+
+/* CONTENT */
+.content{
+  max-width:900px;
+  margin:auto;
+  padding:30px 20px 90px;
+}
+
+/* TRUST BAR */
+.trust-bar{
+  display:flex;
+  gap:14px;
+  margin-top:22px;
+  flex-wrap:wrap;
+}
+
+.trust-bar div{
+  padding:8px 16px;
+  border-radius:999px;
+  font-size:13px;
+  background:rgba(191,161,129,.15);
+  border:1px solid var(--border);
+  color:var(--gold);
+}
+
+/* CUISINES */
+.cuisines{
+  margin-top:20px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.chip{
+  padding:7px 14px;
+  border-radius:999px;
+  font-size:12px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.15);
+  color:#e5e5e5;
+}
+
+/* SECTIONS */
+.section{
+  margin-top:42px;
+}
+
+.section h3{
+  margin-bottom:16px;
+  font-size:18px;
+  color:var(--gold);
+}
+
+/* AI BOX */
+.ai-box{
+  padding:20px;
+  border-radius:20px;
+  background:linear-gradient(135deg,rgba(191,161,129,.15),rgba(0,0,0,.6));
+  border:1px solid var(--border);
+  box-shadow:0 0 35px rgba(191,161,129,.2);
+  font-size:15px;
+  line-height:1.7;
+}
+
+/* REVIEWS */
+.review-card{
+  padding:20px;
+  border-radius:20px;
+  background:rgba(18,18,18,.9);
+  border:1px solid var(--border);
+  margin-bottom:16px;
+}
+
+.review-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.review-head strong{
+  font-size:14px;
+  color:var(--gold);
+}
+
+.review-rating{
+  font-size:13px;
+  color:#ffd166;
+}
+
+.review-time{
+  margin-top:4px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.review-text{
+  margin-top:12px;
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* CTA */
+.cta{
+  margin-top:40px;
+  padding:18px;
+  text-align:center;
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--gold);
+  font-size:15px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.cta:hover{
+  background:rgba(191,161,129,.2);
+  transform:translateY(-2px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <a href="/ai-search" class="back">← Back</a>
+  <div class="brand">WNIT Intelligence ✨</div>
+</div>
+
+<div class="hero">
+  <div class="hero-wrap">
+    <img src="{{ r.image_url or '/static/no-image.jpg' }}"
+         onerror="this.src='/static/no-image.jpg'"
+         class="hero-img">
+
+    <div class="hero-content">
+      <h1>{{ r.name }}</h1>
+      <p>📍 {{ r.locality }}, {{ r.city }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="trust-bar">
+    <div>⭐ Rating {{ r.rating or "N/A" }}</div>
+    <div>🤖 AI Recommended</div>
+    <div>🔥 High Match</div>
+  </div>
+
+  <div class="cuisines">
+    {% for c in r.cuisines.split(",") %}
+      <div class="chip">{{ c.strip() }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="section">
+    <h3>Why AI recommends this</h3>
+    <div class="ai-box">
+      🤖 <b>AI Insight</b><br><br>
+      This place matches your preferences based on review sentiment,
+      cuisine popularity, and quality signals extracted from real customer
+      experiences.
+    </div>
+  </div>
+
+  <!-- ================= REVIEWS SECTION ================= -->
+  <div class="section">
+    <h3>Customer Reviews</h3>
+
+    {% if reviews %}
+      {% for rv in reviews %}
+        <div class="review-card">
+
+          <div class="review-head">
+            <strong>{{ rv.user_name }}</strong>
+            <div class="review-rating">⭐ {{ rv.rating }}</div>
+          </div>
+
+          <div class="review-time">
+            {{ rv.review_time }}
+          </div>
+
+          <div class="review-text">
+            {{ rv.review_text }}
+          </div>
+
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="review-card">
+        No reviews available for this place yet.
+      </div>
+    {% endif %}
+  </div>
+  <!-- =================================================== -->
+
+  <div class="cta" onclick="location.href='/ai-search'">
+    🔍 Find similar places using AI
+  </div>
+
+</div>
+
+</body>
+</html>
