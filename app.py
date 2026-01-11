@@ -581,7 +581,32 @@ def ai_search():
 
 
 
+@app.route("/restaurant/<int:restaurant_id>")
+def restaurant_detail(restaurant_id):
 
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT 
+            restaurant_id,
+            name,
+            image_url,
+            cuisines,
+            locality,
+            city,
+            rating
+        FROM restaurants_info
+        WHERE restaurant_id = %s
+    """, (restaurant_id,))
+
+    r = cursor.fetchone()
+    conn.close()
+
+    if not r:
+        return "Restaurant not found", 404
+
+    return render_template("restaurant_detail.html", r=r)
     
 
 
