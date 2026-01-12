@@ -1,310 +1,495 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
-<meta charset="UTF-8">
-<title>{{ r.name }} • WNIT Intelligence ✨</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>{{ r.name }} | WNIT Intelligence</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-<style>
-:root{
-  --gold:#bfa181;
-  --panel:rgba(28,28,28,.88);
-  --border:rgba(191,161,129,.35);
-  --text:#e5e5e5;
-  --muted:#a0a0a0;
-}
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 
-*{box-sizing:border-box}
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#c0a282",
+            "background-dark": "#1c1916",
+          },
+          fontFamily: {
+            display: ["Plus Jakarta Sans", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
 
-body{
-  margin:0;
-  font-family:Poppins,sans-serif;
-  background:radial-gradient(circle at top,#1b1b1b,#000);
-  color:var(--text);
-}
-
-/* HEADER */
-.top-bar{
-  position:sticky;
-  top:0;
-  z-index:10;
-  height:64px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 26px;
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--border);
-}
-
-.back{
-  color:var(--muted);
-  text-decoration:none;
-}
-.back:hover{color:var(--gold)}
-
-.brand{
-  font-weight:700;
-  background:linear-gradient(135deg,var(--gold),#eee);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-/* HERO */
-.hero{
-  max-width:1100px;
-  margin:30px auto 0;
-  padding:0 20px;
-}
-
-.hero-wrap{
-  position:relative;
-  border-radius:28px;
-  overflow:hidden;
-  box-shadow:0 35px 90px rgba(0,0,0,.7);
-}
-
-.hero-wrap::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(0,0,0,.25),
-    rgba(0,0,0,.85)
-  );
-}
-
-.hero-img{
-  width:100%;
-  height:400px;
-  object-fit:cover;
-  display:block;
-}
-
-.hero-content{
-  position:absolute;
-  bottom:30px;
-  left:30px;
-  z-index:2;
-}
-
-.hero-content h1{
-  margin:0;
-  font-size:36px;
-  font-weight:800;
-}
-
-.hero-content p{
-  margin-top:8px;
-  font-size:14px;
-  color:#ddd;
-}
-
-/* CONTENT */
-.content{
-  max-width:900px;
-  margin:auto;
-  padding:30px 20px 90px;
-}
-
-/* TRUST BAR */
-.trust-bar{
-  display:flex;
-  gap:14px;
-  margin-top:22px;
-  flex-wrap:wrap;
-}
-
-.trust-bar div{
-  padding:8px 16px;
-  border-radius:999px;
-  font-size:13px;
-  background:rgba(191,161,129,.15);
-  border:1px solid var(--border);
-  color:var(--gold);
-}
-
-/* CUISINES */
-.cuisines{
-  margin-top:20px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.chip{
-  padding:7px 14px;
-  border-radius:999px;
-  font-size:12px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.15);
-  color:#e5e5e5;
-}
-
-/* SECTIONS */
-.section{
-  margin-top:42px;
-}
-
-.section h3{
-  margin-bottom:16px;
-  font-size:18px;
-  color:var(--gold);
-}
-
-/* AI BOX */
-.ai-box{
-  padding:20px;
-  border-radius:20px;
-  background:linear-gradient(135deg,rgba(191,161,129,.15),rgba(0,0,0,.6));
-  border:1px solid var(--border);
-  box-shadow:0 0 35px rgba(191,161,129,.2);
-  font-size:15px;
-  line-height:1.7;
-}
-
-/* REVIEWS */
-.review-card{
-  padding:20px;
-  border-radius:20px;
-  background:rgba(18,18,18,.9);
-  border:1px solid var(--border);
-  margin-bottom:16px;
-}
-
-.review-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.review-head strong{
-  font-size:14px;
-  color:var(--gold);
-}
-
-.review-rating{
-  font-size:13px;
-  color:#ffd166;
-}
-
-.review-time{
-  margin-top:4px;
-  font-size:12px;
-  color:var(--muted);
-}
-
-.review-text{
-  margin-top:12px;
-  font-size:14px;
-  line-height:1.7;
-}
-
-/* CTA */
-.cta{
-  margin-top:40px;
-  padding:18px;
-  text-align:center;
-  border-radius:20px;
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:var(--gold);
-  font-size:15px;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.cta:hover{
-  background:rgba(191,161,129,.2);
-  transform:translateY(-2px);
-}
-</style>
+  <style>
+    body { font-family: "Plus Jakarta Sans", sans-serif; }
+    .glass {
+      background: rgba(28, 25, 22, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(192, 162, 130, 0.1);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #c0a282 0%, #f0d5ba 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .transform-gpu { transform: translate3d(0, 0, 0); }
+    .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .scroller-wrapper {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      will-change: transform;
+      padding-left: 1rem;
+    }
+  </style>
 </head>
 
-<body>
+<body class="bg-background-dark text-white min-h-screen">
 
-<div class="top-bar">
-  <a href="/ai-search" class="back">← Back</a>
-  <div class="brand">WNIT Intelligence ✨</div>
-</div>
-
-<div class="hero">
-  <div class="hero-wrap">
-    <img src="{{ r.image_url or '/static/no-image.jpg' }}"
-         onerror="this.src='/static/no-image.jpg'"
-         class="hero-img">
-
-    <div class="hero-content">
-      <h1>{{ r.name }}</h1>
-      <p>📍 {{ r.locality }}, {{ r.city }}</p>
-    </div>
+<header class="fixed top-0 w-full z-50 glass border-b border-primary/10">
+  <div class="max-w-[1200px] mx-auto px-6 h-20 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-3xl text-primary">diamond</span>
+      <h2 class="text-xl font-bold">WNIT <span class="text-primary">Intelligence</span></h2>
+    </a>
+    <a href="/" class="text-sm font-bold text-primary hover:text-white flex items-center gap-1">
+      <span class="material-symbols-outlined text-sm">arrow_back</span> BACK TO HOME
+    </a>
   </div>
-</div>
+</header>
 
-<div class="content">
+<main class="pt-20">
 
-  <div class="trust-bar">
-    <div>⭐ Rating {{ r.rating or "N/A" }}</div>
-    <div>🤖 AI Recommended</div>
-    <div>🔥 High Match</div>
-  </div>
+<section class="relative h-[480px] w-full overflow-hidden">
+  <div class="absolute inset-0 bg-cover bg-center"
+       style="background-image: url('{{ r.image_url or '/static/default_rest.jpg' }}')"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/40 to-transparent"></div>
 
-  <div class="cuisines">
-    {% for c in r.cuisines.split(",") %}
-      <div class="chip">{{ c.strip() }}</div>
-    {% endfor %}
-  </div>
+  <div class="relative max-w-[1200px] mx-auto h-full flex flex-col justify-end px-6 pb-12">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div>
 
-  <div class="section">
-    <h3>Why AI recommends this</h3>
-    <div class="ai-box">
-      🤖 <b>AI Insight</b><br><br>
-      This place matches your preferences based on review sentiment,
-      cuisine popularity, and quality signals extracted from real customer
-      experiences.
-    </div>
-  </div>
-
-  <!-- ================= REVIEWS SECTION ================= -->
-  <div class="section">
-    <h3>Customer Reviews</h3>
-
-    {% if reviews %}
-      {% for rv in reviews %}
-        <div class="review-card">
-
-          <div class="review-head">
-            <strong>{{ rv.user_name }}</strong>
-            <div class="review-rating">⭐ {{ rv.rating }}</div>
-          </div>
-
-          <div class="review-time">
-            {{ rv.review_time }}
-          </div>
-
-          <div class="review-text">
-            {{ rv.review_text }}
-          </div>
-
+        {% if r.rating and r.rating >= 4.5 %}
+        <div class="mb-3">
+          <span class="px-3 py-1 rounded-full bg-primary text-background-dark text-xs font-bold uppercase tracking-wider">
+            Top Rated
+          </span>
         </div>
-      {% endfor %}
-    {% else %}
-      <div class="review-card">
-        No reviews available for this place yet.
+        {% endif %}
+
+        <h1 class="text-5xl font-bold mb-3">{{ r.name }}</h1>
+
+        {% if r.cuisines %}
+        <div class="flex gap-2 mb-3 flex-wrap">
+          {% for cuisine in r.cuisines.split(',') %}
+          <span class="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-wider">
+            {{ cuisine.strip() }}
+          </span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <p class="text-lg text-primary/80 flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">location_on</span>
+          {{ r.locality }}, {{ r.city }}
+        </p>
       </div>
-    {% endif %}
+
+      <div class="flex flex-col items-center justify-center px-6 py-3 rounded-xl glass border border-primary/30 min-w-[140px]">
+        <span class="text-[10px] uppercase font-bold tracking-widest text-primary mb-1">AI Match Score</span>
+        <div class="text-4xl font-bold text-gradient">
+          {{ match_score }}%
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- =================================================== -->
+</section>
 
-  <div class="cta" onclick="location.href='/ai-search'">
-    🔍 Find similar places using AI
-  </div>
+      <div class="border-b border-primary/10 bg-background-dark/50">
+        <div
+          class="max-w-[1200px] mx-auto px-6 py-6 flex flex-wrap items-center justify-between gap-8"
+        >
+          <div class="flex items-center gap-6">
+            <div class="relative flex items-center justify-center w-24 h-24">
+              <svg class="w-24 h-24 transform -rotate-90">
+                <circle
+                  class="text-white/5"
+                  cx="48"
+                  cy="48"
+                  fill="transparent"
+                  r="40"
+                  stroke="currentColor"
+                  stroke-width="6"
+                ></circle>
+                <circle
+                  class="text-primary"
+                  cx="48"
+                  cy="48"
+                  fill="transparent"
+                  r="40"
+                  stroke="currentColor"
+                  stroke-dasharray="251.2"
+                  stroke-dashoffset="{{ 251.2 - (r.rating|float / 5.0 * 251.2) }}"
+                  stroke-width="6"
+                ></circle>
+              </svg>
+              <div
+                class="absolute inset-0 flex flex-col items-center justify-center"
+              >
+                <span class="text-xl font-bold leading-none"
+                  >{{ r.rating }}</span
+                >
+                <span
+                  class="text-[8px] uppercase font-bold tracking-widest text-primary"
+                  >Rating</span
+                >
+              </div>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold flex items-center gap-2">
+                WNIT Score
+                <span class="material-symbols-outlined text-primary text-lg"
+                  >verified</span
+                >
+              </h3>
+              <p class="text-sm text-slate-400">
+                Analysis based on {{ total_reviews }} verified reviews.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-</div>
+      <div class="max-w-[1200px] mx-auto px-6 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div class="lg:col-span-2 space-y-12">
+            <section>
+              <div class="flex items-center gap-3 mb-6">
+                <span class="material-symbols-outlined text-primary text-3xl"
+                  >psychology</span
+                >
+                <h2 class="text-2xl font-bold">The WNIT Perspective</h2>
+              </div>
+              <div class="glass p-8 rounded-2xl relative overflow-hidden">
+                <p
+                  class="text-lg leading-relaxed text-slate-300 mb-6 border-l-4 border-primary pl-4"
+                >
+                  "<strong>{{ r.name }}</strong> stands out in {{ r.locality }}
+                  for its distinct flavor profile. Our analysis of
+                  <strong>{{ total_reviews }} reviews</strong> suggests a {{
+                  'highly positive' if r.rating >= 4 else 'mixed' }} sentiment
+                  regarding service quality and ambiance."
+                </p>
+              </div>
+            </section>
 
-</body>
+            <section>
+              <div class="flex items-center justify-between mb-8">
+                <h2 class="text-2xl font-bold">Verified Experiences</h2>
+                <span class="text-xs text-slate-400"
+                  >Showing page {{ page }} of {{ total_pages }}</span
+                >
+              </div>
+
+              <div class="space-y-6">
+                {% if reviews %} {% for rv in reviews %}
+                <div
+                  class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-primary/30 transition-all group"
+                >
+                  <div class="flex justify-between items-start mb-4">
+                    <div class="flex gap-4">
+                      <div
+                        class="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center text-primary font-bold text-lg"
+                      >
+                        {{ rv.user_name[0] }}
+                      </div>
+                      <div>
+                        <h4 class="font-bold text-white">{{ rv.user_name }}</h4>
+                        <p class="text-xs text-slate-500">{{ rv.timestamp }}</p>
+                      </div>
+                    </div>
+                    <div class="flex items-center gap-1">
+                      <span class="text-primary font-bold"
+                        >{{ rv.rating }}</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-primary text-sm fill-1"
+                        >star</span
+                      >
+                    </div>
+                  </div>
+                  <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                    {{ rv.review_text }}
+                  </p>
+                </div>
+                {% endfor %} {% else %}
+                <div
+                  class="text-slate-500 italic p-4 border border-dashed border-slate-700 rounded-xl"
+                >
+                  No text reviews available yet.
+                </div>
+                {% endif %}
+              </div>
+
+              {% if total_pages > 1 %}
+              <div
+                class="mt-12 flex items-center justify-center gap-2 select-none"
+              >
+                {% if page > 1 %}
+                <a
+                  href="{{ url_for('restaurant_detail', restaurant_id=r.restaurant_id, page=page-1) }}"
+                  class="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-slate-400 hover:border-primary hover:text-primary transition-all"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >chevron_left</span
+                  >
+                </a>
+                {% else %}
+                <button
+                  disabled
+                  class="w-10 h-10 flex items-center justify-center rounded-full border border-white/5 text-slate-700 cursor-not-allowed"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >chevron_left</span
+                  >
+                </button>
+                {% endif %} {% for p in range(1, total_pages + 1) %} {% if
+                total_pages <= 7 %} {% if p == page %}
+                <span
+                  class="w-10 h-10 flex items-center justify-center rounded-full border border-primary text-primary font-bold bg-primary/10 shadow-[0_0_15px_rgba(192,162,130,0.3)]"
+                  >{{ p }}</span
+                >
+                {% else %}
+                <a
+                  href="{{ url_for('restaurant_detail', restaurant_id=r.restaurant_id, page=p) }}"
+                  class="w-10 h-10 flex items-center justify-center rounded-full border border-transparent hover:bg-white/5 hover:border-white/10 text-slate-400 hover:text-white transition-all"
+                  >{{ p }}</a
+                >
+                {% endif %} {% else %} {% if p == 1 or p == total_pages or p ==
+                page or p == page - 1 or p == page + 1 %} {% if p == page %}
+                <span
+                  class="w-10 h-10 flex items-center justify-center rounded-full border border-primary text-primary font-bold bg-primary/10 shadow-[0_0_15px_rgba(192,162,130,0.3)]"
+                  >{{ p }}</span
+                >
+                {% else %}
+                <a
+                  href="{{ url_for('restaurant_detail', restaurant_id=r.restaurant_id, page=p) }}"
+                  class="w-10 h-10 flex items-center justify-center rounded-full border border-transparent hover:bg-white/5 hover:border-white/10 text-slate-400 hover:text-white transition-all"
+                  >{{ p }}</a
+                >
+                {% endif %} {% elif p == page - 2 or p == page + 2 %}
+                <span
+                  class="w-10 h-10 flex items-center justify-center text-slate-500"
+                  >...</span
+                >
+                {% endif %} {% endif %} {% endfor %} {% if page < total_pages %}
+                <a
+                  href="{{ url_for('restaurant_detail', restaurant_id=r.restaurant_id, page=page+1) }}"
+                  class="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-slate-400 hover:border-primary hover:text-primary transition-all"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >chevron_right</span
+                  >
+                </a>
+                {% else %}
+                <button
+                  disabled
+                  class="w-10 h-10 flex items-center justify-center rounded-full border border-white/5 text-slate-700 cursor-not-allowed"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >chevron_right</span
+                  >
+                </button>
+                {% endif %}
+              </div>
+              {% endif %}
+            </section>
+          </div>
+
+          <div class="space-y-8">
+            <div class="glass p-6 rounded-2xl space-y-6">
+              <div class="space-y-1">
+                <h3
+                  class="text-sm uppercase font-bold text-primary tracking-widest"
+                >
+                  Details
+                </h3>
+                <p class="text-slate-300">{{ r.locality }}, {{ r.city }}</p>
+              </div>
+
+              <div
+                class="h-48 w-full rounded-xl overflow-hidden border border-white/10"
+              >
+                <iframe
+                  width="100%"
+                  height="100%"
+                  frameborder="0"
+                  style="
+                    border: 0;
+                    filter: grayscale(100%) invert(92%) contrast(83%);
+                  "
+                  src="https://maps.google.com/maps?q={{ r.name }} {{ r.locality }} {{ r.city }}&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  allowfullscreen
+                >
+                </iframe>
+              </div>
+
+              <div class="pt-2">
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query={{ r.name }}+{{ r.city }}"
+                  target="_blank"
+                  class="flex w-full items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-primary/40 hover:bg-primary hover:text-background-dark transition-all font-bold text-sm tracking-wide text-primary"
+                >
+                  <span class="material-symbols-outlined text-lg">near_me</span>
+                  Get Directions
+                </a>
+              </div>
+
+              <div class="border-t border-white/10 pt-4">
+                <div class="flex items-center gap-3 text-sm text-slate-300">
+                  <span class="material-symbols-outlined text-primary"
+                    >location_city</span
+                  >
+                  <span>{{ r.city }}</span>
+                </div>
+              </div>
+            </div>
+
+            {% if similar_restaurants %}
+            <div class="space-y-4 overflow-hidden">
+              <div class="flex items-center justify-between px-2">
+                <h3
+                  class="text-sm uppercase font-bold text-slate-400 tracking-widest"
+                >
+                  Also from your search
+                </h3>
+              </div>
+
+              <div
+                id="scrollContainer"
+                class="scroller-container w-full overflow-x-auto no-scrollbar relative cursor-grab active:cursor-grabbing"
+              >
+                <div
+                  class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background-dark to-transparent z-20 pointer-events-none"
+                ></div>
+                <div
+                  class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background-dark to-transparent z-20 pointer-events-none"
+                ></div>
+
+                <div class="scroller-wrapper py-2 pl-4">
+                  {% for _ in range(2) %} {% for sim in similar_restaurants %}
+                  {% if sim.restaurant_id|string != r.restaurant_id|string %}
+
+                  <a
+                    href="/restaurant/{{ sim.restaurant_id }}"
+                    class="block w-64 flex-shrink-0 bg-white/5 border border-white/10 rounded-xl p-3 hover:bg-white/10 hover:border-primary/50 transition-all group relative transform-gpu backface-hidden"
+                  >
+                    <div
+                      class="h-32 w-full rounded-lg bg-slate-800 mb-3 relative overflow-hidden isolate"
+                    >
+                      <div
+                        class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                        style="background-image: url('{{ sim.image_url or '/static/default_rest.jpg' }}');"
+                      ></div>
+                      <div
+                        class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-all"
+                      ></div>
+                    </div>
+
+                    <div class="space-y-1">
+                      <h4
+                        class="text-sm font-bold text-white truncate group-hover:text-primary transition-colors"
+                      >
+                        {{ sim.name }}
+                      </h4>
+                      <div class="flex items-center justify-between mt-1">
+                        <div class="flex items-center gap-1">
+                          <span
+                            class="bg-primary/20 text-primary text-[10px] font-bold px-1.5 py-0.5 rounded"
+                          >
+                            {{ sim.match_percentage if sim.match_percentage else
+                            '85' }}% MATCH
+                          </span>
+                        </div>
+                        <span
+                          class="text-[10px] text-slate-500 uppercase truncate max-w-[100px]"
+                          >{{ sim.locality }}</span
+                        >
+                      </div>
+                    </div>
+                  </a>
+                  {% endif %} {% endfor %} {% endfor %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="border-t border-primary/10 py-12 bg-background-dark text-center"
+    >
+      <p class="text-xs text-slate-600">© 2026 WNIT Intelligence Systems.</p>
+    </footer>
+
+    <script>
+      const slider = document.getElementById("scrollContainer");
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+      let autoScrollSpeed = 0.5; // VERY SLOW SPEED
+      let isHovered = false;
+      let animationId;
+
+      function autoScroll() {
+        if (!isHovered && !isDown && slider) {
+          slider.scrollLeft += autoScrollSpeed;
+          // Infinite Loop Illusion: Reset when halfway
+          if (slider.scrollLeft >= slider.scrollWidth / 2) {
+            slider.scrollLeft = 0;
+          }
+        }
+        animationId = requestAnimationFrame(autoScroll);
+      }
+
+      if (slider) {
+        autoScroll();
+
+        slider.addEventListener("mouseenter", () => (isHovered = true));
+        slider.addEventListener("mouseleave", () => {
+          isHovered = false;
+          isDown = false;
+        });
+
+        slider.addEventListener("mousedown", (e) => {
+          isDown = true;
+          isHovered = true;
+          startX = e.pageX - slider.offsetLeft;
+          scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener("mouseup", () => {
+          isDown = false;
+          isHovered = false;
+        });
+        slider.addEventListener("mousemove", (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - slider.offsetLeft;
+          const walk = (x - startX) * 2;
+          slider.scrollLeft = scrollLeft - walk;
+        });
+      }
+    </script>
+  </body>
 </html>
