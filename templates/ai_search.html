@@ -2,332 +2,345 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>WNIT Intelligence ✨</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WNIT Intelligence ✨</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
 <style>
-:root{
-  --gold:#bfa181;
-  --gold-light:#e5e5e5;
-  --panel:rgba(28,28,28,.88);
-  --border:rgba(191,161,129,.35);
-  --text:#e5e5e5;
-  --muted:#a0a0a0;
+:root {
+  --bg-dark: #050505;
+  --card-bg: #121212;
+  --gold: #D2C2B2; /* Muted Gold/Tan Color */
+  --text-main: #EAEAEA;
+  --border: rgba(210, 194, 178, 0.25);
 }
 
-*{box-sizing:border-box}
+* { box-sizing: border-box; }
 
-body{
-  margin:0;
-  font-family:Poppins,sans-serif;
-  background:radial-gradient(circle at top,#1a1a1a,#000);
-  color:var(--text);
+body {
+  margin: 0;
+  background-color: var(--bg-dark);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-main);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* HEADER */
-.top-bar{
-  height:64px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 28px;
-  border-bottom:1px solid var(--border);
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(10px);
-  position:sticky;
-  top:0;
-  z-index:10;
+.header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(5, 5, 5, 0.95);
+  z-index: 10;
+}
+.brand { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px; color: var(--text-main); }
+.brand span { color: var(--gold); }
+.nav-link { color: #9CA3AF; text-decoration: none; font-size: 14px; transition: 0.3s; }
+.nav-link:hover { color: var(--gold); }
+
+/* CHAT AREA */
+.chat-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px 20px 140px;
+  scroll-behavior: smooth;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.chat-container::-webkit-scrollbar { width: 6px; }
+.chat-container::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+
+/* MESSAGES */
+.msg-row { display: flex; margin-bottom: 30px; width: 100%; }
+.user-row { justify-content: flex-end; }
+.msg-bubble {
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  max-width: 700px;
+}
+.user-msg { background: var(--gold); color: #000; font-weight: 600; border-radius: 20px 20px 0 20px; }
+.ai-msg { background: transparent; padding: 0; width: 100%; max-width: 100%; }
+
+/* --- CITY HEADER --- */
+.city-header-block {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+.city-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: var(--gold);
+  letter-spacing: 1px;
 }
 
-.brand{
-  font-weight:700;
-  background:linear-gradient(135deg,var(--gold),var(--gold-light));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+/* --- GRID --- */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  width: 100%;
 }
 
-.back{
-  color:var(--muted);
-  text-decoration:none;
+/* --- CARD DESIGN --- */
+.card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
 }
-.back:hover{color:var(--gold)}
-
-/* LAYOUT */
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:30px 20px 140px;
-}
-
-.intro{
-  text-align:center;
-  margin-bottom:30px;
-}
-
-.intro-box{
-  display:inline-block;
-  padding:14px 26px;
-  border-radius:999px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  box-shadow:0 0 25px rgba(191,161,129,.2);
-  font-size:14px;
+.card:hover { 
+  transform: translateY(-5px); 
+  border-color: var(--gold); 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
 }
 
-/* CHAT */
-.chat{
-  display:flex;
-  flex-direction:column;
-  gap:18px;
+.card-img-wrapper { height: 200px; width: 100%; position: relative; overflow: hidden; }
+.card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.card:hover .card-img { transform: scale(1.05); }
+
+.match-badge {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--gold); color: #000;
+  font-size: 11px; font-weight: 800;
+  padding: 5px 12px; border-radius: 50px;
+  z-index: 2;
 }
 
-.msg{
-  max-width:92%;
-  padding:16px 18px;
-  border-radius:16px;
-  line-height:1.7;
-  animation:fade .3s ease;
+.card-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+
+/* Name & Rating */
+.card-header-group { margin-bottom: 15px; }
+.card-title {
+  font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600;
+  margin: 0 0 6px 0; color: var(--text-main); line-height: 1.2;
+}
+.card-rating-line {
+  font-size: 13px; color: #ccc; display: flex; align-items: center; gap: 8px;
+}
+.star { color: var(--gold); }
+
+/* Insight Box */
+.insight-box {
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px; padding: 16px;
+  margin-bottom: 20px; border-left: 3px solid var(--gold);
+}
+.insight-label { font-size: 10px; color: var(--gold); font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
+.insight-text { font-size: 13px; color: #bbb; line-height: 1.5; font-style: italic; }
+
+/* View Details Link (Replaces Button) */
+.view-details {
+  margin-top: auto; 
+  align-self: flex-end;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: 0.3s;
+}
+.card:hover .view-details {
+  color: #fff;
+  transform: translateX(5px);
 }
 
-.user{
-  margin-left:auto;
-  border:1px solid var(--border);
-  background:linear-gradient(135deg,#1c1c1c,#000);
-}
-
-.ai{
-  background:var(--panel);
-  border:1px solid var(--border);
-}
-
-.city{
-  margin:18px 0 6px;
-  font-weight:700;
-  color:var(--gold);
-}
-
-/* CARD */
-.card{
-  display:flex;
-  gap:14px;
-  padding:14px;
-  border-radius:18px;
-  background:rgba(18,18,18,.9);
-  border:1px solid var(--border);
-  margin-top:12px;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 0 35px rgba(191,161,129,.35);
-}
-
-.card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent 40%,rgba(191,161,129,.08),transparent 60%);
-  opacity:0;
-  transition:.3s;
-}
-.card:hover::after{opacity:1}
-
-.card img{
-  width:96px;
-  height:96px;
-  border-radius:14px;
-  object-fit:cover;
-}
-
-.card-body{flex:1}
-
-.card-body h4{
-  margin:0;
-  font-size:16px;
-}
-
-.card-meta{
-  font-size:13px;
-  color:var(--muted);
-  margin-top:4px;
-}
-
-.card-tags{
-  margin-top:6px;
-  font-size:13px;
-}
-
-.ai-tag{
-  display:inline-block;
-  margin-top:6px;
-  padding:3px 8px;
-  font-size:11px;
-  border-radius:999px;
-  color:var(--gold);
-  background:rgba(191,161,129,.15);
-  border:1px solid var(--border);
-}
-
-.view{
-  margin-top:6px;
-  font-size:13px;
-  color:var(--gold);
-}
-
-.bookmark{
-  position:absolute;
-  top:12px;
-  right:14px;
-  font-size:18px;
-  color:var(--muted);
-  cursor:pointer;
-}
-.bookmark.active{color:var(--gold)}
-
-.fade{
-  opacity:0;
-  animation:fadeUp .45s ease forwards;
-}
-
-@keyframes fade{
-  from{opacity:0;transform:translateY(8px)}
-  to{opacity:1;transform:none}
-}
-
-@keyframes fadeUp{
-  to{opacity:1;transform:none}
+/* Discovery Note */
+.discovery-note {
+  margin: 40px auto 10px;
+  padding: 15px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  color: #888;
+  font-size: 13px;
+  text-align: center;
+  max-width: 600px;
+  background: rgba(210, 194, 178, 0.05);
 }
 
 /* INPUT */
-.input-bar{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  padding:16px 20px;
-  background:rgba(0,0,0,.85);
-  backdrop-filter:blur(10px);
-  border-top:1px solid var(--border);
+.input-area {
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  width: 90%; max-width: 700px; z-index: 20;
 }
+.search-wrapper {
+  background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 50px;
+  padding: 8px 8px 8px 24px; display: flex; align-items: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  transition: border-color 0.3s;
+}
+.search-wrapper:focus-within { border-color: var(--gold); }
 
-.input-inner{
-  max-width:900px;
-  margin:auto;
-  display:flex;
-  gap:12px;
+.search-input { flex: 1; background: transparent; border: none; color: #fff; font-size: 16px; outline: none; }
+.send-btn {
+  width: 48px; height: 48px; border-radius: 50%; background: var(--gold);
+  border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;
 }
-
-input{
-  flex:1;
-  padding:14px 20px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:#000;
-  color:var(--text);
-}
-
-button{
-  padding:0 26px;
-  border-radius:999px;
-  border:none;
-  cursor:pointer;
-  font-weight:600;
-  background:linear-gradient(135deg,var(--gold),var(--gold-light));
-}
+.send-btn:hover { background: #fff; }
 </style>
 </head>
 
 <body>
 
-<div class="top-bar">
-  <a href="/" class="back">← Back</a>
-  <div class="brand">WNIT Intelligence ✨</div>
-</div>
+  <header class="header">
+    <div class="brand">WNIT <span>INTELLIGENCE</span></div>
+    <a href="/" class="nav-link">BACK TO HOME</a>
+  </header>
 
-<div class="container">
-  <div class="intro">
-    <div class="intro-box">
-      Hello! I’m your AI concierge. Ask about <b>restaurants, cafés, nightlife</b> ✨
+  <div id="chat" class="chat-container">
+    <div class="msg-row">
+      <div class="msg-bubble" style="background: rgba(255,255,255,0.05); color: #ddd;">
+        Hello! I am your city guide. Ask about <b>restaurants, cafes, or nightlife</b>. 🌆
+      </div>
     </div>
   </div>
 
-  <div id="chat" class="chat"></div>
-</div>
-
-<div class="input-bar">
-  <div class="input-inner">
-    <input id="query" placeholder="Ask anything…" onkeypress="if(event.key==='Enter') sendQuery()" />
-    <button onclick="sendQuery()">Send</button>
+  <div class="input-area">
+    <div class="search-wrapper">
+      <input id="query" class="search-input" placeholder="Ask anything... (e.g. 'Good food in Indore')" autocomplete="off" onkeypress="if(event.key==='Enter') sendQuery()" />
+      <button class="send-btn" onclick="sendQuery()">➤</button>
+    </div>
   </div>
-</div>
 
 <script>
-async function sendQuery(){
-  const input=document.getElementById("query");
-  const text=input.value.trim();
-  if(!text)return;
-  input.value="";
+async function sendQuery() {
+  const input = document.getElementById("query");
+  const text = input.value.trim();
+  if (!text) return;
 
-  const chat=document.getElementById("chat");
-  chat.innerHTML+=`<div class="msg user">${text}</div>`;
+  input.value = "";
+  const chat = document.getElementById("chat");
 
-  const thinking=document.createElement("div");
-  thinking.className="msg ai";
-  thinking.innerText="Thinking...";
-  chat.appendChild(thinking);
+  // User Msg
+  chat.innerHTML += `<div class="msg-row user-row"><div class="msg-bubble user-msg">${text}</div></div>`;
+  setTimeout(() => chat.scrollTop = chat.scrollHeight, 50);
 
-  const res=await fetch("/ai-search",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({query:text})
-  });
+  // Loading
+  const thinkingId = 'thinking-' + Date.now();
+  chat.innerHTML += `<div id="${thinkingId}" class="msg-row"><div class="msg-bubble" style="color:#888;">Thinking...</div></div>`;
+  chat.scrollTop = chat.scrollHeight;
 
-  const data=await res.json();
-  thinking.remove();
+  try {
+    const res = await fetch("/ai-search", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: text })
+    });
+    const data = await res.json();
+    document.getElementById(thinkingId).remove();
 
-  let html=`<div class="msg ai">`;
+    if (!data.results || Object.keys(data.results).length === 0) {
+      chat.innerHTML += `<div class="msg-row"><div class="msg-bubble" style="color:#fff;">No results found. Try a different city.</div></div>`;
+    } else {
+      
+      let htmlContent = `<div class="msg-row"><div class="ai-msg">`;
+      let totalCities = Object.keys(data.results).length;
 
-  if(!data.results||Object.keys(data.results).length===0){
-    html+="No relevant places found.";
-  }else{
-    for(const city in data.results){
-      html+=`<div class="city">${city}</div>`;
-      data.results[city].forEach((r,i)=>{
-        html+=`
-        <div class="card fade" style="animation-delay:${i*80}ms"
-             onclick="location.href='/restaurant/${r.id}'">
-
-          <div class="bookmark" onclick="event.stopPropagation();toggle(this)">☆</div>
-
-          <img src="${r.image||'/static/no-image.jpg'}"
-               onerror="this.src='/static/no-image.jpg'">
-
-          <div class="card-body">
-            <h4>${r.name}</h4>
-            <div class="card-meta">📍 ${r.locality}, ${r.city}</div>
-            <div class="card-tags">🍽 ${r.cuisines}</div>
-            <div class="ai-tag">🤖 Recommended for you</div>
-            <div class="card-meta">⭐ ${r.rating??"N/A"} • 🔥 ${r.score.toFixed(3)}</div>
-            <div class="view">View details →</div>
+      // --- Loop for Each City ---
+      for (const city in data.results) {
+        
+        // 1. CITY HEADER
+        htmlContent += `
+          <div class="city-header-block">
+            <div class="city-title">📍 ${city}</div>
           </div>
-        </div>`;
-      });
+          <div class="results-grid">
+        `;
+
+        data.results[city].forEach(r => {
+          
+          // 2. DATA PROCESSING
+          const cuisine = r.cuisines ? r.cuisines.split(',')[0] : "Fine Dining";
+          const rating = r.rating || "N/A";
+          const location = r.location || city;
+          const cost = r.cost_for_two || 1500;
+          const matchPercent = Math.round(r.score * 100);
+          
+          // 3. DYNAMIC INSIGHT LOGIC
+          let insight = "";
+          if (rating != "N/A" && rating >= 4.5) {
+             insight = `A highly-rated gem in ${location}. Exceptional ${cuisine} cuisine with a ${rating}-star experience.`;
+          } else if (cost < 800) {
+             insight = `Delicious ${cuisine} food at an unbeatable price. A popular budget-friendly spot in ${location}.`;
+          } else if (cost > 2500) {
+             insight = `A luxurious destination for ${cuisine} lovers. Perfect for special occasions and fine dining.`;
+          } else {
+             insight = `Known for its great ambiance and ${cuisine} dishes. Matches your preference for ${location}.`;
+          }
+
+          // Fallback Image
+          const imgUrl = r.image || 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80';
+
+          htmlContent += `
+            <div class="card" onclick="window.location.href='/restaurant/${r.id || '#'}'">
+              <div class="card-img-wrapper">
+                 <div class="match-badge">${matchPercent}% MATCH</div>
+                 <img src="${imgUrl}" class="card-img" alt="${r.name}">
+              </div>
+              
+              <div class="card-body">
+                <div class="card-header-group">
+                    <h3 class="card-title">${r.name}</h3>
+                    <div class="card-rating-line">
+                        <span class="star">★</span> ${rating} • ${cuisine.toUpperCase()}
+                    </div>
+                </div>
+                
+                <div class="insight-box">
+                  <div class="insight-label">✨ WHY YOU'LL LOVE IT</div>
+                  <div class="insight-text">${insight}</div>
+                </div>
+
+                <div class="view-details">VIEW DETAILS →</div>
+              </div>
+            </div>
+          `;
+        });
+
+        htmlContent += `</div>`; // Grid Close
+      }
+
+      // 4. DISCOVERY MODE DISCLAIMER
+      if (totalCities > 1 || text.split(' ').length < 3) {
+        htmlContent += `
+          <div class="discovery-note">
+            ⚠️ <b>Discovery Mode:</b> Showing top picks across regions.<br> 
+            Please provide specific <b>city, cuisine, and rating</b> for best results.
+          </div>
+        `;
+      }
+
+      htmlContent += `</div></div>`;
+      chat.innerHTML += htmlContent;
     }
+
+    chat.scrollTop = chat.scrollHeight;
+
+  } catch (err) {
+    document.getElementById(thinkingId)?.remove();
+    console.error(err);
+    chat.innerHTML += `<div class="msg-row"><div class="msg-bubble" style="color:red;">Server Error.</div></div>`;
   }
-
-  html+=`</div>`;
-  chat.innerHTML+=html;
-  chat.scrollTop=chat.scrollHeight;
-}
-
-function toggle(el){
-  el.classList.toggle("active");
-  el.innerText=el.classList.contains("active")?"★":"☆";
 }
 </script>
 
