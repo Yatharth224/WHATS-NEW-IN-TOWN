@@ -1,3 +1,4 @@
+
 import os
 import re
 import json
@@ -44,7 +45,7 @@ def extract_cuisine(cursor, text):
             return c
     return None
 
-
+'''
 def extract_price(text):
     text = text.lower()
 
@@ -59,18 +60,30 @@ def extract_price(text):
     if any(w in text for w in ["expensive", "premium", "luxury", "high"]):
         return 4000
 
-    return None
+    return None'''
 
 
-def extract_rating(text):
-    m = re.search(r'([1-5](?:\.\d)?)', text)
-    if m:
-        return float(m.group(1))
+def extract_rating_filter(text):
+    text = text.lower()
 
-    if any(w in text for w in ["best", "top", "excellent"]):
-        return 4.0
+    # 1–5 ke beech rating
+    m = re.search(r'\b([1-5](?:\.\d)?)\b', text)
+    if not m:
+        if any(w in text for w in ["best", "top", "excellent"]):
+            return ("gte", 4.0)
+        return None, None
 
-    return None
+    rating= float(m.group(1))
+
+    if any(w in text for w in ["above", "greater", "more than", "over"]):
+        return ("gt", rating)
+
+    if any(w in text for w in ["below", "less than", "under"]):
+        return ("lt", rating)
+
+    return ("gte", rating)
+
+
 
 
 def get_recommendations(user_text):
@@ -86,10 +99,9 @@ def get_recommendations(user_text):
    
     city = extract_city(cursor, user_text)
     cuisine = extract_cuisine(cursor, user_text)
-    price = extract_price(user_text)
-    rating = extract_rating(user_text)
-
-    has_structured_signal = any([city, cuisine, price, rating])
+    # price = extract_price(user_text)
+    rating_op, rating_value = extract_rating_filter(user_text)
+    has_structured_signal = any([city, cuisine, rating_op])
 
     
     # FILTER restaurants_info
@@ -105,13 +117,18 @@ def get_recommendations(user_text):
         query += " AND LOWER(cuisines) LIKE %s"
         params.append(f"%{cuisine}%")
 
-    if price:
-        query += " AND cost_for_two <= %s"
-        params.append(price)
+   # if price:
+    #    query += " AND cost_for_two <= %s"
+    #    params.append(price)
 
-    if rating:
-        query += " AND rating >= %s"
-        params.append(rating)
+    if rating_op and rating_value:
+        if rating_op == "gt":
+            query += " AND rating > %s"
+        elif rating_op == "lt":
+            query += " AND rating < %s"
+        else:  # gte
+            query += " AND rating >= %s"
+        params.append(rating_value)
 
     cursor.execute(query, params)
     restaurants = cursor.fetchall()
