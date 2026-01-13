@@ -44,24 +44,22 @@
             padding: 0 var(--container-padding);
         }
 
-        /* --- Header (Absolute Positioning applied) --- */
+        /* --- Header --- */
         header {
             display: flex;
             align-items: center;
-            justify-content: center; /* Center the Logo by default */
+            justify-content: center;
             padding: 30px 0;
-            position: relative; /* Context for absolute children */
+            position: relative;
             z-index: 100;
             height: 100px;
         }
 
-        /* Menu Button - Absolute Left */
         .menu-btn {
             position: absolute;
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--gold-primary);
@@ -83,7 +81,6 @@
             box-shadow: 0 0 15px rgba(191, 161, 129, 0.2);
         }
 
-        /* Logo (Centered) */
         .brand-logo {
             font-family: 'Playfair Display', serif;
             font-size: 28px;
@@ -95,13 +92,11 @@
         }
         .brand-logo span { color: var(--gold-primary); font-style: italic; }
 
-        /* Auth Buttons (Absolute Right) */
         .auth-buttons { 
             position: absolute;
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            
             display: flex; 
             gap: 15px;
             z-index: 2;
@@ -189,7 +184,6 @@
         .description-text strong { color: var(--gold-primary); font-weight: 600; }
         .highlight { color: #fff; text-decoration: underline; text-decoration-color: var(--gold-primary); }
 
-        /* AI Search Bar */
         .ai-search-container {
             display: flex; align-items: center;
             background: rgba(255, 255, 255, 0.03);
@@ -198,7 +192,7 @@
             border-radius: 60px;
             width: 100%;
             transition: 0.3s; text-decoration: none;
-            margin-bottom: 35px; /* Added margin for new buttons */
+            margin-bottom: 35px;
         }
         .ai-search-container:hover {
             border-color: var(--gold-primary);
@@ -211,13 +205,7 @@
         .arrow-btn { margin-left: auto; color: #fff; font-size: 18px; transition: 0.3s; }
         .ai-search-container:hover .arrow-btn { transform: translateX(5px); color: var(--gold-primary); }
 
-        /* --- NEW CTA BUTTONS STYLES --- */
-        .cta-container {
-            display: flex;
-            gap: 20px;
-            width: 100%;
-        }
-
+        .cta-container { display: flex; gap: 20px; width: 100%; }
         .cta-btn {
             padding: 15px 35px;
             border-radius: 50px;
@@ -227,43 +215,34 @@
             transition: all 0.3s ease;
             white-space: nowrap;
         }
-
-        /* Primary: Solid Gold */
         .cta-btn.primary {
             background: var(--gold-primary);
             color: #000;
             border: 1px solid var(--gold-primary);
             box-shadow: 0 4px 15px rgba(191, 161, 129, 0.3);
         }
-
-        /* Secondary: Transparent/Outline */
         .cta-btn.secondary {
             background: transparent;
             color: var(--text-main);
             border: 1px solid var(--border-color);
         }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(191, 161, 129, 0.4); }
+        .cta-btn.secondary:hover { border-color: var(--gold-primary); color: var(--gold-primary); }
 
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(191, 161, 129, 0.4);
-        }
-        .cta-btn.secondary:hover {
-            border-color: var(--gold-primary);
-            color: var(--gold-primary);
-        }
-
-        /* --- Hero Visuals (Bento Grid) --- */
+        /* --- CONTEMPORARY OFFSET GRID --- */
         .hero-visuals {
             flex: 1.2;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: 220px 220px;
+            /* Uneven columns for offset look: Left column is slightly larger */
+            grid-template-columns: 1.3fr 1fr 1fr;
+            /* Uneven rows: Top row shorter, bottom row taller to create movement */
+            grid-template-rows: 190px 250px; 
             gap: 16px;
         }
         
         .image-card {
             position: relative;
-            border-radius: 16px;
+            border-radius: 12px; /* Slightly tighter radius for modern feel */
             overflow: hidden;
             border: 1px solid transparent;
             transition: all 0.4s ease;
@@ -274,14 +253,14 @@
         .image-card img {
             width: 100%; height: 100%;
             object-fit: cover;
-            opacity: 0.7;
-            transition: opacity 0.4s, transform 0.4s;
+            opacity: 0.75;
+            transition: opacity 0.5s, transform 0.6s;
             display: block;
         }
 
         .image-card:hover { 
             border-color: var(--gold-primary); 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6); 
             z-index: 5;
         }
         .image-card:hover img { opacity: 1; transform: scale(1.05); }
@@ -289,22 +268,43 @@
         .card-label {
             position: absolute;
             bottom: 12px; left: 12px;
-            background: rgba(0,0,0,0.7);
-            padding: 5px 12px;
-            border-radius: 30px;
-            font-size: 11px;
+            background: rgba(0,0,0,0.8);
+            padding: 4px 12px;
+            border-radius: 4px; /* Square-ish label for contemporary look */
+            font-size: 10px;
             color: var(--gold-primary);
             font-weight: 700;
-            border: 1px solid var(--gold-primary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
             backdrop-filter: blur(4px);
             z-index: 2;
         }
 
-        /* Grid Placement */
-        .image-card:nth-child(1) { grid-column: 1 / 2; grid-row: 1 / 3; }
-        .image-card:nth-child(2) { grid-column: 2 / 4; grid-row: 1 / 2; }
-        .image-card:nth-child(3) { grid-column: 2 / 3; grid-row: 2 / 3; }
-        .image-card:nth-child(4) { grid-column: 3 / 4; grid-row: 2 / 3; }
+        /* --- OFFSET POSITIONS --- */
+        
+        /* 1. Tall Main Feature (Left) - Spans full height */
+        .image-card:nth-child(1) { 
+            grid-column: 1 / 2; 
+            grid-row: 1 / 3; 
+        }
+
+        /* 2. Wide Top Feature (Top Right) - Spans 2 cols */
+        .image-card:nth-child(2) { 
+            grid-column: 2 / 4; 
+            grid-row: 1 / 2; 
+        }
+
+        /* 3. Small Box (Middle Bottom) */
+        .image-card:nth-child(3) { 
+            grid-column: 2 / 3; 
+            grid-row: 2 / 3; 
+        }
+
+        /* 4. Small Box (Right Bottom) */
+        .image-card:nth-child(4) { 
+            grid-column: 3 / 4; 
+            grid-row: 2 / 3; 
+        }
 
         /* --- Footer --- */
         .footer-section {
@@ -348,11 +348,10 @@
             
             .hero-section { flex-direction: column; text-align: center; gap: 40px; }
             .description-box { border-left: none; border-top: 2px solid var(--gold-primary); padding: 20px 0 0 0; margin: 0 auto 40px; }
-            
-            /* Center Align Buttons on Mobile */
             .cta-container { justify-content: center; }
 
-            .hero-visuals { width: 100%; grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; }
+            /* Mobile Grid: 2x2 Simple */
+            .hero-visuals { width: 100%; grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px; }
             .image-card:nth-child(1) { grid-column: auto; grid-row: auto; }
             .image-card:nth-child(2) { grid-column: auto; grid-row: auto; }
             .image-card:nth-child(3) { grid-column: auto; grid-row: auto; }
@@ -361,11 +360,9 @@
 
         @media (max-width: 768px) {
             .auth-buttons { display: none; }
-            .hero-visuals { grid-template-columns: 1fr; grid-template-rows: repeat(4, 180px); }
+            .hero-visuals { grid-template-columns: 1fr; grid-template-rows: repeat(4, 200px); }
             .brand-logo { font-size: 22px; }
             header { height: 80px; }
-            
-            /* Stack buttons vertically on small phones */
             .cta-container { flex-direction: column; align-items: center; gap: 15px; }
             .cta-btn { width: 100%; max-width: 280px; }
         }
@@ -407,7 +404,7 @@
                         <strong>“What's New in Town”</strong> is your digital guide to all things new and exciting. 
                         Bored of the <span class="highlight">same places again and again?</span> This platform helps you explore the latest 
                         <strong>cafés, fine-dining spots, restro-bars, and arcades</strong>. 
-                        Whether craving something new or planning a night out — <strong>we’ve got you covered</strong>.
+                        Whether craving something new or planning a night out — <strong>we’ve got you covered</strong>. 🌆✨
                     </p>
                 </div>
 
@@ -434,7 +431,7 @@
                 </div>
 
                 <div class="image-card">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80" alt="Fine Dine">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80" alt="Fine Dine">
                     <div class="card-label">Fine Dine</div>
                 </div>
 
@@ -444,7 +441,7 @@
                 </div>
 
                 <div class="image-card">
-                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=800" alt="Arcade">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=600" alt="Arcade">
                     <div class="card-label">Arcade Zone</div>
                 </div>
             </div>
