@@ -166,20 +166,24 @@
             font-size: clamp(42px, 4.5vw, 68px);
             line-height: 1.1;
             font-weight: 700;
-            margin-bottom: 30px;
+            margin-bottom: 25px; /* Thoda gap kam kiya */
             color: #fff;
+            text-align: left; /* Explicitly Left */
         }
 
+        /* --- UPDATED DESCRIPTION ALIGNMENT --- */
         .description-box {
-            padding-left: 25px;
-            border-left: 2px solid var(--gold-primary);
+            /* Removed border-left and padding-left to align flush with title */
             margin-bottom: 40px;
+            width: 100%;
         }
         .description-text {
             font-size: 16px;
             line-height: 1.8;
             color: var(--text-muted);
             margin: 0;
+            text-align: justify; /* Text block looks cleaner */
+            text-justify: inter-word;
         }
         .description-text strong { color: var(--gold-primary); font-weight: 600; }
         .highlight { color: #fff; text-decoration: underline; text-decoration-color: var(--gold-primary); }
@@ -229,20 +233,18 @@
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(191, 161, 129, 0.4); }
         .cta-btn.secondary:hover { border-color: var(--gold-primary); color: var(--gold-primary); }
 
-        /* --- CONTEMPORARY OFFSET GRID --- */
+        /* --- OFFSET GRID --- */
         .hero-visuals {
             flex: 1.2;
             display: grid;
-            /* Uneven columns for offset look: Left column is slightly larger */
             grid-template-columns: 1.3fr 1fr 1fr;
-            /* Uneven rows: Top row shorter, bottom row taller to create movement */
             grid-template-rows: 190px 250px; 
             gap: 16px;
         }
         
         .image-card {
             position: relative;
-            border-radius: 12px; /* Slightly tighter radius for modern feel */
+            border-radius: 12px; 
             overflow: hidden;
             border: 1px solid transparent;
             transition: all 0.4s ease;
@@ -270,7 +272,7 @@
             bottom: 12px; left: 12px;
             background: rgba(0,0,0,0.8);
             padding: 4px 12px;
-            border-radius: 4px; /* Square-ish label for contemporary look */
+            border-radius: 4px;
             font-size: 10px;
             color: var(--gold-primary);
             font-weight: 700;
@@ -280,31 +282,11 @@
             z-index: 2;
         }
 
-        /* --- OFFSET POSITIONS --- */
-        
-        /* 1. Tall Main Feature (Left) - Spans full height */
-        .image-card:nth-child(1) { 
-            grid-column: 1 / 2; 
-            grid-row: 1 / 3; 
-        }
-
-        /* 2. Wide Top Feature (Top Right) - Spans 2 cols */
-        .image-card:nth-child(2) { 
-            grid-column: 2 / 4; 
-            grid-row: 1 / 2; 
-        }
-
-        /* 3. Small Box (Middle Bottom) */
-        .image-card:nth-child(3) { 
-            grid-column: 2 / 3; 
-            grid-row: 2 / 3; 
-        }
-
-        /* 4. Small Box (Right Bottom) */
-        .image-card:nth-child(4) { 
-            grid-column: 3 / 4; 
-            grid-row: 2 / 3; 
-        }
+        /* Positions */
+        .image-card:nth-child(1) { grid-column: 1 / 2; grid-row: 1 / 3; }
+        .image-card:nth-child(2) { grid-column: 2 / 4; grid-row: 1 / 2; }
+        .image-card:nth-child(3) { grid-column: 2 / 3; grid-row: 2 / 3; }
+        .image-card:nth-child(4) { grid-column: 3 / 4; grid-row: 2 / 3; }
 
         /* --- Footer --- */
         .footer-section {
@@ -347,10 +329,13 @@
             header { justify-content: center; } 
             
             .hero-section { flex-direction: column; text-align: center; gap: 40px; }
-            .description-box { border-left: none; border-top: 2px solid var(--gold-primary); padding: 20px 0 0 0; margin: 0 auto 40px; }
+            /* Mobile par alignment center kar diya hai */
+            .hero-title { text-align: center; }
+            .description-box { text-align: center; }
+            .description-text { text-align: center; } /* Mobile pe Justify acha nahi lagta */
+            
             .cta-container { justify-content: center; }
 
-            /* Mobile Grid: 2x2 Simple */
             .hero-visuals { width: 100%; grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px; }
             .image-card:nth-child(1) { grid-column: auto; grid-row: auto; }
             .image-card:nth-child(2) { grid-column: auto; grid-row: auto; }
@@ -401,10 +386,11 @@
 
                 <div class="description-box">
                     <p class="description-text">
-                        <strong>“What's New in Town”</strong> is your digital guide to all things new and exciting. 
-                        Bored of the <span class="highlight">same places again and again?</span> This platform helps you explore the latest 
-                        <strong>cafés, fine-dining spots, restro-bars, and arcades</strong>. 
-                        Whether craving something new or planning a night out — <strong>we’ve got you covered</strong>. 🌆✨
+                        <strong>“What's New in Town”</strong> is your digital guide to the city's heartbeat 🏙️. 
+                        Tired of visiting the <span class="highlight">same places again and again?</span> 🥱 
+                        We help you discover the freshest <strong>cafés ☕, fine-dining gems 🍽️, and buzzing restro-bars 🥂</strong>. 
+                        Whether planning a night out 🌙 or just exploring trends 🚀 — 
+                        <strong>we’ve got you covered.</strong> ✨
                     </p>
                 </div>
 
@@ -437,12 +423,12 @@
 
                 <div class="image-card">
                     <img src="https://thegamemumbai.com/assets//images/Blogs/top-bowling-alley-mumbai.jpg" alt="Bowling">
-                    <div class="card-label">Bowling</div>
+                    <div class="card-label">Luxury Bowling</div>
                 </div>
 
                 <div class="image-card">
                     <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=600" alt="Arcade">
-                    <div class="card-label">Arcade Zone</div>
+                    <div class="card-label">Premium Arcade</div>
                 </div>
             </div>
 
@@ -490,7 +476,14 @@
 
         // Typewriter Effect
         const textElement = document.getElementById('typewriter');
-        const phrases = ["Find a rooftop bar...", "Where is the new arcade?", "Best Italian food nearby..."];
+        
+        const phrases = [
+            "Find a romantic fine dine...", 
+            "Where is the newest restro-bar?", 
+            "Best rooftop cafe for tonight...",
+            "Suggest a luxury dinner spot..."
+        ];
+        
         let phraseIndex = 0; let charIndex = 0; let isDeleting = false;
 
         function type() {
