@@ -580,22 +580,32 @@ def ai_search():
     results = get_recommendations(user_query)
     print("AI RESULTS =>", results)
 
-    return jsonify(results)
-    session['ai_results'] = results
 
+    ai_scores = {}
+
+    for city, items in results.get("results", {}).items():
+        for item in items:
+            ai_scores[str(item["id"])] = round(item["score"] * 100)
+
+    session["ai_scores"] = ai_scores
+    session.modified = True
+
+    return jsonify(results)
 
 
 from flask import request
-
 @app.route("/restaurant/<int:restaurant_id>")
 def restaurant_detail(restaurant_id):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
     
-    cursor.execute("SELECT * FROM restaurants_info WHERE restaurant_id = %s", (restaurant_id,))
+    cursor.execute(
+        "SELECT * FROM restaurants_info WHERE restaurant_id = %s",
+        (restaurant_id,)
+    )
     r = cursor.fetchone()
-    
+
     if not r:
         return "Restaurant not found", 404
 
@@ -604,52 +614,49 @@ def restaurant_detail(restaurant_id):
     PER_PAGE = 5
     offset = (page - 1) * PER_PAGE
 
-    cursor.execute("SELECT COUNT(*) AS total FROM rs_reviews WHERE restaurant_id = %s", (restaurant_id,))
+    cursor.execute(
+        "SELECT COUNT(*) AS total FROM rs_reviews WHERE restaurant_id = %s",
+        (restaurant_id,)
+    )
     total_reviews = cursor.fetchone()["total"]
     total_pages = math.ceil(total_reviews / PER_PAGE)
 
-    cursor.execute("""
-        SELECT user_name, rating, review_text, timestamp 
-        FROM rs_reviews WHERE restaurant_id = %s 
-        ORDER BY timestamp DESC LIMIT %s OFFSET %s
-    """, (restaurant_id, PER_PAGE, offset))
+    cursor.execute(
+        """
+        SELECT user_name, rating, review_text, timestamp
+        FROM rs_reviews
+        WHERE restaurant_id = %s
+        ORDER BY timestamp DESC
+        LIMIT %s OFFSET %s
+        """,
+        (restaurant_id, PER_PAGE, offset)
+    )
     reviews = cursor.fetchall()
 
     
-    match_score = None
-    
-  
-    ai_scores = session.get('ai_scores', {})
-    
-    
-    if str(restaurant_id) in ai_scores:
-        match_score = ai_scores[str(restaurant_id)]
-    
-   
-    if match_score is None:
-        match_score = round((r["rating"] or 0) * 20)
+    ai_scores = session.get("ai_scores", {})
 
     
-    
-    cursor.execute("""
-        SELECT restaurant_id, name, image_url, rating, locality 
-        FROM restaurants_info 
-        WHERE city = %s AND restaurant_id != %s 
-        ORDER BY rating DESC 
-        LIMIT 10
-    """, (r["city"], restaurant_id))
-    
-    similar_restaurants = cursor.fetchall()
-    
+    match_score = ai_scores.get(str(restaurant_id))
 
-    if not similar_restaurants:
-         cursor.execute("""
-            SELECT restaurant_id, name, image_url, rating, locality 
-            FROM restaurants_info 
-            ORDER BY RAND() 
-            LIMIT 5
-        """)
-         similar_restaurants = cursor.fetchall()
+    
+    cursor.execute(
+        """
+        SELECT restaurant_id, name, image_url, locality
+        FROM restaurants_info
+        WHERE city = %s AND restaurant_id != %s
+        """,
+        (r["city"], restaurant_id)
+    )
+    all_similar = cursor.fetchall()
+
+    
+    similar_restaurants = []
+    for sim in all_similar:
+        ai_match = ai_scores.get(str(sim["restaurant_id"]))
+        if ai_match is not None:
+            sim["match_percentage"] = ai_match
+            similar_restaurants.append(sim)
 
     cursor.close()
     conn.close()
@@ -661,9 +668,10 @@ def restaurant_detail(restaurant_id):
         page=page,
         total_pages=total_pages,
         total_reviews=total_reviews,
-        similar_restaurants=similar_restaurants, 
+        similar_restaurants=similar_restaurants,
         match_score=match_score
     )
+
 
 if __name__ == "__main__":
     app.run(debug=True)
