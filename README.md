@@ -1,6 +1,5 @@
 
 
-
 # 🏙️ What's New in Town
 
 ## Overview
@@ -82,17 +81,22 @@ Support for additional cities and categories will be introduced in future update
 
 ## Application Workflow
 
-1. **Select City**
-   Choose a city to explore.
+1. **Enter Your Query**
+   Users directly enter their query (for example, searching for the best newly opened restaurants or restro bars in a city).
 
-2. **Select Category**
-   Filter places by category.
+2. **AI Review Analysis**
+   The system processes the query and analyzes **Zomato-sourced customer reviews** from the restaurant dataset.
 
-3. **AI-Based Recommendation**
-   The system analyzes Zomato reviews and ranks the best newly opened places.
+3. **Intelligent Matching**
+   The AI identifies the most relevant places by matching the query with review content, ratings, and sentiment.
 
-4. **Discover Places**
-   Users receive curated recommendations backed by real customer experiences.
+4. **Top Recommendations with Confidence Score**
+
+   * The platform returns the **Top 3 best-matched places**.
+   * Each recommendation includes a **percentage match score**, indicating how closely it matches the user’s query based on review analysis.
+
+5. **Discover with Confidence**
+   Users receive clear, data-backed recommendations derived from real customer experiences.
 
 ---
 
@@ -100,7 +104,7 @@ Support for additional cities and categories will be introduced in future update
 
 * Authentic, Zomato-sourced reviews
 * Review-based AI recommendations
-* City-wise and category-wise discovery
+* Query-driven intelligent discovery
 * Accurate and trustworthy results
 * Scalable platform design
 
