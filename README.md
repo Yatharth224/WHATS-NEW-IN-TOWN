@@ -1,25 +1,28 @@
+
+
+
 # 🏙️ What's New in Town
 
 ## Overview
 
-**What's New in Town** is a city-based discovery platform that helps users explore **newly opened places** in their city. The platform aims to reduce repetitive outings by providing structured, up-to-date information about new venues along with an **AI-powered review-based recommendation system**.
+**What's New in Town** is a city-based discovery platform that helps users explore **newly opened places** in their city. The platform is designed to reduce repetitive outings by offering structured discovery along with an **AI-powered review-based recommendation system**.
 
-The system analyzes customer reviews to recommend the most relevant and highly rated places, helping users make informed decisions quickly and effectively.
+The recommendation engine is trained on **real customer reviews sourced from Zomato**, ensuring highly accurate and trustworthy results.
 
 ---
 
 ## Key Objectives
 
 * Discover newly opened places across major cities
-* Provide intelligent recommendations using customer reviews
-* Rank places based on real user experiences
-* Build a scalable platform for future expansion
+* Provide intelligent recommendations using authentic customer reviews
+* Leverage Zomato data for higher recommendation accuracy
+* Build a scalable and future-ready discovery platform
 
 ---
 
 ## Supported Cities
 
-The platform currently supports the following cities:
+The platform currently supports:
 
 * **Indore**
 * **Mumbai**
@@ -30,7 +33,7 @@ The platform currently supports the following cities:
 
 ## Categories
 
-Users can explore newly opened places under these categories:
+Users can explore newly opened places under the following categories:
 
 * **Fine Dine** – Newly opened fine dining restaurants
 * **Restro Bar** – New restro bars and nightlife venues
@@ -41,16 +44,20 @@ Users can explore newly opened places under these categories:
 
 ## 🤖 AI-Powered Review-Based Recommendation System
 
-**What's New in Town** features an intelligent **review-based recommendation engine** that suggests places based on customer feedback rather than mood or manual filtering.
+**What's New in Town** features an advanced **review-based AI recommendation engine** built using authentic restaurant data.
+
+### Data Source & Training
+
+* All restaurant **reviews are collected from Zomato**.
+* Restaurant data used for AI recommendations is sourced from **Zomato Collections**.
+* The model is trained on real customer feedback, ratings, and review patterns.
+* Using Zomato’s rich dataset enables more **accurate, reliable, and realistic recommendations**.
 
 ### Recommendation Approach
 
-* The AI model is trained on **customer reviews and ratings**.
-* It analyzes review sentiment, relevance, and frequency.
-* Places are ranked based on overall review quality and consistency.
-* Recommendations reflect real user experiences and preferences.
-
-This approach ensures that suggestions are **data-driven, unbiased, and reliable**.
+* Reviews are analyzed for sentiment, relevance, and consistency.
+* Restaurants are ranked based on overall review quality.
+* Recommendations are completely **data-driven** and free from manual bias.
 
 ---
 
@@ -69,50 +76,51 @@ The AI recommendation system is currently available for:
 * Restro Bar
 * Fine Dine
 
-Support for additional cities and categories will be added in future releases.
+Support for additional cities and categories will be introduced in future updates.
 
 ---
 
 ## Application Workflow
 
-1. **City Selection**
-   Users select their preferred city.
+1. **Select City**
+   Choose a city to explore.
 
-2. **Category Selection**
-   Users choose a category such as Fine Dine or Restro Bar.
+2. **Select Category**
+   Filter places by category.
 
-3. **AI-Based Recommendations**
-   The platform analyzes reviews and ranks the best places accordingly.
+3. **AI-Based Recommendation**
+   The system analyzes Zomato reviews and ranks the best newly opened places.
 
-4. **Place Discovery**
-   Users view a curated list of newly opened places backed by real customer feedback.
+4. **Discover Places**
+   Users receive curated recommendations backed by real customer experiences.
 
 ---
 
 ## Why What's New in Town?
 
-* Centralized discovery of newly opened venues
-* Review-driven AI recommendations
-* City-wise and category-wise filtering
-* Scalable and future-ready architecture
+* Authentic, Zomato-sourced reviews
+* Review-based AI recommendations
+* City-wise and category-wise discovery
+* Accurate and trustworthy results
+* Scalable platform design
 
-The platform focuses on **trustworthy recommendations powered by real reviews**, making every outing a better experience.
+The platform ensures users discover the **best new places with confidence**.
 
 ---
 
 ## Future Enhancements
 
-* Expansion to more cities
-* Inclusion of additional categories
-* Improved recommendation accuracy with larger review datasets
-* Advanced analytics and personalization
-* Enhanced UI/UX design
+* Expansion to additional cities
+* Inclusion of more place categories
+* Enhanced AI models using larger Zomato datasets
+* Improved ranking algorithms
+* Personalized recommendation features
 
 ---
 
 ## Conclusion
 
-**What's New in Town** combines structured city discovery with a **review-based AI recommendation system** to help users find the best new places effortlessly. By leveraging real customer feedback, the platform delivers meaningful, transparent, and reliable recommendations.
+**What's New in Town** combines structured city discovery with a **Zomato-powered, review-based AI recommendation system**. By leveraging trusted data from Zomato Collections and customer reviews, the platform delivers high-quality, transparent, and reliable recommendations for exploring new places.
 
 ---
 
