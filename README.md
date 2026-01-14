@@ -1,34 +1,127 @@
-# What's New in Town
-
-## Project Overview
-
-**What's New in Town** is an innovative platform designed to help users discover newly opened places in their cities. We all experience the monotony of visiting the same places repeatedly, and this project was created to break that cycle. With this website, you can explore exciting new spots in your city and keep your outings fresh and fun.
-
-## Features
-
-The website focuses on four major cities:  
-- **Indore**
-- **Mumbai**
-- **Delhi**
-- **Bengaluru**
-
-Users can select their city and browse newly opened places based on specific categories. The categories available are:
-
-- **Fine Dine**: Discover newly opened fine dining restaurants in your city.
-- **Restro Bar**: Explore new restro bars and nightlife spots for a fun evening out.
-- **Arcades**: Find newly opened arcades for a gaming experience with friends and family.
-- **Bowling**: Check out new bowling alleys in your city for a fun night out.
-
-## How It Works
-
-1. **Select Your City**: Choose from Indore, Mumbai, Delhi, or Bengaluru.
-2. **Choose a Category**: Pick the type of place you're looking for—whether it's fine dining, a restro bar, an arcade, or a bowling alley.
-3. **Discover New Places**: Get a list of newly opened places in your city that match your selected category.
-
-## Why Choose This Website?
-
-Discovering new places can be a challenge, especially when you don't know where to go. **What's New in Town** brings all the information you need into one place, making it easy for you to find new spots to explore. Our goal is to help you make every outing an adventure and to keep your social life exciting.
+Got it 👍 thanks for clarifying.
+Below is the **corrected, fully professional GitHub README.md**, where the **AI system is purely review-based** (❌ no mood-based logic).
 
 ---
 
-Stay tuned as we continue to add more cities and categories to enhance your experience! 😊
+# 🏙️ What's New in Town
+
+## Overview
+
+**What's New in Town** is a city-based discovery platform that helps users explore **newly opened places** in their city. The platform aims to reduce repetitive outings by providing structured, up-to-date information about new venues along with an **AI-powered review-based recommendation system**.
+
+The system analyzes customer reviews to recommend the most relevant and highly rated places, helping users make informed decisions quickly and effectively.
+
+---
+
+## Key Objectives
+
+* Discover newly opened places across major cities
+* Provide intelligent recommendations using customer reviews
+* Rank places based on real user experiences
+* Build a scalable platform for future expansion
+
+---
+
+## Supported Cities
+
+The platform currently supports the following cities:
+
+* **Indore**
+* **Mumbai**
+* **Delhi**
+* **Bengaluru**
+
+---
+
+## Categories
+
+Users can explore newly opened places under these categories:
+
+* **Fine Dine** – Newly opened fine dining restaurants
+* **Restro Bar** – New restro bars and nightlife venues
+* **Arcades** – Entertainment and gaming arcades
+* **Bowling** – Newly launched bowling alleys
+
+---
+
+## 🤖 AI-Powered Review-Based Recommendation System
+
+**What's New in Town** features an intelligent **review-based recommendation engine** that suggests places based on customer feedback rather than mood or manual filtering.
+
+### Recommendation Approach
+
+* The AI model is trained on **customer reviews and ratings**.
+* It analyzes review sentiment, relevance, and frequency.
+* Places are ranked based on overall review quality and consistency.
+* Recommendations reflect real user experiences and preferences.
+
+This approach ensures that suggestions are **data-driven, unbiased, and reliable**.
+
+---
+
+## Current AI Coverage
+
+The AI recommendation system is currently available for:
+
+**Cities**
+
+* Indore
+* Mumbai
+* Bengaluru
+
+**Categories**
+
+* Restro Bar
+* Fine Dine
+
+Support for additional cities and categories will be added in future releases.
+
+---
+
+## Application Workflow
+
+1. **City Selection**
+   Users select their preferred city.
+
+2. **Category Selection**
+   Users choose a category such as Fine Dine or Restro Bar.
+
+3. **AI-Based Recommendations**
+   The platform analyzes reviews and ranks the best places accordingly.
+
+4. **Place Discovery**
+   Users view a curated list of newly opened places backed by real customer feedback.
+
+---
+
+## Why What's New in Town?
+
+* Centralized discovery of newly opened venues
+* Review-driven AI recommendations
+* City-wise and category-wise filtering
+* Scalable and future-ready architecture
+
+The platform focuses on **trustworthy recommendations powered by real reviews**, making every outing a better experience.
+
+---
+
+## Future Enhancements
+
+* Expansion to more cities
+* Inclusion of additional categories
+* Improved recommendation accuracy with larger review datasets
+* Advanced analytics and personalization
+* Enhanced UI/UX design
+
+---
+
+## Conclusion
+
+**What's New in Town** combines structured city discovery with a **review-based AI recommendation system** to help users find the best new places effortlessly. By leveraging real customer feedback, the platform delivers meaningful, transparent, and reliable recommendations.
+
+---
+
+⭐ *If you find this project useful, feel free to star the repository and contribute!*
+
+---
+
