@@ -140,9 +140,6 @@ This approach enables **context-aware, accurate, and trustworthy recommendations
 - **Cosine Similarity**
 - **Vector Database**
 - **Zomato Review Dataset**
-- **REST APIs**
-- **Frontend Framework (React / Next.js – optional)**
-
 ---
 
 ## 📌 Conclusion
