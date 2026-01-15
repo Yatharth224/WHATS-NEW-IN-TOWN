@@ -10,7 +10,6 @@ The platform reduces repetitive outings by offering structured discovery powered
 - Discover **newly opened places** across major Indian cities
 - AI-powered **review-based recommendations**
 - Trained on **real customer reviews sourced from Zomato**
-- Query-driven intelligent discovery
 - Transparent, data-backed confidence scores
 - Scalable and future-ready architecture
 
