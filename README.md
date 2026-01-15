@@ -1,5 +1,7 @@
 # 🏙️ What's New in Town
 
+## Overview
+
 **What's New in Town** is a city-based discovery platform that helps users explore **newly opened places** in their city.  
 The platform reduces repetitive outings by offering structured discovery powered by an **AI-based review recommendation system** trained on **authentic Zomato customer reviews**.
 
