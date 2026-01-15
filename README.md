@@ -133,14 +133,27 @@ This approach enables **context-aware, accurate, and trustworthy recommendations
 
 ---
 
-## 🧩 Tech Stack (Suggested)
+### 🧩 Tech Stack
 
-- **Python**
-- **Sentence Transformers**
-- **Cosine Similarity**
-- **Vector Database**
-- **Zomato Review Dataset**
----
+### Backend & AI
+- **Python** – Core programming language
+- **Flask** – Backend web framework
+- **Sentence Transformers** – Semantic text embedding generation
+- **Cosine Similarity** – Review and query relevance matching
+- **Vector Database** – Efficient storage and retrieval of embeddings
+
+### Data
+- **Zomato Reviews (Scraped)** – Customer reviews scraped from Zomato and used to train the AI recommendation system
+- **Zomato Collections (Scraped)** – Restaurant and category metadata scraped from Zomato Collections
+
+### Frontend
+- **HTML** – Page structure
+- **CSS** – Styling and layout
+- **JavaScript** – Client-side interactivity
+
+### Others
+- **JSON** – Data exchange format
+
 
 ## 📌 Conclusion
 
