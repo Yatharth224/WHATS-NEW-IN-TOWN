@@ -273,7 +273,7 @@
       <a href="{{ url_for('home') }}" class="glow-link">
         <h1 class="glow-title">What's New in Town</h1>
       </a>
-      <p>Discover Best {% if category %} {{ category }}</p>
+      <p>Discover Best {% if category %} {{ category }} {% else %} Places</p>
     </header>
 
     <div class="container">
