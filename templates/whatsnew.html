@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -158,13 +158,17 @@
         font-weight: 800;
         color: #d8b98a;
         transition: all 0.4s ease;
-        text-shadow: 0 0 6px rgba(216, 185, 138, 0.4),
-          0 0 12px rgba(216, 185, 138, 0.35), 0 0 25px rgba(216, 185, 138, 0.25);
+        text-shadow:
+          0 0 6px rgba(216, 185, 138, 0.4),
+          0 0 12px rgba(216, 185, 138, 0.35),
+          0 0 25px rgba(216, 185, 138, 0.25);
       }
       .glow-title:hover {
         color: #f3e1b0;
-        text-shadow: 0 0 10px rgba(243, 225, 176, 0.8),
-          0 0 25px rgba(243, 225, 176, 0.6), 0 0 50px rgba(243, 225, 176, 0.45),
+        text-shadow:
+          0 0 10px rgba(243, 225, 176, 0.8),
+          0 0 25px rgba(243, 225, 176, 0.6),
+          0 0 50px rgba(243, 225, 176, 0.45),
           0 0 80px rgba(243, 225, 176, 0.3);
         transform: scale(1.05);
       }
@@ -224,7 +228,8 @@
       .home-btn:hover {
         color: #000;
         background: #e6d3b1;
-        box-shadow: 0 0 15px rgba(230, 211, 177, 0.8),
+        box-shadow:
+          0 0 15px rgba(230, 211, 177, 0.8),
           0 0 30px rgba(230, 211, 177, 0.6);
         transform: translateY(-2px);
       }
@@ -250,7 +255,8 @@
       .logout-btn:hover {
         color: #000;
         background: #e6d3b1;
-        box-shadow: 0 0 15px rgba(230, 211, 177, 0.8),
+        box-shadow:
+          0 0 15px rgba(230, 211, 177, 0.8),
           0 0 30px rgba(230, 211, 177, 0.6);
         transform: translateY(-2px);
       }
@@ -267,7 +273,7 @@
       <a href="{{ url_for('home') }}" class="glow-link">
         <h1 class="glow-title">What's New in Town</h1>
       </a>
-      
+      <p>Discover Best</p>
     </header>
 
     <div class="container">
@@ -425,7 +431,7 @@
             }
           });
         },
-        { threshold: 0.2 }
+        { threshold: 0.2 },
       );
 
       cards.forEach((card) => observer.observe(card));
