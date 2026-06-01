@@ -8,7 +8,7 @@ The platform reduces repetitive outings by offering structured discovery powered
 ---
 
 
-## 🌐 Live Demo:
+# 🌐 Live Demo:
 https://whatsnew-yatharthsingh.azurewebsites.net/
 
 ## 🚀 Key Features
