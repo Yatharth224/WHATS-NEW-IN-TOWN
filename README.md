@@ -145,6 +145,7 @@ This approach enables **context-aware, accurate, and trustworthy recommendations
 - **Sentence Transformers** – Semantic text embedding generation
 - **Cosine Similarity** – Review and query relevance matching
 - **Vector Database** – Efficient storage and retrieval of embeddings
+- **smtp - 
 
 ### Data
 - **Zomato Reviews (Scraped)** – Customer reviews scraped from Zomato and used to train the AI recommendation system
