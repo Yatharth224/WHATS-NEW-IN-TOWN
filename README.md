@@ -139,7 +139,7 @@ This approach enables **context-aware, accurate, and trustworthy recommendations
 
 ### 🧩 Tech Stack
 
-### Backend & AI
+## Backend & AI
 - **Python** – Core programming language
 - **Flask** – Backend web framework
 - **Sentence Transformers** – Semantic text embedding generation
