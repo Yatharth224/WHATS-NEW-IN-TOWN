@@ -147,7 +147,7 @@ This approach enables **context-aware, accurate, and trustworthy recommendations
 - **Vector Database** – Efficient storage and retrieval of embeddings
 - **Email Service** – smtp 
 
-### Data
+## Data
 - **Zomato Reviews (Scraped)** – Customer reviews scraped from Zomato and used to train the AI recommendation system
 - **Zomato Collections (Scraped)** – Restaurant and category metadata scraped from Zomato Collections
 
