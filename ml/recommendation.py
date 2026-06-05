@@ -48,7 +48,7 @@ def extract_cuisine(cursor, text):
 
 '''
 def extract_price(text):
-    
+    text = text.lower()
 
     # explicit number
     m = re.search(r'\b(\d{3,5})\b', text)
