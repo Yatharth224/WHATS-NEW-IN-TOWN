@@ -1,4 +1,5 @@
 
+
 import os
 import re
 import json
@@ -47,7 +48,7 @@ def extract_cuisine(cursor, text):
 
 '''
 def extract_price(text):
-    text = text.lower()
+    
 
     # explicit number
     m = re.search(r'\b(\d{3,5})\b', text)
@@ -86,7 +87,7 @@ def extract_rating_filter(text):
 
 
 
-def get_recommendations(user_text):
+def recommend_restaurants(user_text):
 
     model = SentenceTransformer("all-MiniLM-L6-v2")
     user_embedding = model.encode(user_text)
