@@ -47,6 +47,13 @@ def extract_cuisine(cursor, text):
     return None
 
 '''
+def extract_price(text):
+    text = text.lower()
+
+    # explicit number
+    m = re.search(r'\b(\d{3,5})\b', text)
+    if m:
+        return int(m.group(1))
 
     # intent words
     if any(w in text for w in ["cheap", "budget", "low"]):
