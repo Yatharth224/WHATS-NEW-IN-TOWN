@@ -64,8 +64,8 @@ def extract_price(text):
     return None'''
 
 
-def extract_rating_filter(text):
-    text = text.lower()
+"""def extract_rating_filter(text):
+    text = text.lower()"""
 
     m = re.search(r'\b([1-5](?:\.\d)?)\b', text)
     if not m:
