@@ -64,25 +64,6 @@ def extract_price(text):
     return None'''
 
 
-"""def extract_rating_filter(text):
-    text = text.lower()"""
-
-    m = re.search(r'\b([1-5](?:\.\d)?)\b', text)
-    if not m:
-        if any(w in text for w in ["best", "top", "excellent"]):
-            return ("gte", 4.0)
-        return None, None
-
-    rating= float(m.group(1))
-
-    if any(w in text for w in ["above", "greater", "more than", "over"]):
-        return ("gt", rating)
-
-    if any(w in text for w in ["below", "less than", "under"]):
-        return ("lt", rating)
-
-    return ("gte", rating)
-
 
 
 
