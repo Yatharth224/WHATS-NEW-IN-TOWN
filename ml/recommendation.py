@@ -67,7 +67,6 @@ def extract_price(text):
 def extract_rating_filter(text):
     text = text.lower()
 
-    # 1–5 ke beech rating
     m = re.search(r'\b([1-5](?:\.\d)?)\b', text)
     if not m:
         if any(w in text for w in ["best", "top", "excellent"]):
